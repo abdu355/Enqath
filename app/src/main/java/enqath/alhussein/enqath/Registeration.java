@@ -22,7 +22,7 @@ public class Registeration extends Activity implements View.OnClickListener {
         setContentView(R.layout.registation);
         txtFname=(EditText)findViewById(R.id.txtFname);
         txtLname=(EditText)findViewById(R.id.txtLname);
-        //txtUname=(EditText)findViewById(R.id.txtUname);
+        //txtUname=(EditText)findViewById(R.id.txtUname); error
         txtPass=(EditText)findViewById(R.id.txtPass);
         txtCpass=(EditText)findViewById(R.id.txtCpass);
         txtNationality=(EditText)findViewById(R.id.txtNationality);
