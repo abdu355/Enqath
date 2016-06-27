@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Enqath</string>
+
+    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="ar">arabic</string>
+
+
+
+        <string-array name="currency">
+            <item >1 Contact </item>
+            <item >2 Contacts</item>
+            <item >3 Contacts</item>
+            <item >4 Contacts</item>
+            <item >5 Contacts</item>
+
+        </string-array>
+        <string-array name="currencyValue">
+            <item >0</item>
+            <item >1</item>
+            <item >2</item>
+            <item >3</item>
+            <item >4</item>
+        </string-array>
+        <string name="about">this is a coooool app.</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+</resources>
