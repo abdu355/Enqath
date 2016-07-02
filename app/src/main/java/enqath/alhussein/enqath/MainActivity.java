@@ -32,7 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private Button btnEnqath;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 124;
 
-    String number = "tel:000";
+   final String number = "tel:000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +95,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             //    startActivity(callIntent);
                // startActivity(new Intent(this,Fire.class));
 
-                break;
+     break;
             case R.id.btnCar:
             //    startActivity(callIntent);
 

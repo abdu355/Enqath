@@ -1,6 +1,8 @@
 package enqath.alhussein.enqath;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,12 @@ import android.widget.Button;
  */
 public class Fire extends Activity implements View.OnClickListener{
   Button btnMinor,btnMed,btnSerious;
+    final String number = "tel:000";
+    final String txtMinor="Fire incident occurred ";
+
+    Uri callui = Uri.parse(number);
+    Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fire_level);
@@ -30,6 +38,8 @@ public class Fire extends Activity implements View.OnClickListener{
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.btnMinorF:
+                  startActivity(callIntent);
+
                 break;
             case R.id.btnMedF:
                 break;

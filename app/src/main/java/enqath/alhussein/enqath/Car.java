@@ -2,6 +2,8 @@ package enqath.alhussein.enqath;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +13,8 @@ import android.widget.Button;
  */
 public class Car extends Activity implements View.OnClickListener {
     Button btnMinor, btnSerious,btnMed;
+    final String number = "tel:000";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +27,8 @@ public class Car extends Activity implements View.OnClickListener {
         btnMed.setOnClickListener(this);
         btnSerious.setOnClickListener(this);
 
+        Uri callui = Uri.parse(number);
+        Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
 
     }
 
