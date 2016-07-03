@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "732708414973",
+    "firebase_url": "https://enqath-314cc.firebaseio.com",
+    "project_id": "enqath-314cc",
+    "storage_bucket": "enqath-314cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732708414973:android:3c6b4d2b7a4372c0",
+        "android_client_info": {
+          "package_name": "enqath.alhussein.enqath"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732708414973-d5t61nmh3v10tk1i03jjks898nd7id0n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQc14JDlsZ6r-CKWICBN41RJbyzPl2yPk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
