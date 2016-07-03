@@ -106,6 +106,6 @@ public class Registeration extends Activity implements View.OnClickListener {
     private void writeNewUser(String userId, String name, String email,String pass, String phone,String dob) {
         User user = new User(name,email,pass, phone,dob);
 
-        mDatabase.child("users").child(userId).setValue(user);
+        mDatabase.child("users").push().setValue(user);
     }
 }

@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="enqath.alhussein.enqath.LoginActivity">
+    tools:context="enqath.alhussein.enqath.LoginActivity"
+    android:background="@color/accent_material_dark">
 
     <!-- Login progress -->
     <ProgressBar
@@ -71,14 +72,16 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/holo_green_light" />
 
         </LinearLayout>
     </ScrollView>
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="200dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light" />
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -101,6 +104,8 @@
         android:layout_height="wrap_content"
         android:text="SKIP (DEV ONLY)"
         android:id="@+id/skiplogin"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/holo_green_light" />
 
 </LinearLayout>
