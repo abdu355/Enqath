@@ -11,18 +11,13 @@ import android.support.v4.app.ActivityCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TableRow;
-import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+import com.firebase.client.authentication.Constants;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
-import java.io.IOException;
-import java.net.URI;
 
 
 /**
@@ -50,6 +45,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
         testObject.saveInBackground();
+
+        Firebase.setAndroidContext(this);
 
     }
 
