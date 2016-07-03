@@ -15,6 +15,11 @@ public class Car extends Activity implements View.OnClickListener {
     Button btnMinor, btnSerious,btnMed;
     final String number = "tel:000";
 
+    Uri callui = Uri.parse(number);
+
+    Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +32,6 @@ public class Car extends Activity implements View.OnClickListener {
         btnMed.setOnClickListener(this);
         btnSerious.setOnClickListener(this);
 
-        Uri callui = Uri.parse(number);
-        Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
 
     }
 
@@ -38,10 +41,20 @@ public class Car extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.btnMinor:
+                startActivity(callIntent);
+            // insert talkback
                 break;
+
             case R.id.btnMed:
+                startActivity(callIntent);
+                // insert talkback
+
                 break;
+
             case R.id.btnSerious:
+                startActivity(callIntent);
+                // insert talkback
+
                 break;
 
 
