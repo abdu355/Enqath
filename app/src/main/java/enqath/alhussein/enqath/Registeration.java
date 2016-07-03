@@ -1,6 +1,7 @@
 package enqath.alhussein.enqath;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,9 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Registeration extends Activity implements View.OnClickListener {
-    private EditText txtFname, txtLname, txtPass, txtCpass, txtNationality, txtDob, txtPhone, txtUname;
+    private EditText txtFname, txtLname, txtPass, txtCpass, txtNationality, txtDob, txtPhone, txtUname, txtEmail;
     private Button btnSubmit;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +34,11 @@ public class Registeration extends Activity implements View.OnClickListener {
         txtDob=(EditText)findViewById(R.id.txtDOB);
         txtPhone=(EditText)findViewById(R.id.txtPhone);
         btnSubmit=(Button)findViewById(R.id.btnSubmit);
+        txtEmail=(EditText)findViewById(R.id.txtEmail);
 
         btnSubmit.setOnClickListener(this);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
     }
     public void insert(int phone, String name,String name2, String user,String pass,String Dateob, String National){
@@ -77,13 +84,28 @@ public class Registeration extends Activity implements View.OnClickListener {
 
                 }
                 else{
-                insert(Integer.parseInt(txtPhone.getText().toString()),txtFname.getText().toString(),
-                        txtLname.getText().toString(),txtUname.getText().toString(),txtPass.getText().toString(),txtDob.getText().toString(),
-                        txtNationality.getText().toString());
+//                    insert(Integer.parseInt(txtPhone.getText().toString()),txtFname.getText().toString(),
+//                            txtLname.getText().toString(),txtUname.getText().toString(),txtPass.getText().toString(),txtDob.getText().toString(),
+//                            txtNationality.getText().toString());
 
-                 }
+                    //using Firebase ---------------------------------------
+
+                    writeNewUser("enqath-86a82",txtFname.getText().toString(),txtEmail.getText().toString(), txtPass.getText().toString(),txtPhone.getText().toString(),txtDob.getText().toString());
+
+                    //------------------------------------------------
+
+                    startActivity(new Intent(this,Main.class));
+
+
+                }
         }
 
 
+
+    }
+    private void writeNewUser(String userId, String name, String email,String pass, String phone,String dob) {
+        User user = new User(name,email,pass, phone,dob);
+
+        mDatabase.child("users").child(userId).setValue(user);
     }
 }

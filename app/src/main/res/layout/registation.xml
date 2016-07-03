@@ -48,7 +48,8 @@
                     android:ems="10"
                     android:id="@+id/txtFname"
                     android:layout_weight="1"
-                    android:background="#FFFFFF" />
+                    android:background="#FFFFFF"
+                    android:textColor="@color/bright_foreground_material_light" />
 
             </TableRow>
 
@@ -72,8 +73,33 @@
                     android:ems="10"
                     android:id="@+id/txtLname"
                     android:layout_weight="1"
-                    android:background="#FFFFFF" />
+                    android:background="#FFFFFF"
+                    android:textColor="@color/bright_foreground_material_light" />
 
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Email"
+                    android:id="@+id/textView21"
+                    android:paddingRight="15dp" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/txtEmail"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:textColor="@color/bright_foreground_material_light" />
             </TableRow>
 
             <TableRow
@@ -96,7 +122,8 @@
                     android:ems="10"
                     android:id="@+id/txtPass"
                     android:layout_weight="1"
-                    android:background="#FFFFFF" />
+                    android:background="#FFFFFF"
+                    android:textColor="@color/bright_foreground_material_light" />
 
             </TableRow>
 
@@ -120,7 +147,8 @@
                     android:ems="10"
                     android:id="@+id/txtCpass"
                     android:layout_weight="1"
-                    android:background="#FFFFFF" />
+                    android:background="#FFFFFF"
+                    android:textColor="@color/bright_foreground_material_light" />
 
             </TableRow>
 
@@ -144,7 +172,8 @@
                     android:ems="10"
                     android:id="@+id/txtPhone"
                     android:layout_weight="1"
-                    android:background="#FFFFFF" />
+                    android:background="#FFFFFF"
+                    android:textColor="@color/bright_foreground_material_light" />
 
             </TableRow>
 
@@ -166,7 +195,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txtID"
                     android:background="#FFFFFF"
-                    android:paddingLeft="15dp" />
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/bright_foreground_material_light" />
             </TableRow>
 
             <TableRow
@@ -190,7 +220,8 @@
                     android:ems="10"
                     android:id="@+id/txtDOB"
                     android:layout_weight="1"
-                    android:background="#FFFFFF" />
+                    android:background="#FFFFFF"
+                    android:textColor="@color/bright_foreground_material_light" />
 
             </TableRow>
 
@@ -212,7 +243,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txtNationality"
                     android:background="#FFFFFF"
-                    android:paddingLeft="15dp" />
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/bright_foreground_material_light" />
             </TableRow>
 
             <Button

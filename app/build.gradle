@@ -17,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    apply plugin: 'com.google.gms.google-services'
+//    apply plugin: 'com.google.gms.google-services'
 
 }
 
@@ -28,4 +28,9 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.+'
     compile 'com.parse:parse-android:1.+'
     compile 'com.firebase:firebase-client-android:2.3.1'
+    compile 'com.android.support:design:24.0.0'
+    compile 'com.google.firebase:firebase-database:9.2.0'
+    compile 'com.google.firebase:firebase-auth:9.2.0'
+    compile 'com.google.android.gms:play-services-auth:9.2.0'
 }
+apply plugin: 'com.google.gms.google-services'
