@@ -20,7 +20,7 @@ public class About extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Contact us at: enqath_uae@gmail.com", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Contact us at: enqath.uae@gmail.com", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

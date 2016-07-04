@@ -2,7 +2,31 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/abc_input_method_navigation_guard</item>
+        <item name="android:colorBackground">@color/background_material_light</item>
+        <item name="android:textColorSecondary">@color/common_plus_signin_btn_text_light</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:colorForeground">@color/primary_dark_material_dark</item>
+        <item name="android:textColorSecondaryInverse">@color/colorPrimaryDark</item>
+        <item name="android:buttonStyle">@style/MyButton</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="MyButton" parent="android:Widget.Material.Button">
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_margin">0dip</item>
+        <item name="android:background">#ff9800</item>
+    </style>
+
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorButtonNormal">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
