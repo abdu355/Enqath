@@ -22,11 +22,21 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     private Button btnEnqath;
     FrameLayout layout;
@@ -57,7 +67,13 @@ public class Main extends AppCompatActivity
         btnEnqath.setOnClickListener(this);
 
         Firebase.setAndroidContext(this);
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            Toast.makeText(Main.this,"WELCOME" +user.getEmail(),Toast.LENGTH_LONG).show();
+        } else {
+            // No user is signed in
+        }
 
     }
     public void DynamicPermission() {
@@ -75,6 +91,7 @@ public class Main extends AppCompatActivity
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void onBackPressed() {
@@ -101,6 +118,10 @@ public class Main extends AppCompatActivity
                 return true;
             case R.id.menu_about:
                 startActivity(new Intent(this, About.class));
+                return true;
+            case R.id.menu_logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(),MainLogin.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -180,4 +201,5 @@ public class Main extends AppCompatActivity
 
         }
     }
+
 }

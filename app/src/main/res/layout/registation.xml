@@ -15,19 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Registration"
-                android:id="@+id/textView"
-                android:layout_gravity="center_horizontal"
-                android:textSize="30dp"
-                android:autoText="false"
-                android:background="#e5ffe9"
-                android:textColor="#d96157"
-                android:foregroundGravity="center|center_horizontal"
-                android:gravity="center_horizontal" />
-
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -248,12 +235,13 @@
             </TableRow>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Submit"
+                android:text="Sign Up"
                 android:id="@+id/btnSubmit"
                 android:gravity="center|center_horizontal"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp" />
         </LinearLayout>
     </ScrollView>
     </LinearLayout>
