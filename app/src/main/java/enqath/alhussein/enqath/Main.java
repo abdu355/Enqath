@@ -2,12 +2,17 @@ package enqath.alhussein.enqath;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,7 +23,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -27,8 +35,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -37,6 +50,10 @@ public class Main extends AppCompatActivity
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private TextView useremail_nav,username_nav;
+    private ImageView userdp_nav;
+    String userdisplayname;
+    FirebaseUser user;
 
     private Button btnEnqath;
     FrameLayout layout;
@@ -60,19 +77,35 @@ public class Main extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View navHeaderView = navigationView.getHeaderView(0);
+        useremail_nav = (TextView) navHeaderView.findViewById(R.id.useremail_nav);
+        username_nav=(TextView)navHeaderView.findViewById(R.id.username_nav);
         //--------------------------
 
         btnEnqath = (Button) findViewById(R.id.btnEnqath);
         layout = (FrameLayout)findViewById(R.id.container);
+        userdp_nav=(ImageView)findViewById(R.id.userdp_nav);
+
         btnEnqath.setOnClickListener(this);
 
         Firebase.setAndroidContext(this);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // User is signed in
-            Toast.makeText(Main.this,"WELCOME" +user.getEmail(),Toast.LENGTH_LONG).show();
+            Toast.makeText(Main.this,"WELCOME " + user.getDisplayName(),Toast.LENGTH_LONG).show();
+            //get user profile and display in nav drawer
+            useremail_nav.setText(user.getEmail());
+            username_nav.setText(user.getDisplayName());
+            //set DP image here
+
+            if(username_nav.getText().length()<=0)
+            {
+                showdialog();
+            }
         } else {
             // No user is signed in
+            Toast.makeText(Main.this,"GUEST MODE",Toast.LENGTH_LONG).show();
         }
 
     }
@@ -200,6 +233,44 @@ public class Main extends AppCompatActivity
 
 
         }
+    }
+
+    private void showdialog()
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        final EditText edittext = new EditText(getApplicationContext());
+        alert.setMessage("Consider updating your profile");
+        alert.setTitle("Profile Setup");
+
+        alert.setView(edittext);
+
+        alert.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //What ever you want to do with the value
+                 userdisplayname = edittext.getText().toString();
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setDisplayName(userdisplayname)
+                        .build();
+
+                user.updateProfile(profileUpdates)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d("Firebase Profile", "User profile updated.");
+                                }
+                            }
+                        });
+            }
+        });
+
+        alert.setNegativeButton("Not Now", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // what ever you want to do with No option.
+            }
+        });
+
+        alert.show();
     }
 
 }

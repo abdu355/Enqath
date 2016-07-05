@@ -70,6 +70,7 @@ public class MainLogin extends AppCompatActivity {
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
+                    //Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
                 }
                 // ...
             }
@@ -163,6 +164,11 @@ public class MainLogin extends AppCompatActivity {
                         // ...
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        System.exit(0);
     }
 
 
