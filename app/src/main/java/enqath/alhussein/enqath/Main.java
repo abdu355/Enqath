@@ -1,10 +1,12 @@
 package enqath.alhussein.enqath;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -238,10 +240,12 @@ public class Main extends AppCompatActivity
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     private void showdialog()
     {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this,R.style.CustomDialogTheme);
         final EditText edittext = new EditText(getApplicationContext());
+        edittext.setTextColor(getColor(R.color.colorPrimaryDark));
         alert.setMessage("Consider updating your profile");
         alert.setTitle("Profile Setup");
 
