@@ -22,10 +22,14 @@
         <item name="android:background">#ff9800</item>
     </style>
 
-    <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.DayNight.Dialog">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:editTextColor">@color/abc_input_method_navigation_guard</item>
+        <item name="android:textColorPrimary">@color/abc_input_method_navigation_guard</item>
+        <item name="android:colorForeground">@color/primary_dark_material_dark</item>
+        <item name="android:textColorSecondary">@color/common_plus_signin_btn_text_light</item>
         <item name="android:colorButtonNormal">@color/colorAccent</item>
     </style>
 
