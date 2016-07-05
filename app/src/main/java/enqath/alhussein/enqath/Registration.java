@@ -5,18 +5,21 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Registration extends Activity implements View.OnClickListener {
+public class Registration extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private EditText txtFname, txtLname, txtPass, txtCpass, txtNationality, txtDob, txtPhone, txtUname, txtEmail;
     private Button btnSubmit;
     private DatabaseReference mDatabase;
-
+private Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,22 @@ public class Registration extends Activity implements View.OnClickListener {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+
+        ArrayAdapter<CharSequence> adapter =
+                ArrayAdapter.createFromResource(
+                        this,
+                        R.array.BloodTypes,
+                        android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
+
     }
+
+
+
 //    public void insert(int phone, String name,String name2, String user,String pass,String Dateob, String National){
 //        SQLiteDatabase db;
 //        db = openOrCreateDatabase( "Database.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
@@ -88,6 +106,16 @@ public class Registration extends Activity implements View.OnClickListener {
 
                 }
         }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 }

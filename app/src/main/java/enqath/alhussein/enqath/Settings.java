@@ -35,7 +35,7 @@ public class Settings extends Activity implements View.OnClickListener, AdapterV
         ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(
                         this,
-                        R.array.currency,
+                        R.array.Contacts,
                         android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);

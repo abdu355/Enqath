@@ -6,7 +6,7 @@
     <string name="ar">arabic</string>
 
 
-    <string-array name="currency">
+    <string-array name="Contacts">
         <item>1 Contact </item>
         <item>2 Contacts</item>
         <item>3 Contacts</item>
@@ -14,13 +14,39 @@
         <item>5 Contacts</item>
 
     </string-array>
-    <string-array name="currencyValue">
+    <string-array name="ContactsValues">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
     </string-array>
+
+    <string-array name="BloodTypes">
+        <item>A+</item>
+        <item>A-</item>
+        <item>AB</item>
+        <item>AB-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>O+</item>
+        <item>O-</item>
+
+    </string-array>
+    <string-array name="BloodValues">
+        <item>A+</item>
+        <item>A-</item>
+        <item>AB</item>
+        <item>AB-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>O+</item>
+        <item>O-</item>
+
+    </string-array>
+
+
+
     <string name="about">this is a coooool app.</string>
     <string name="title_activity_main">MainActivity</string>
 

@@ -199,6 +199,9 @@ public class Main extends AppCompatActivity
 
                 Uri callui = Uri.parse(number);
                 Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
+                DynamicPermission();
+                startActivity(callIntent);
+
 
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling

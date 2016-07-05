@@ -234,6 +234,23 @@
                     android:textColor="@color/bright_foreground_material_light" />
             </TableRow>
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Blood Type"
+                    android:id="@+id/textView23" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:id="@+id/spinner2" />
+            </TableRow>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
