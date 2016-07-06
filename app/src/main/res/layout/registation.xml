@@ -25,7 +25,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="First Name"
-                    android:id="@+id/textView2"
+                    android:id="@+id/fname"
                     android:paddingRight="15dp" />
 
                 <EditText

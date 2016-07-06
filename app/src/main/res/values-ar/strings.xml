@@ -3,4 +3,29 @@
     <string name="app_name">انقاذ</string>
     <string name="action_settings">الاعدادات</string>
     <string name="ar">العربية</string>
+    <string name="about">انه برنامج لطيييييف</string>
+    <string name="action_example">مثال حركة</string>
+    <string name="action_reg">تسليم</string>
+    <string name="action_sign_in">تسجيل الدخول</string>
+    <string name="action_sign_in_short">تسجيل الدخول</string>
+    <string name="action_sign_up">تسجيل</string>
+    <string name="error_field_required">يجب تعبئة هذه الخانة</string>
+    <string name="error_incorrect_password">كلمة المرور غير صحيحة</string>
+    <string name="error_invalid_email">صيغة البريد الاكتروني غير صحيحة</string>
+    <string name="error_invalid_password">كلمة مرور قصيرة</string>
+    <string name="hello_world" translatable="false">مرحبا للعالم!</string>
+    <string name="navigation_drawer_close">أغلق درج الملاحة</string>
+    <string name="navigation_drawer_open">افتح درج الملاحة</string>
+    <string name="prompt_email">البريد الالكتروني</string>
+    <string name="prompt_password">كلمة المرور</string>
+    <string name="title_activity_about">عن التطبيق</string>
+    <string name="title_activity_drawer">إنقاذ</string>
+    <string name="title_activity_login">إنقاذ</string>
+    <string name="title_activity_main">النشاط الرئيسي</string>
+    <string name="title_activity_main_login">إنقاذ</string>
+    <string name="title_activity_quick_registration">التسجيل</string>
+    <string name="title_section1">القسم 1</string>
+    <string name="title_section2">القسم 2</string>
+    <string name="title_section3">القسم 3</string>
+    <string name="permission_rationale">هناك حاجة الى اذونات جهات الاتصال لتقديم رسالة البريد الاكتروني</string>
 </resources>
