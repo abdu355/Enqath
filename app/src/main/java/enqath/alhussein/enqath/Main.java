@@ -1,7 +1,6 @@
 package enqath.alhussein.enqath;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +10,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.telephony.SmsManager;
 import android.text.Editable;
@@ -30,6 +32,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +50,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 import org.w3c.dom.Text;
 
+import java.security.acl.Permission;
 import java.util.List;
 import java.util.Locale;
 
@@ -58,12 +62,14 @@ public class Main extends AppCompatActivity
     private TextView useremail_nav,username_nav;
     private ImageView userdp_nav;
     String userdisplayname;
-    Button btnFire, btnTheft, btnCar,btnDrown;
     FirebaseUser user;
+
 
     private Button btnEnqath;
     FrameLayout layout;
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 124;
+    final private int REQUEST_CODE_CALL = 124;
+    DrawerLayout drawer;
+
 
     String [] phones;
     String [] msg={"Car Accident Level Minor. No Human Injuries","Car Accident Level Medium. Simple Human Injuries","Car Accident Level Serious. Major Human Injuries"};
@@ -73,26 +79,17 @@ public class Main extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        btnFire=(Button)findViewById(R.id.btnFire);
-        btnDrown=(Button)findViewById(R.id.btnDrawn);
-        btnCar=(Button)findViewById(R.id.btnCar);
-        btnTheft=(Button)findViewById(R.id.btnTheft);
-
-        btnFire.setOnClickListener(this);
-        btnDrown.setOnClickListener(this);
-        btnCar.setOnClickListener(this);
-        btnTheft.setOnClickListener(this);
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //noinspection deprecation
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -141,32 +138,99 @@ public class Main extends AppCompatActivity
         Toast.makeText(Main.this,Locale.getDefault().getLanguage(),Toast.LENGTH_LONG).show();
 
 
+
+
     }
     public void DynamicPermission() {
-        try {
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                int hasReadContactPermission = checkSelfPermission(Manifest.permission.CALL_PHONE);
-                if (hasReadContactPermission != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
-                            101);
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.CALL_PHONE) && ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.SEND_SMS)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                Snackbar snackbar = Snackbar
+                        .make(drawer, "Requires phone permission to make Emergency Calls", Snackbar.LENGTH_LONG)
+                        .setAction("Allow", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Snackbar snackbar1 = Snackbar.make(drawer, "Requesting Access", Snackbar.LENGTH_SHORT);
+                                snackbar1.show();
+                                ActivityCompat.requestPermissions(Main.this,
+                                        new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS},
+                                        REQUEST_CODE_CALL);
+                            }
+                        });
+
+                snackbar.show();
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CALL_PHONE,Manifest.permission.SEND_SMS},
+                        REQUEST_CODE_CALL);
+
+            }
+        }
+        else
+        {
+            Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
+            Uri callui = Uri.parse(number);
+            Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
+            //noinspection MissingPermission
+            startActivity(callIntent);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_CALL: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // calling-related task you need to do.
+                    Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
+                    Uri callui = Uri.parse(number);
+                    Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
+                    //noinspection MissingPermission
+                    startActivity(callIntent);
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Snackbar snackbar1 = Snackbar.make(drawer, "Permission Denied", Snackbar.LENGTH_SHORT);
+                    snackbar1.show();
                 }
+                return;
             }
 
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            // other 'case' lines to check for other
+            // permissions this app might request
         }
     }
 
 
     @Override
     public void onBackPressed() {
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
-            } else {
-                super.onBackPressed();
-            }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
 
     }
     @Override
@@ -216,8 +280,8 @@ public class Main extends AppCompatActivity
         } else if (id == R.id.nav_thirdpage) {
             fragmentManager.beginTransaction().replace(R.id.container, new ThirdFrag()).commit();
         }
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
@@ -226,46 +290,16 @@ public class Main extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnEnqath:
-
-
-                Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
-
-                Uri callui = Uri.parse(number);
-                Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
-                DynamicPermission();
-                startActivity(callIntent);
-
-
-
-                sendSMS( phones, msg );
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-
-
-
-
-
-
-            break;
+                DynamicPermission(); //fixed permission request logic
+                break;
             case R.id.btnFire:
-                 callui = Uri.parse(number);
-                 callIntent = new Intent(Intent.ACTION_CALL, callui);
-                DynamicPermission();
-                startActivity(callIntent);
-                startActivity(new Intent(this,Fire.class));
+                //    startActivity(callIntent);
+                // startActivity(new Intent(this,Fire.class));
 
                 break;
             case R.id.btnCar:
-                Intent i= new Intent(this, Fire.class);
-                startActivity(i);
+                //    startActivity(callIntent);
+
                 break;
             case R.id.btnTheft:
                 //     startActivity(callIntent);
@@ -288,18 +322,18 @@ public class Main extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "Message Sent",
                     Toast.LENGTH_LONG).show();
         } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
+            Toast.makeText(getApplicationContext(),ex.getMessage(),
                     Toast.LENGTH_LONG).show();
             ex.printStackTrace();
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
+
     private void showdialog()
     {
         AlertDialog.Builder alert = new AlertDialog.Builder(this,R.style.CustomDialogTheme);
         final EditText edittext = new EditText(getApplicationContext());
-        edittext.setTextColor(getColor(R.color.colorPrimaryDark));
+        edittext.setTextColor(Color.parseColor(String.valueOf(R.color.colorPrimaryDark)));
         alert.setMessage("Consider updating your profile");
         alert.setTitle("Profile Setup");
 
@@ -308,7 +342,7 @@ public class Main extends AppCompatActivity
         alert.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //What ever you want to do with the value
-                 userdisplayname = edittext.getText().toString();
+                userdisplayname = edittext.getText().toString();
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                         .setDisplayName(userdisplayname)
                         .build();

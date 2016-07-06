@@ -19,13 +19,11 @@ public class Settings extends Activity implements View.OnClickListener, AdapterV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.settings);
-
 
         save=(Button)findViewById(R.id.btnSave);
         save.setOnClickListener(this);
+
 
         R1=(TableRow)findViewById(R.id.R1);
         R2=(TableRow)findViewById(R.id.R2);
