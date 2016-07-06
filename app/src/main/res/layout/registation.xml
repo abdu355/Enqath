@@ -24,8 +24,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="First Name"
-                    android:id="@+id/textView2"
+                    android:text="@string/fName"
+                    android:id="@+id/fname"
                     android:paddingRight="15dp" />
 
                 <EditText
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Last Name"
+                    android:text="@string/lName"
                     android:id="@+id/textView8"
                     android:paddingRight="15dp" />
 
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Email"
+                    android:text="@string/email"
                     android:id="@+id/textView21"
                     android:paddingRight="15dp" />
 
@@ -98,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Password"
+                    android:text="@string/password"
                     android:id="@+id/textView4"
                     android:paddingRight="15dp" />
 
@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Confirm Password"
+                    android:text="@string/confirmPass"
                     android:id="@+id/textView10"
                     android:paddingRight="15dp" />
 
@@ -148,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Phone Number"
+                    android:text="@string/phoneNumber"
                     android:id="@+id/textView3"
                     android:paddingRight="15dp" />
 
@@ -173,7 +173,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="National ID"
+                    android:text="@string/nationalID"
                     android:id="@+id/textView5"
                     android:paddingRight="15dp" />
 
@@ -196,7 +196,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Date of Birth"
+                    android:text="@string/DOB"
                     android:id="@+id/textView7"
                     android:paddingRight="15dp" />
 
@@ -221,7 +221,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Nationality"
+                    android:text="@string/nationality"
                     android:id="@+id/textView6"
                     android:paddingRight="15dp" />
 
@@ -234,10 +234,27 @@
                     android:textColor="@color/bright_foreground_material_light" />
             </TableRow>
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/bloodType"
+                    android:id="@+id/textView23" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:id="@+id/spinner2" />
+            </TableRow>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
+                android:text="@string/signUp"
                 android:id="@+id/btnSubmit"
                 android:gravity="center|center_horizontal"
                 android:layout_gravity="center"

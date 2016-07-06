@@ -30,7 +30,7 @@
                 android:layout_height="150dp"
                 android:background="@drawable/circle"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Enqath"
+                android:text="@string/Enqath"
                 android:textColor="#fff"
                 android:id="@+id/btnEnqath"
                 android:textSize="30dp"

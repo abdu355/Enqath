@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Choose The Level of Fire"
+        android:text="@string/accidentMsg"
         android:id="@+id/textView9"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.18"
@@ -20,7 +20,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Minor: No injuries"
+        android:text="@string/level1"
         android:id="@+id/btnMinorF"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.18" />
@@ -28,7 +28,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Medium: Minor Injuries"
+        android:text="@string/level2"
         android:id="@+id/btnMedF"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.18" />
@@ -36,7 +36,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Serious: Severe Injuries"
+        android:text="@string/level3"
         android:id="@+id/btnSeriousF"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.18" />

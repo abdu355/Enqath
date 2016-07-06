@@ -13,8 +13,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.telephony.SmsManager;
 import android.text.Editable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -46,6 +48,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -61,12 +64,19 @@ public class Main extends AppCompatActivity
     FrameLayout layout;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 124;
 
+    String [] phones;
+    String [] msg={"Car Accident Level Minor. No Human Injuries","Car Accident Level Medium. Simple Human Injuries","Car Accident Level Serious. Major Human Injuries"};
+
     final String number = "tel:000";
     android.app.FragmentManager fragmentManager = getFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,6 +86,15 @@ public class Main extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+//change orientation when changing language
+        if(Locale.getDefault().getLanguage().equals("en")) {
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        }
+        else {
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        }
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -110,6 +129,9 @@ public class Main extends AppCompatActivity
             Toast.makeText(Main.this,"GUEST MODE",Toast.LENGTH_LONG).show();
         }
 
+        Toast.makeText(Main.this,Locale.getDefault().getLanguage(),Toast.LENGTH_LONG).show();
+
+
     }
     public void DynamicPermission() {
         try {
@@ -130,14 +152,14 @@ public class Main extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
 
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -173,8 +195,7 @@ public class Main extends AppCompatActivity
         if (id == R.id.nav_home) {
             //fragmentManager.beginTransaction().replace(R.id.container, new Home()).commit();
             Fragment f = fragmentManager.findFragmentById(R.id.container);
-            if(f!=null)
-            {
+            if (f != null) {
                 try {
                     fragmentManager.beginTransaction().remove(getFragmentManager().findFragmentById(R.id.container)).commit();
                 } catch (Exception e) {
@@ -186,9 +207,9 @@ public class Main extends AppCompatActivity
         } else if (id == R.id.nav_thirdpage) {
             fragmentManager.beginTransaction().replace(R.id.container, new ThirdFrag()).commit();
         }
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -197,11 +218,19 @@ public class Main extends AppCompatActivity
         switch (v.getId()) {
             case R.id.btnEnqath:
 
+
+
+
                 Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
 
                 Uri callui = Uri.parse(number);
                 Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
+                DynamicPermission();
+                startActivity(callIntent);
 
+
+
+                sendSMS( phones, msg );
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
@@ -212,9 +241,13 @@ public class Main extends AppCompatActivity
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                startActivity(callIntent);
 
-                break;
+
+
+
+
+
+            break;
             case R.id.btnFire:
                 //    startActivity(callIntent);
                 // startActivity(new Intent(this,Fire.class));
@@ -234,6 +267,20 @@ public class Main extends AppCompatActivity
                 break;
 
 
+        }
+    }
+    public void sendSMS(String [] phoneNo, String [] msg){
+        try {
+
+
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo[0], null, msg[0], null, null);
+            Toast.makeText(getApplicationContext(), "Message Sent",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
         }
     }
 

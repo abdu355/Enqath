@@ -1,27 +1,54 @@
 <resources>
     <string name="app_name">Enqath</string>
 
-    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="ar">arabic</string>
 
 
-    <string-array name="currency">
-        <item>1 Contact </item>
-        <item>2 Contacts</item>
-        <item>3 Contacts</item>
-        <item>4 Contacts</item>
-        <item>5 Contacts</item>
+    <string-array name="Contacts">
+        <item>   <string name="contact1">1</string>   </item>
+        <item><string name="contact2">2</string></item>
+        <item><string name="contact3">3</string></item>
+        <item><string name="contact4">4</string></item>
+        <item><string name="contact5">5</string></item>
+
 
     </string-array>
-    <string-array name="currencyValue">
+    <string-array name="ContactsValues">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
     </string-array>
-    <string name="about">this is a coooool app.</string>
+
+    <string-array name="BloodTypes">
+        <item>A+</item>
+        <item>A-</item>
+        <item>AB</item>
+        <item>AB-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>O+</item>
+        <item>O-</item>
+
+    </string-array>
+    <string-array name="BloodValues">
+        <item>A+</item>
+        <item>A-</item>
+        <item>AB</item>
+        <item>AB-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>O+</item>
+        <item>O-</item>
+
+    </string-array>
+
+
+
+    <string name="about">about</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="title_section1">Section 1</string>
@@ -45,13 +72,46 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions.</string>
+    <string name="Enqath">Enqath</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="level1">Minor: No injuries</string>
+    <string name="level2">Medium: Minor Injuries</string>
+    <string name="level3">Serious: Severe Injuries</string>
+    <string name="accidentMsg">Choose The Level of the Accident</string>
+    <string name="Skip">skip (dev only)</string>
+    <string name="errorMsg">Field Required</string>
     <string name="title_activity_main_login">Enqath</string>
     <string name="action_sign_up">Register</string>
     <string name="title_activity_quick_registration">Registration</string>
     <string name="action_reg">Submit</string>
-    <string name="title_activity_splash">Splash</string>
+    <string name="fName">First Name</string>
+    <string name="lName">Last Name</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="nationality">Nationality</string>
+    <string name="bloodType">Blood Type</string>
+    <string name="confirmPass">Confrim Password</string>
+    <string name="nationalID">National ID</string>
+    <string name="DOB">Date of Birth</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="signUp">Sign Up</string>
+    <string name="communications">Communications</string>
+    <string name="preferences">Preferences</string>
+    <string name="phone1">Phone 1:</string>
+    <string name="phone2">Phone 2:</string>
+    <string name="phone3">Phone 3:</string>
+    <string name="phone4">Phone 4:</string>
+    <string name="phone5">Phone 5:</string>
+    <string name="emergencyContacts">Emergency Contacts</string>
 
+
+
+    <string name="send">Send</string>
+    <string name="share">Share</string>
+    <string name="thirdPage">Third Page</string>
+    <string name="secondPage">Second Page</string>
+    <string name="home">Home</string>
+    <string name="save">Save</string>
 </resources>

@@ -84,14 +84,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="ENQATH"
+            android:text="@string/Enqath"
             android:id="@+id/textView22"
             android:layout_gravity="center_horizontal" />
 
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="SKIP (DEV ONLY)"
+            android:text="@string/Skip"
             android:id="@+id/skiplogin"
             android:layout_gravity="center_horizontal" />
 

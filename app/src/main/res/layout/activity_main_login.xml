@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="enqath.alhussein.enqath.MainLogin">
+    tools:context="enqath.alhussein.enqath.MainLogin"
+    tools:showIn="@layout/content_main_login">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
