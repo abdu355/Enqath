@@ -52,5 +52,6 @@
     <string name="action_sign_up">Register</string>
     <string name="title_activity_quick_registration">Registration</string>
     <string name="action_reg">Submit</string>
+    <string name="title_activity_splash">Splash</string>
 
 </resources>
