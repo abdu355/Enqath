@@ -16,7 +16,7 @@
             android:title="@string/thirdPage" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communications">
         <menu>
             <item
                 android:id="@+id/nav_share"

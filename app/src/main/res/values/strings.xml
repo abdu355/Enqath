@@ -7,11 +7,12 @@
 
 
     <string-array name="Contacts">
-        <item>1 Contact </item>
-        <item>2 Contacts</item>
-        <item>3 Contacts</item>
-        <item>4 Contacts</item>
-        <item>5 Contacts</item>
+        <item>   <string name="contact1">1</string>   </item>
+        <item><string name="contact2">2</string></item>
+        <item><string name="contact3">3</string></item>
+        <item><string name="contact4">4</string></item>
+        <item><string name="contact5">5</string></item>
+
 
     </string-array>
     <string-array name="ContactsValues">
@@ -96,6 +97,15 @@
     <string name="DOB">Date of Birth</string>
     <string name="phoneNumber">Phone Number</string>
     <string name="signUp">Sign Up</string>
+    <string name="communications">Communications</string>
+    <string name="preferences">Preferences</string>
+    <string name="phone1">Phone 1:</string>
+    <string name="phone2">Phone 2:</string>
+    <string name="phone3">Phone 3:</string>
+    <string name="phone4">Phone 4:</string>
+    <string name="phone5">Phone 5:</string>
+    <string name="emergencyContacts">Emergency Contacts</string>
+
 
 
     <string name="send">Send</string>
@@ -103,5 +113,5 @@
     <string name="thirdPage">Third Page</string>
     <string name="secondPage">Second Page</string>
     <string name="home">Home</string>
-
+    <string name="save">Save</string>
 </resources>

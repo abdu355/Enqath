@@ -53,4 +53,14 @@
     <string name="secondPage">الصفحة الثانية</string>
     <string name="share">مشاركة</string>
     <string name="thirdPage">الصفحة الثالثة</string>
+    <string name="communications">التواصل</string>
+    <string name="emergencyContacts">عدد هواتف الطوارئ</string>
+    <string name="phone1">الهاتف 1:</string>
+    <string name="phone2">الهاتف 2:</string>
+    <string name="phone3">الهاتف 3:</string>
+    <string name="phone4">الهاتف 4:</string>
+    <string name="phone5">الهاتف 5:</string>
+    <string name="preferences">الإعدادات</string>
+    <string name="save">حفظ</string>
+    <string name="abc">مرحبا</string>
 </resources>

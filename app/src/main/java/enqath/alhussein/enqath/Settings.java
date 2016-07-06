@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TableRow;
 
@@ -14,11 +15,13 @@ import android.widget.TableRow;
 public class Settings extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     TableRow R1,R2,R3,R4,R5;
     Spinner spinner;
+    Button save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        save=(Button)findViewById(R.id.btnSave);
+        save.setOnClickListener(this);
 
         setContentView(R.layout.settings);
         R1=(TableRow)findViewById(R.id.R1);

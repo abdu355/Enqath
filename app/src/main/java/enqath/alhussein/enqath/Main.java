@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.telephony.SmsManager;
 import android.text.Editable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -47,6 +48,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -70,7 +72,11 @@ public class Main extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,6 +86,10 @@ public class Main extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+
+        getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -134,14 +144,14 @@ public class Main extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
 
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -177,8 +187,7 @@ public class Main extends AppCompatActivity
         if (id == R.id.nav_home) {
             //fragmentManager.beginTransaction().replace(R.id.container, new Home()).commit();
             Fragment f = fragmentManager.findFragmentById(R.id.container);
-            if(f!=null)
-            {
+            if (f != null) {
                 try {
                     fragmentManager.beginTransaction().remove(getFragmentManager().findFragmentById(R.id.container)).commit();
                 } catch (Exception e) {
@@ -190,9 +199,9 @@ public class Main extends AppCompatActivity
         } else if (id == R.id.nav_thirdpage) {
             fragmentManager.beginTransaction().replace(R.id.container, new ThirdFrag()).commit();
         }
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
