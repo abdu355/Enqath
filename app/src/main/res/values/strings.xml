@@ -47,7 +47,7 @@
 
 
 
-    <string name="about">this is a coooool app.</string>
+    <string name="about">about</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="title_section1">Section 1</string>
@@ -71,9 +71,16 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions.</string>
+    <string name="Enqath">Enqath</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="level1">Minor: No injuries</string>
+    <string name="level2">Medium: Minor Injuries</string>
+    <string name="level3">Serious: Severe Injuries</string>
+    <string name="accidentMsg">Choose The Level of the Accident</string>
+    <string name="Skip">skip (dev only)</string>
+    <string name="errorMsg">Field Required</string>
     <string name="title_activity_main_login">Enqath</string>
     <string name="action_sign_up">Register</string>
     <string name="title_activity_quick_registration">Registration</string>

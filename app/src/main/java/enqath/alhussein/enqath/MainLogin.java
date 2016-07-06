@@ -29,19 +29,24 @@ public class MainLogin extends AppCompatActivity {
     private SignInButton gsign_in_button;
     private EditText useremail,pass;
     private FirebaseAuth mAuth;
+    private String errorMsg;
     private FirebaseAuth.AuthStateListener mAuthListener;
     String TAG = "Firebase Authentication";
-
     ProgressDialog progress;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+        errorMsg= getString(R.string.errorMsg);
 
         View decorView = getWindow().getDecorView();
         // Hide the status bar.
@@ -102,11 +107,11 @@ public class MainLogin extends AppCompatActivity {
             public void onClick(View view) {
                 if(useremail.getText().length()<=0)
                 {
-                    useremail.setError("Field required");
+                    useremail.setError(errorMsg);
                 }
                 if (pass.getText().length()<=0)
                 {
-                    pass.setError("Field required");
+                    pass.setError(errorMsg);
                 }
                 else
                 {
@@ -164,6 +169,8 @@ public class MainLogin extends AppCompatActivity {
                         // ...
                     }
                 });
+        if (errorMsg==null)
+            errorMsg="Field Required";
     }
 
     @Override

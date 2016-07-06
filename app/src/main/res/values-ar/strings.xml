@@ -3,7 +3,7 @@
     <string name="app_name">انقاذ</string>
     <string name="action_settings">الاعدادات</string>
     <string name="ar">العربية</string>
-    <string name="about">انه برنامج لطيييييف</string>
+    <string name="about">عن التطبيق</string>
     <string name="action_example">مثال حركة</string>
     <string name="action_reg">تسليم</string>
     <string name="action_sign_in">تسجيل الدخول</string>
@@ -28,4 +28,13 @@
     <string name="title_section2">القسم 2</string>
     <string name="title_section3">القسم 3</string>
     <string name="permission_rationale">هناك حاجة الى اذونات جهات الاتصال لتقديم رسالة البريد الاكتروني</string>
+    <string name="Enqath">إنقاذ</string>
+    <string name="accidentMsg">اختر مستوى الحادث</string>
+    <string name="level2">متوسط: اصابات طفيفة</string>
+    <string name="level1">بسيط: لا توجد اصابات</string>
+    <string name="level3">حرج: اصابات خطيرة</string>
+    <string name="Skip">تخطي (للمبرمجين فقط)ا</string>
+    <string name="errorMsg">خانة مطلوبة</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="settings">الإعدادات</string>
 </resources>
