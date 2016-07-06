@@ -87,8 +87,13 @@ public class Main extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
-        getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+//change orientation when changing language
+        if(Locale.getDefault().getLanguage().equals("en")) {
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        }
+        else {
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        }
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -123,6 +128,9 @@ public class Main extends AppCompatActivity
             // No user is signed in
             Toast.makeText(Main.this,"GUEST MODE",Toast.LENGTH_LONG).show();
         }
+
+        Toast.makeText(Main.this,Locale.getDefault().getLanguage(),Toast.LENGTH_LONG).show();
+
 
     }
     public void DynamicPermission() {

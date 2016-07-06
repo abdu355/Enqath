@@ -46,7 +46,7 @@ public class MainLogin extends AppCompatActivity {
 
 
 
-        errorMsg= getString(R.string.errorMsg);
+        errorMsg= getString(R.string.errorMsg);//using string.xml value so we can translate it later on :D
 
         View decorView = getWindow().getDecorView();
         // Hide the status bar.
