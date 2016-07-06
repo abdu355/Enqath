@@ -58,6 +58,7 @@ public class Main extends AppCompatActivity
     private TextView useremail_nav,username_nav;
     private ImageView userdp_nav;
     String userdisplayname;
+    Button btnFire, btnTheft, btnCar,btnDrown;
     FirebaseUser user;
 
     private Button btnEnqath;
@@ -73,7 +74,15 @@ public class Main extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        btnFire=(Button)findViewById(R.id.btnFire);
+        btnDrown=(Button)findViewById(R.id.btnDrawn);
+        btnCar=(Button)findViewById(R.id.btnCar);
+        btnTheft=(Button)findViewById(R.id.btnTheft);
 
+        btnFire.setOnClickListener(this);
+        btnDrown.setOnClickListener(this);
+        btnCar.setOnClickListener(this);
+        btnTheft.setOnClickListener(this);
 
         super.onCreate(savedInstanceState);
 
@@ -219,8 +228,6 @@ public class Main extends AppCompatActivity
             case R.id.btnEnqath:
 
 
-
-
                 Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
 
                 Uri callui = Uri.parse(number);
@@ -249,13 +256,16 @@ public class Main extends AppCompatActivity
 
             break;
             case R.id.btnFire:
-                //    startActivity(callIntent);
-                // startActivity(new Intent(this,Fire.class));
+                 callui = Uri.parse(number);
+                 callIntent = new Intent(Intent.ACTION_CALL, callui);
+                DynamicPermission();
+                startActivity(callIntent);
+                startActivity(new Intent(this,Fire.class));
 
                 break;
             case R.id.btnCar:
-                //    startActivity(callIntent);
-
+                Intent i= new Intent(this, Fire.class);
+                startActivity(i);
                 break;
             case R.id.btnTheft:
                 //     startActivity(callIntent);

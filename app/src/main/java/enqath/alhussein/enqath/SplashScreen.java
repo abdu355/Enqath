@@ -9,13 +9,12 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 /**
  * Created by Abdulwahab on 7/6/2016.
  */
-public class Splashscreen extends Activity {
+public class SplashScreen extends Activity {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         Window window = getWindow();
@@ -56,14 +55,14 @@ public class Splashscreen extends Activity {
                         sleep(100);
                         waited += 100;
                     }
-                    Intent intent = new Intent(Splashscreen.this, MainLogin.class);
+                    Intent intent = new Intent(SplashScreen.this, MainLogin.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
-                    Splashscreen.this.finish();
+                    SplashScreen.this.finish();
                 } catch (InterruptedException e) {
                     // do nothing
                 } finally {
-                    Splashscreen.this.finish();
+                    SplashScreen.this.finish();
                 }
 
             }

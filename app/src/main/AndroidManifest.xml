@@ -45,7 +45,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
-            android:name=".Splashscreen"
+            android:name=".SplashScreen"
             android:label="@string/title_activity_main_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
