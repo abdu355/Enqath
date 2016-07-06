@@ -37,4 +37,20 @@
     <string name="errorMsg">خانة مطلوبة</string>
     <string name="logout">تسجيل الخروج</string>
     <string name="settings">الإعدادات</string>
+    <string name="DOB">تاريخ الميلاد</string>
+    <string name="bloodType">فصيلة الدم</string>
+    <string name="confirmPass">تأكيد كلمة المرور</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="fName">الاسم الأول</string>
+    <string name="lName">اسم العائلة</string>
+    <string name="nationalID">رقم الهوية الوطنية</string>
+    <string name="nationality">الجنسية</string>
+    <string name="password">كلمة المرور</string>
+    <string name="phoneNumber">رقم الهاتف</string>
+    <string name="signUp">التسجيل</string>
+    <string name="home">الرئيسية</string>
+    <string name="send">أرسل</string>
+    <string name="secondPage">الصفحة الثانية</string>
+    <string name="share">مشاركة</string>
+    <string name="thirdPage">الصفحة الثالثة</string>
 </resources>

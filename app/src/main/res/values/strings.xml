@@ -85,5 +85,23 @@
     <string name="action_sign_up">Register</string>
     <string name="title_activity_quick_registration">Registration</string>
     <string name="action_reg">Submit</string>
+    <string name="fName">First Name</string>
+    <string name="lName">Last Name</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="nationality">Nationality</string>
+    <string name="bloodType">Blood Type</string>
+    <string name="confirmPass">Confrim Password</string>
+    <string name="nationalID">National ID</string>
+    <string name="DOB">Date of Birth</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="signUp">Sign Up</string>
+
+
+    <string name="send">Send</string>
+    <string name="share">Share</string>
+    <string name="thirdPage">Third Page</string>
+    <string name="secondPage">Second Page</string>
+    <string name="home">Home</string>
 
 </resources>
