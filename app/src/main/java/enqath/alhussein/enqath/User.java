@@ -10,6 +10,14 @@ public class User {
     public String phone;
     public String dob;
     public String pass;
+  //  -----
+    public String blood;
+    public String alergies;
+    public String currentCondition;
+    public String nID;
+    public String extraInfo;
+    public String medications;
+
 
     public User() {
 

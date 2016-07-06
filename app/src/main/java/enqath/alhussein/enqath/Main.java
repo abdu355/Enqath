@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.telephony.SmsManager;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
@@ -60,6 +61,9 @@ public class Main extends AppCompatActivity
     private Button btnEnqath;
     FrameLayout layout;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 124;
+
+    String [] phones;
+    String [] msg={"Car Accident Level Minor. No Human Injuries","Car Accident Level Medium. Simple Human Injuries","Car Accident Level Serious. Major Human Injuries"};
 
     final String number = "tel:000";
     android.app.FragmentManager fragmentManager = getFragmentManager();
@@ -197,6 +201,9 @@ public class Main extends AppCompatActivity
         switch (v.getId()) {
             case R.id.btnEnqath:
 
+
+
+
                 Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
 
                 Uri callui = Uri.parse(number);
@@ -205,6 +212,8 @@ public class Main extends AppCompatActivity
                 startActivity(callIntent);
 
 
+
+                sendSMS( phones, msg );
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
@@ -215,9 +224,13 @@ public class Main extends AppCompatActivity
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                startActivity(callIntent);
 
-                break;
+
+
+
+
+
+            break;
             case R.id.btnFire:
                 //    startActivity(callIntent);
                 // startActivity(new Intent(this,Fire.class));
@@ -237,6 +250,20 @@ public class Main extends AppCompatActivity
                 break;
 
 
+        }
+    }
+    public void sendSMS(String [] phoneNo, String [] msg){
+        try {
+
+
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo[0], null, msg[0], null, null);
+            Toast.makeText(getApplicationContext(), "Message Sent",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
         }
     }
 
