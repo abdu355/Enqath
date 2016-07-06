@@ -65,7 +65,7 @@ public class Main extends AppCompatActivity
     FirebaseUser user;
 
 
-    private Button btnEnqath;
+    private Button btnEnqath, btnTheft,btnCar,btnDrawn,btnFire;
     FrameLayout layout;
     final private int REQUEST_CODE_CALL = 124;
     DrawerLayout drawer;
@@ -84,6 +84,16 @@ public class Main extends AppCompatActivity
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        btnCar=(Button)findViewById(R.id.btnCar);
+        btnTheft=(Button)findViewById(R.id.btnTheft);
+        btnDrawn=(Button)findViewById(R.id.btnDrawn);
+        btnFire=(Button)findViewById(R.id.btnFire);
+
+        btnCar.setOnClickListener(this);
+        btnTheft.setOnClickListener(this);
+        btnDrawn.setOnClickListener(this);
+        btnFire.setOnClickListener(this);
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
