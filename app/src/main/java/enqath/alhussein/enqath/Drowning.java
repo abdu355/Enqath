@@ -6,10 +6,10 @@ import android.os.Bundle;
 /**
  * Created by Mohammad on 2016-06-21.
  */
-public class Drawning extends Activity {
+public class Drowning extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawning);
+        setContentView(R.layout.drowning);
     }
 }

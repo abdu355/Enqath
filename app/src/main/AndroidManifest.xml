@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Settings" />
         <activity android:name=".Car" />
-        <activity android:name=".Drawning" />
+        <activity android:name=".Drowning" />
         <activity android:name=".Fire" />
         <activity
             android:name=".Registration"
