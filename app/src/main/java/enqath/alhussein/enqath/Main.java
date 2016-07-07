@@ -93,7 +93,7 @@ public class Main extends AppCompatActivity
                 Snackbar.make(view, "Open Dialer", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 Intent intent = new Intent(Intent.ACTION_DIAL); //open dialer
-                intent.setData(Uri.parse("000"));
+                intent.setData(Uri.parse("tel:000"));
                 startActivity(intent);
             }
         });
@@ -308,8 +308,8 @@ public class Main extends AppCompatActivity
                     Snackbar.make(view, "Open Dialer", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     Intent intent = new Intent(Intent.ACTION_DIAL); //open dialer
-                    intent.setData(Uri.parse("000"));
-                    startActivity(Intent.createChooser(intent, "Could Not Open Dialer"));
+                    intent.setData(Uri.parse("tel:000"));
+                    startActivity(intent);
                 }
             });
         } else if (id == R.id.nav_profilepage) {
