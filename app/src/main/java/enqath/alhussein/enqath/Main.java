@@ -385,9 +385,9 @@ public class Main extends AppCompatActivity
     @Override
     public void updateUserProfile() //profile fragment
     {
-        Log.d("Main Activity Event","updateUserProfile called");
+        Log.d("Main Activity Event","updateUser called");
         //push to Firebase
-        firebaseFunctions.pushProfileData( new User( firebaseUser.getDisplayName(),  firebaseUser.getEmail(), "000-0000000", "02/02/2002"),firebaseUser.getUid());
+        firebaseFunctions.pushProfileData( new UserProfile( firebaseUser.getDisplayName(),  firebaseUser.getEmail(), "000-0000000", "02/02/2002"),firebaseUser.getUid());
         //confirm
         Snackbar snackbar = Snackbar.make(drawer, "Your profile has been saved", Snackbar.LENGTH_SHORT);
         snackbar.show();
@@ -398,8 +398,8 @@ public class Main extends AppCompatActivity
     {
         Log.d("Main Activity Event","updateMedicalID called");
        //push to Firebase
-
-
+        UserProfile usermedID = new UserProfile("drugs","extrabullshit","lazyAF","diarrhea","O+");
+        firebaseFunctions.pushMedID(firebaseUser.getUid(),usermedID.getMedications(),usermedID.getExtraInfo(),usermedID.getCurrentCondition(),usermedID.getAllergies(),usermedID.getBlood());
         //confirm
         Snackbar snackbar = Snackbar.make(drawer, "Your Medical ID has been updated", Snackbar.LENGTH_SHORT);
         snackbar.show();

@@ -5,7 +5,7 @@ package enqath.alhussein.enqath;
  */
 
 
-public class User {
+public class UserProfile {
 
 
     public String username;
@@ -14,28 +14,33 @@ public class User {
     public String email;
     public String phone;
     public String dob;
-    public String pass;
   //  -----
     public String blood;
-    public String alergies;
+    public String allergies;
     public String currentCondition;
     public String nID;
     public String extraInfo;
     public String medications;
 
 
-    public User() {
+    public UserProfile() {
 
     }
 
-    public User(String username, String email,String phone,String dob) {
+    public UserProfile(String username, String email, String phone, String dob) {
         this.username = username;
         this.email = email;
         this.phone=phone;
         this.dob=dob;
-        this.pass=pass;
     }
 
+    public UserProfile(String medications, String extraInfo, String currentCondition, String allergies, String blood) {
+        this.medications = medications;
+        this.extraInfo = extraInfo;
+        this.currentCondition = currentCondition;
+        this.allergies = allergies;
+        this.blood = blood;
+    }
 
     public String getUsername() {
         return username;
@@ -69,14 +74,6 @@ public class User {
         this.dob = dob;
     }
 
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-
     public String getBlood() {
         return blood;
     }
@@ -85,12 +82,12 @@ public class User {
         this.blood = blood;
     }
 
-    public String getAlergies() {
-        return alergies;
+    public String getAllergies() {
+        return allergies;
     }
 
-    public void setAlergies(String alergies) {
-        this.alergies = alergies;
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
     }
 
     public String getCurrentCondition() {
@@ -124,6 +121,4 @@ public class User {
     public void setMedications(String medications) {
         this.medications = medications;
     }
-
-
 }
