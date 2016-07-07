@@ -105,5 +105,6 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/btnsubmitmed"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
 </LinearLayout>

@@ -16,7 +16,7 @@ import android.widget.Button;
  */
 public class MedicalFrag extends Fragment implements View.OnClickListener {
     View myView;
-    Button submit;
+    static Button submit;
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
 
@@ -53,5 +53,9 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
     {
         // This is how you call method of Activity from Fragment.
         listener.updateMedicalID();
+    }
+    public static void showEditButtons()
+    {
+        submit.setVisibility(View.VISIBLE);
     }
 }

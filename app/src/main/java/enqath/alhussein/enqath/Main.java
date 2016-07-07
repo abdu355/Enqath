@@ -1,6 +1,7 @@
 package enqath.alhussein.enqath;
 
 import android.Manifest;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,6 +9,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
@@ -50,12 +55,16 @@ public class Main extends AppCompatActivity
     String userdisplayname;
     FirebaseUser firebaseUser;
     FirebaseFunctions firebaseFunctions;
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
 
     private Button btnEnqath, btnTheft,btnCar,btnDrawn,btnFire;
     FrameLayout layout;
     final private int REQUEST_CODE_CALL = 124;
     DrawerLayout drawer;
+    FloatingActionButton fab;
+    android.support.v4.app.Fragment fragment_obj;
+    AppBarLayout appBarLayout;
 
 
 
@@ -73,6 +82,21 @@ public class Main extends AppCompatActivity
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
+        appBarLayout =(AppBarLayout)findViewById(R.id.app_bar);
+        fab.setImageResource(R.drawable.ic_phone_white_48dp); //call FAB
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Open Dialer", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Intent intent = new Intent(Intent.ACTION_DIAL); //open dialer
+                intent.setData(Uri.parse("000"));
+                startActivity(intent);
+            }
+        });
 
         btnCar=(Button)findViewById(R.id.btnCar);
         btnTheft=(Button)findViewById(R.id.btnTheft);
@@ -270,26 +294,56 @@ public class Main extends AppCompatActivity
 
         transaction = getSupportFragmentManager().beginTransaction();
 
+
         if (id == R.id.nav_home) {
             transaction.replace(R.id.container, new HomeFrag());
             transaction.addToBackStack(null);
             transaction.commit();
-//            Fragment f = fragmentManager.findFragmentById(R.id.container);
-//            if (f != null) {
-//                try {
-//                    fragmentManager.beginTransaction().remove(getFragmentManager().findFragmentById(R.id.container)).commit();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
+            //FAB
+            collapsingToolbarLayout.setTitle("Enqath");
+            fab.setImageResource(R.drawable.ic_phone_white_48dp); //call FAB
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar.make(view, "Open Dialer", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    Intent intent = new Intent(Intent.ACTION_DIAL); //open dialer
+                    intent.setData(Uri.parse("000"));
+                    startActivity(Intent.createChooser(intent, "Could Not Open Dialer"));
+                }
+            });
         } else if (id == R.id.nav_profilepage) {
             transaction.replace(R.id.container, new ProfileFrag());
             transaction.addToBackStack(null);
             transaction.commit();
+            //FAB
+            collapsingToolbarLayout.setTitle("User Profile");//change appbar title
+            fab.setImageResource(R.drawable.ic_mode_edit_white_48dp); //call FAB
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar.make(view, "Edit profile", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    ProfileFrag.showEditButtons();//show edit buttons
+                    appBarLayout.setExpanded(false,true); //hide appbar
+                }
+            });
         } else if (id == R.id.nav_medicalpage) {
             transaction.replace(R.id.container, new MedicalFrag());
             transaction.addToBackStack(null);
             transaction.commit();
+            //FAB
+            collapsingToolbarLayout.setTitle("Medical ID"); //change appbar title
+            fab.setImageResource(R.drawable.ic_mode_edit_white_48dp); //call FAB
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar.make(view, "Edit Medical ID", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    MedicalFrag.showEditButtons(); //show edit buttons
+                    appBarLayout.setExpanded(false,true); //hide appbar
+                }
+            });
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
