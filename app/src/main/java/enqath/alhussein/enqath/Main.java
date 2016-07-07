@@ -1,24 +1,20 @@
 package enqath.alhussein.enqath;
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.telephony.SmsManager;
-import android.text.Editable;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -32,37 +28,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-import org.w3c.dom.Text;
-
-import java.security.acl.Permission;
-import java.util.List;
 import java.util.Locale;
 
 public class Main extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener,myFragEventListerner {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private TextView useremail_nav,username_nav;
     private ImageView userdp_nav;
     String userdisplayname;
-    FirebaseUser user;
+    FirebaseUser firebaseUser;
+    FirebaseFunctions firebaseFunctions;
 
 
     private Button btnEnqath, btnTheft,btnCar,btnDrawn,btnFire;
@@ -71,11 +58,13 @@ public class Main extends AppCompatActivity
     DrawerLayout drawer;
 
 
+
     String [] phones;
     String [] msg={"Car Accident Level Minor. No Human Injuries","Car Accident Level Medium. Simple Human Injuries","Car Accident Level Serious. Major Human Injuries"};
 
     final String number = "tel:000";
-    android.app.FragmentManager fragmentManager = getFragmentManager();
+    //android.app.FragmentManager fragmentManager = getFragmentManager();
+    FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +79,12 @@ public class Main extends AppCompatActivity
         btnDrawn=(Button)findViewById(R.id.btnDrawn);
         btnFire=(Button)findViewById(R.id.btnFire);
 
-        btnCar.setOnClickListener(this);
-        btnTheft.setOnClickListener(this);
-        btnDrawn.setOnClickListener(this);
-        btnFire.setOnClickListener(this);
+
+        /*TODO :: moved to HomeFrag.java*/
+//        btnCar.setOnClickListener(this);
+//        btnTheft.setOnClickListener(this);
+//        btnDrawn.setOnClickListener(this);
+//        btnFire.setOnClickListener(this);
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -103,7 +94,7 @@ public class Main extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-//change orientation when changing language
+        //change orientation when changing language
         if(Locale.getDefault().getLanguage().equals("en")) {
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
@@ -120,35 +111,38 @@ public class Main extends AppCompatActivity
         username_nav=(TextView)navHeaderView.findViewById(R.id.username_nav);
         //--------------------------
 
-        btnEnqath = (Button) findViewById(R.id.btnEnqath);
+        //btnEnqath = (Button) findViewById(R.id.btnEnqath);
         layout = (FrameLayout)findViewById(R.id.container);
         userdp_nav=(ImageView)findViewById(R.id.userdp_nav);
 
-        btnEnqath.setOnClickListener(this);
 
+        firebaseFunctions = new FirebaseFunctions();
         Firebase.setAndroidContext(this);
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
             // User is signed in
-            Toast.makeText(Main.this,"WELCOME " + user.getDisplayName(),Toast.LENGTH_LONG).show();
-            //get user profile and display in nav drawer
-            useremail_nav.setText(user.getEmail());
-            username_nav.setText(user.getDisplayName());
+            Toast.makeText(Main.this,"WELCOME " + firebaseUser.getDisplayName(),Toast.LENGTH_LONG).show();
+            //get firebaseUser profile and display in nav drawer
+            useremail_nav.setText(firebaseUser.getEmail());
+            username_nav.setText(firebaseUser.getDisplayName());
             //set DP image here
 
-            if(username_nav.getText().length()<=0)
+            if(username_nav.getText().length()<=0) //if no username or alias yet
             {
                 showdialog();
             }
         } else {
-            // No user is signed in
+            // No firebaseUser is signed in
             Toast.makeText(Main.this,"GUEST MODE",Toast.LENGTH_LONG).show();
         }
 
         Toast.makeText(Main.this,Locale.getDefault().getLanguage(),Toast.LENGTH_LONG).show();
 
-
-
+        //start app with home fragment
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, new HomeFrag());
+        transaction.addToBackStack(null);
+        transaction.commit();
 
     }
     public void DynamicPermission() {
@@ -164,8 +158,8 @@ public class Main extends AppCompatActivity
                     Manifest.permission.CALL_PHONE) && ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.SEND_SMS)) {
 
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
+                // Show an expanation to the User *asynchronously* -- don't block
+                // this thread waiting for the User's response! After the User
                 // sees the explanation, try again to request the permission.
                 Snackbar snackbar = Snackbar
                         .make(drawer, "Requires phone permission to make Emergency Calls", Snackbar.LENGTH_LONG)
@@ -274,21 +268,28 @@ public class Main extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        transaction = getSupportFragmentManager().beginTransaction();
 
         if (id == R.id.nav_home) {
-            //fragmentManager.beginTransaction().replace(R.id.container, new Home()).commit();
-            Fragment f = fragmentManager.findFragmentById(R.id.container);
-            if (f != null) {
-                try {
-                    fragmentManager.beginTransaction().remove(getFragmentManager().findFragmentById(R.id.container)).commit();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        } else if (id == R.id.nav_secpage) {
-            fragmentManager.beginTransaction().replace(R.id.container, new SecondFrag()).commit();
-        } else if (id == R.id.nav_thirdpage) {
-            fragmentManager.beginTransaction().replace(R.id.container, new ThirdFrag()).commit();
+            transaction.replace(R.id.container, new HomeFrag());
+            transaction.addToBackStack(null);
+            transaction.commit();
+//            Fragment f = fragmentManager.findFragmentById(R.id.container);
+//            if (f != null) {
+//                try {
+//                    fragmentManager.beginTransaction().remove(getFragmentManager().findFragmentById(R.id.container)).commit();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+        } else if (id == R.id.nav_profilepage) {
+            transaction.replace(R.id.container, new ProfileFrag());
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } else if (id == R.id.nav_medicalpage) {
+            transaction.replace(R.id.container, new MedicalFrag());
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -296,33 +297,34 @@ public class Main extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnEnqath:
-                DynamicPermission(); //fixed permission request logic
-                break;
-            case R.id.btnFire:
-                //    startActivity(callIntent);
-                // startActivity(new Intent(this,Fire.class));
-
-                break;
-            case R.id.btnCar:
-                //    startActivity(callIntent);
-
-                break;
-            case R.id.btnTheft:
-                //     startActivity(callIntent);
-
-                break;
-            case R.id.btnDrawn:
-                //     startActivity(callIntent);
-
-                break;
-
-
-        }
-    }
+    /*TODO:: moved to HomeFrag.java*/
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.btnEnqath:
+//                DynamicPermission(); //fixed permission request logic
+//                break;
+//            case R.id.btnFire:
+//                //    startActivity(callIntent);
+//                // startActivity(new Intent(this,Fire.class));
+//
+//                break;
+//            case R.id.btnCar:
+//                //    startActivity(callIntent);
+//
+//                break;
+//            case R.id.btnTheft:
+//                //     startActivity(callIntent);
+//
+//                break;
+//            case R.id.btnDrawn:
+//                //     startActivity(callIntent);
+//
+//                break;
+//
+//
+//        }
+//    }
     public void sendSMS(String [] phoneNo, String [] msg){
         try {
 
@@ -344,7 +346,7 @@ public class Main extends AppCompatActivity
         AlertDialog.Builder alert = new AlertDialog.Builder(this,R.style.CustomDialogTheme);
         final EditText edittext = new EditText(getApplicationContext());
         edittext.setTextColor(Color.parseColor(String.valueOf(R.color.colorPrimaryDark)));
-        alert.setMessage("Consider updating your profile");
+        alert.setMessage("Enter Alias or Name");
         alert.setTitle("Profile Setup");
 
         alert.setView(edittext);
@@ -357,7 +359,7 @@ public class Main extends AppCompatActivity
                         .setDisplayName(userdisplayname)
                         .build();
 
-                user.updateProfile(profileUpdates)
+                firebaseUser.updateProfile(profileUpdates)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -377,5 +379,37 @@ public class Main extends AppCompatActivity
 
         alert.show();
     }
+
+
+    /*<---------------------------------------------/*TODO :: Implement fragment functions here *///--------------------------------------------->
+    @Override
+    public void updateUserProfile() //profile fragment
+    {
+        Log.d("Main Activity Event","updateUserProfile called");
+        //push to Firebase
+        firebaseFunctions.pushProfileData( new User( firebaseUser.getDisplayName(),  firebaseUser.getEmail(), "000-0000000", "02/02/2002"),firebaseUser.getUid());
+        //confirm
+        Snackbar snackbar = Snackbar.make(drawer, "Your profile has been saved", Snackbar.LENGTH_SHORT);
+        snackbar.show();
+
+    }
+    @Override
+    public void updateMedicalID()//medical ID fragment
+    {
+        Log.d("Main Activity Event","updateMedicalID called");
+       //push to Firebase
+
+
+        //confirm
+        Snackbar snackbar = Snackbar.make(drawer, "Your Medical ID has been updated", Snackbar.LENGTH_SHORT);
+        snackbar.show();
+    }
+
+    @Override
+    public void quickCall() //home fragment
+    {
+        DynamicPermission(); //checks permission and initiates call
+    }
+
 
 }

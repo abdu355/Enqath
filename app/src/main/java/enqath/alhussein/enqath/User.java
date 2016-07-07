@@ -28,7 +28,7 @@ public class User {
 
     }
 
-    public User(String username, String email,String pass,String phone,String dob) {
+    public User(String username, String email,String phone,String dob) {
         this.username = username;
         this.email = email;
         this.phone=phone;

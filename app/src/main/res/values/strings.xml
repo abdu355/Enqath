@@ -110,8 +110,9 @@
 
     <string name="send">Send</string>
     <string name="share">Share</string>
-    <string name="thirdPage">Third Page</string>
-    <string name="secondPage">Second Page</string>
+    <string name="thirdPage">Medical ID</string>
+    <string name="secondPage">Profile</string>
     <string name="home">Home</string>
     <string name="save">Save</string>
+    <string name="updateProfile">Update</string>
 </resources>

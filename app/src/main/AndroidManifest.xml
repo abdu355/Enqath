@@ -22,9 +22,6 @@
         <activity android:name=".Car" />
         <activity android:name=".Drowning" />
         <activity android:name=".Fire" />
-        <activity
-            android:name=".Registration"
-            android:label="@string/title_activity_about" />
         <activity android:name=".Theft" />
         <activity
             android:name=".Main"
