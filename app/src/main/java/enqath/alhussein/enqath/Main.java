@@ -272,7 +272,7 @@ public class Main extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_settings:
-                startActivity(new Intent(this, Settings.class));
+                startActivity(new Intent(this, Preferences.class));
                 return true;
             case R.id.menu_about:
                 startActivity(new Intent(this, About.class));
@@ -441,7 +441,11 @@ public class Main extends AppCompatActivity
     {
         Log.d("Main Activity Event","updateUser called");
         //push to Firebase
-        firebaseFunctions.pushProfileData( new UserProfile( firebaseUser.getDisplayName(),  firebaseUser.getEmail(), "000-0000000", "02/02/2002"),firebaseUser.getUid());
+        try {
+            firebaseFunctions.pushProfileData( new UserProfile( firebaseUser.getDisplayName(),  firebaseUser.getEmail(), "000-0000000", "02/02/2002"),firebaseUser.getUid());
+        } catch (NullPointerException e) {
+            showAlert();
+        }
         //confirm
         Snackbar snackbar = Snackbar.make(drawer, "Your profile has been saved", Snackbar.LENGTH_SHORT);
         snackbar.show();
@@ -453,7 +457,11 @@ public class Main extends AppCompatActivity
         Log.d("Main Activity Event","updateMedicalID called");
        //push to Firebase
         UserProfile usermedID = new UserProfile("drugs","extrabullshit","lazyAF","diarrhea","O+");
-        firebaseFunctions.pushMedID(firebaseUser.getUid(),usermedID.getMedications(),usermedID.getExtraInfo(),usermedID.getCurrentCondition(),usermedID.getAllergies(),usermedID.getBlood());
+        try {
+            firebaseFunctions.pushMedID(firebaseUser.getUid(),usermedID.getMedications(),usermedID.getExtraInfo(),usermedID.getCurrentCondition(),usermedID.getAllergies(),usermedID.getBlood());
+        } catch (NullPointerException e) {
+            showAlert();
+        }
         //confirm
         Snackbar snackbar = Snackbar.make(drawer, "Your Medical ID has been updated", Snackbar.LENGTH_SHORT);
         snackbar.show();
@@ -465,5 +473,18 @@ public class Main extends AppCompatActivity
         DynamicPermission(); //checks permission and initiates call
     }
 
+    private void showAlert()
+    {
+        new AlertDialog.Builder(this)
+                .setTitle("User Error")
+                .setMessage("Error Occurred , are you logged in ?")
+                .setNeutralButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //close
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 
 }

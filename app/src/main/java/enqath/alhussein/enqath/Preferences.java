@@ -1,7 +1,12 @@
 package enqath.alhussein.enqath;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -9,17 +14,18 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TableRow;
 
-/**
- * Created by Mohammad on 2016-06-21.
- */
-public class Settings extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class Preferences extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener {
     TableRow R1,R2,R3,R4,R5;
     Spinner spinner;
     Button save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.activity_preferences);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         save=(Button)findViewById(R.id.btnSave);
         save.setOnClickListener(this);
@@ -47,6 +53,16 @@ public class Settings extends Activity implements View.OnClickListener, AdapterV
         spinner.setOnItemSelectedListener(this);
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -107,7 +123,7 @@ public class Settings extends Activity implements View.OnClickListener, AdapterV
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
 
     }
 }
