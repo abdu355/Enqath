@@ -103,7 +103,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="Update"
         android:id="@+id/btnsubmitmed"
         android:layout_gravity="center_horizontal"
         android:visibility="gone" />

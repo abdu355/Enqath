@@ -433,16 +433,29 @@ public class Main extends AppCompatActivity
 
         alert.show();
     }
-
+    private void showAlert()
+    {
+        new AlertDialog.Builder(this)
+                .setTitle("User Error")
+                .setMessage("Error Occurred , are you logged in ?")
+                .setNeutralButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //close
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 
     /*<---------------------------------------------/*TODO :: Implement fragment functions here *///--------------------------------------------->
     @Override
-    public void updateUserProfile() //profile fragment
+    public void pushUserProfile() //profile fragment
     {
         Log.d("Main Activity Event","updateUser called");
         //push to Firebase
         try {
-            firebaseFunctions.pushProfileData( new UserProfile( firebaseUser.getDisplayName(),  firebaseUser.getEmail(), "000-0000000", "02/02/2002"),firebaseUser.getUid());
+            firebaseFunctions.pushProfileData( new UserProfile("Abdulwahab","Sahyoun","0500000000","02/02/1992","UAEID8976235612","Canada"),firebaseUser.getUid());
+            //REFERENCE ONLY: String fname, String lname, String phone, String dob, String nID, String nat
         } catch (NullPointerException e) {
             showAlert();
         }
@@ -452,13 +465,14 @@ public class Main extends AppCompatActivity
 
     }
     @Override
-    public void updateMedicalID()//medical ID fragment
+    public void pushMedicalID()//medical ID fragment
     {
-        Log.d("Main Activity Event","updateMedicalID called");
+        Log.d("Main Activity Event","pushMedicalID called");
        //push to Firebase
-        UserProfile usermedID = new UserProfile("drugs","extrabullshit","lazyAF","diarrhea","O+");
+        MedID usermedID = new MedID("O+","diarrhea","lazyAF","extrabullshit","drugs");
+        //REFERENCE ONLY: String blood, String allergies, String currentCondition, String extraInfo, String medications
         try {
-            firebaseFunctions.pushMedID(firebaseUser.getUid(),usermedID.getMedications(),usermedID.getExtraInfo(),usermedID.getCurrentCondition(),usermedID.getAllergies(),usermedID.getBlood());
+            firebaseFunctions.pushMedID(usermedID,firebaseUser.getUid());
         } catch (NullPointerException e) {
             showAlert();
         }
@@ -473,18 +487,11 @@ public class Main extends AppCompatActivity
         DynamicPermission(); //checks permission and initiates call
     }
 
-    private void showAlert()
-    {
-        new AlertDialog.Builder(this)
-                .setTitle("User Error")
-                .setMessage("Error Occurred , are you logged in ?")
-                .setNeutralButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        //close
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+    @Override
+    public void fetchUserProfile() {
+        firebaseFunctions.fetchUserProfile(firebaseUser.getUid());
+
     }
+
 
 }

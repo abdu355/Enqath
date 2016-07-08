@@ -17,6 +17,9 @@ import java.util.HashMap;
  */
 public class FirebaseFunctions {
     UserProfile dbuser;
+
+
+    //<---------------------------------------------------PUSH FUNCTIONS--------------------------------------------------->
     public void pushProfileData(UserProfile userProfile, String userid)
     {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -25,7 +28,18 @@ public class FirebaseFunctions {
         myRef.child("profiles").child(userid).setValue(userProfile);
 
     }
-    public UserProfile getProfielData(String userid)
+    public void pushMedID(MedID medID, String userid)
+    {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+
+        myRef.child("medID").child(userid).setValue(medID);
+    }
+
+
+
+    //<---------------------------------------------------FETCH FUNCTIONS--------------------------------------------------->
+    public UserProfile fetchUserProfile(String userid)
     {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
@@ -37,13 +51,13 @@ public class FirebaseFunctions {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get userProfile value
                         UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                        dbuser.setEmail(userProfile.getEmail());
+                        dbuser.setFname(userProfile.getFname());
+                        dbuser.setLname(userProfile.getLname());
                         dbuser.setDob(userProfile.getDob());
-                        dbuser.setUsername(userProfile.getUsername());
                         dbuser.setPhone(userProfile.getPhone());
 
-                        Log.d("DBUSER",""+dbuser.getEmail()+" "+dbuser.getDob());
-                        Log.d("DBUSER",""+dbuser.getUsername()+" "+dbuser.getPhone());
+                        Log.d("DBUSER",""+dbuser.getFname()+" "+dbuser.getDob());
+                        Log.d("DBUSER",""+dbuser.getLname()+" "+dbuser.getPhone());
                         // ...
                     }
 
@@ -56,7 +70,9 @@ public class FirebaseFunctions {
         return dbuser;
     }
 
-    public void pushMedID(String userid, String ... params) //Push all available medical and critical information
+
+    //<---------------------------------------------------UPDATE/APPEND FUNCTIONS--------------------------------------------------->
+    public void updateMedID(String userid, String ... params) //Push all available medical and critical information
     {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
@@ -70,7 +86,8 @@ public class FirebaseFunctions {
         //put all fields required
         // ...
         // ...
-        myRef.child("profiles").child(userid).updateChildren(myMap);
+        myRef.child("medID").child(userid).updateChildren(myMap);
     }
+
 
 }

@@ -8,54 +8,51 @@ package enqath.alhussein.enqath;
 public class UserProfile {
 
 
-    public String username;
 
 
-    public String email;
+    public String fname,lname;
     public String phone;
     public String dob;
-  //  -----
-    public String blood;
-    public String allergies;
-    public String currentCondition;
     public String nID;
-    public String extraInfo;
-    public String medications;
-
+    public String nat;
+  //  -----
 
     public UserProfile() {
 
     }
 
-    public UserProfile(String username, String email, String phone, String dob) {
-        this.username = username;
-        this.email = email;
+    public UserProfile(String fname, String lname, String phone, String dob, String nID, String nat) {
+        this.fname = fname;
+        this.lname = lname;
         this.phone=phone;
         this.dob=dob;
+        this.nID=nID;
+        this.nat=nat;
     }
 
-    public UserProfile(String medications, String extraInfo, String currentCondition, String allergies, String blood) {
-        this.medications = medications;
-        this.extraInfo = extraInfo;
-        this.currentCondition = currentCondition;
-        this.allergies = allergies;
-        this.blood = blood;
+
+    public String getNat() {
+        return nat;
     }
 
-    public String getUsername() {
-        return username;
+    public void setNat(String nat) {
+        this.nat = nat;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getFname() {
+        return fname;
     }
 
-    public String getEmail() {
-        return email;
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 
     public String getPhone() {
@@ -74,30 +71,6 @@ public class UserProfile {
         this.dob = dob;
     }
 
-    public String getBlood() {
-        return blood;
-    }
-
-    public void setBlood(String blood) {
-        this.blood = blood;
-    }
-
-    public String getAllergies() {
-        return allergies;
-    }
-
-    public void setAllergies(String allergies) {
-        this.allergies = allergies;
-    }
-
-    public String getCurrentCondition() {
-        return currentCondition;
-    }
-
-    public void setCurrentCondition(String currentCondition) {
-        this.currentCondition = currentCondition;
-    }
-
     public String getnID() {
         return nID;
     }
@@ -106,19 +79,5 @@ public class UserProfile {
         this.nID = nID;
     }
 
-    public String getExtraInfo() {
-        return extraInfo;
-    }
 
-    public void setExtraInfo(String extraInfo) {
-        this.extraInfo = extraInfo;
-    }
-
-    public String getMedications() {
-        return medications;
-    }
-
-    public void setMedications(String medications) {
-        this.medications = medications;
-    }
 }

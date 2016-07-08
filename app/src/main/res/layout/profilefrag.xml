@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/editText9"
+                android:id="@+id/txt_fname"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
                 android:textColor="@color/bright_foreground_material_light" />
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/editText10"
+                android:id="@+id/txt_lname"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
                 android:textColor="@color/bright_foreground_material_light" />
@@ -68,7 +68,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/email"
                 android:id="@+id/textView19"
-                android:paddingRight="15dp" />
+                android:paddingRight="15dp"
+                android:visibility="gone" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -78,7 +79,8 @@
                 android:id="@+id/editText11"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
-                android:textColor="@color/bright_foreground_material_light" />
+                android:textColor="@color/bright_foreground_material_light"
+                android:visibility="gone" />
         </TableRow>
 
         <TableRow
@@ -92,7 +94,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/password"
                 android:id="@+id/textView28"
-                android:paddingRight="15dp" />
+                android:paddingRight="15dp"
+                android:visibility="gone" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -102,7 +105,8 @@
                 android:id="@+id/editText12"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
-                android:textColor="@color/bright_foreground_material_light" />
+                android:textColor="@color/bright_foreground_material_light"
+                android:visibility="gone" />
         </TableRow>
 
         <TableRow
@@ -116,7 +120,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/confirmPass"
                 android:id="@+id/textView29"
-                android:paddingRight="15dp" />
+                android:paddingRight="15dp"
+                android:visibility="gone" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -126,7 +131,8 @@
                 android:id="@+id/editText13"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
-                android:textColor="@color/bright_foreground_material_light" />
+                android:textColor="@color/bright_foreground_material_light"
+                android:visibility="gone" />
         </TableRow>
 
         <TableRow
@@ -147,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
-                android:id="@+id/editText14"
+                android:id="@+id/txt_phone"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
                 android:textColor="@color/bright_foreground_material_light" />
@@ -169,7 +175,7 @@
             <EditText
                 android:layout_width="254dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText15"
+                android:id="@+id/txt_nID"
                 android:background="#FFFFFF"
                 android:paddingLeft="15dp"
                 android:textColor="@color/bright_foreground_material_light" />
@@ -193,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:ems="10"
-                android:id="@+id/editText16"
+                android:id="@+id/txt_dob"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
                 android:textColor="@color/bright_foreground_material_light" />
@@ -215,7 +221,7 @@
             <EditText
                 android:layout_width="254dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText17"
+                android:id="@+id/txt_nat"
                 android:background="#FFFFFF"
                 android:paddingLeft="15dp"
                 android:textColor="@color/bright_foreground_material_light" />
@@ -230,12 +236,14 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/bloodType"
-                android:id="@+id/textView34" />
+                android:id="@+id/textView34"
+                android:visibility="gone" />
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
-                android:id="@+id/spinner4" />
+                android:id="@+id/spinner_blood"
+                android:visibility="gone" />
         </TableRow>
 
         <Button
