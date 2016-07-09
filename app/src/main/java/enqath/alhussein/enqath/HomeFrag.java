@@ -3,6 +3,8 @@ package enqath.alhussein.enqath;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,15 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 /**
  * Created by Abdulwahab on 7/3/2016.
  */
 public class HomeFrag extends Fragment implements View.OnClickListener {
     View myView;
-    Button btnEnqath;
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
+    private ImageButton btnTheft,btnCar,btnDrawn,btnFire;
+    private Button btnEnqath;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -35,13 +39,18 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.homefrag,container,false);
         btnEnqath = (Button)myView.findViewById(R.id.btnEnqath);
+        btnCar=(ImageButton)myView.findViewById(R.id.imageButton_crash);
+        btnTheft=(ImageButton)myView.findViewById(R.id.imageButton_theft);
+        btnDrawn=(ImageButton)myView.findViewById(R.id.imageButton_drown);
+        btnFire=(ImageButton)myView.findViewById(R.id.imageButton_fire);
+
 
         /*TODO :: put all main buttons here, HomeFrag will now attach to Main.java*/
         btnEnqath.setOnClickListener(this);
-//        btnCar.setOnClickListener(this);
-//        btnTheft.setOnClickListener(this);
-//        btnDrawn.setOnClickListener(this);
-//        btnFire.setOnClickListener(this);
+        btnCar.setOnClickListener(this);
+        btnTheft.setOnClickListener(this);
+        btnDrawn.setOnClickListener(this);
+        btnFire.setOnClickListener(this);
 
 
         return myView;
@@ -53,6 +62,18 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
             case R.id.btnEnqath:
                 quickcall(); //saves profile to Firebase
                 break;
+            case R.id.imageButton_fire:
+                quickEmergency("Report Fire");
+                break;
+            case R.id.imageButton_theft:
+                quickEmergency("Report Theft");
+                break;
+            case R.id.imageButton_crash:
+                quickEmergency("Report Car Crash");
+                break;
+            case R.id.imageButton_drown:
+                quickEmergency("Report Drowning");
+                break;
         }
     }
     public void quickcall()
@@ -60,4 +81,9 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         // This is how you call method of Activity from Fragment.
         listener.quickCall();
     }
+    public void quickEmergency(String message)
+    {
+        listener.quickEmergency(message);
+    }
+
 }

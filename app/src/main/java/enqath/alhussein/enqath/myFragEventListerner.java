@@ -5,10 +5,12 @@ package enqath.alhussein.enqath;
  */
 public interface myFragEventListerner {
     //push methods
-    public void pushUserProfile();
-    public void pushMedicalID();
+    public void pushUserProfile(UserProfile userProfile);
+    public void pushMedicalID(MedID medID);
     public void quickCall();
 
-    //get methods
-    public void fetchUserProfile();
+    //other
+    public void showProgress();
+    public void hideProgress();
+    public void quickEmergency(String message);
 }

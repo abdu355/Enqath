@@ -36,39 +36,8 @@ public class FirebaseFunctions {
         myRef.child("medID").child(userid).setValue(medID);
     }
 
-
-
     //<---------------------------------------------------FETCH FUNCTIONS--------------------------------------------------->
-    public UserProfile fetchUserProfile(String userid)
-    {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-        dbuser = new UserProfile();
 
-        myRef.child("profiles").child(userid).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get userProfile value
-                        UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                        dbuser.setFname(userProfile.getFname());
-                        dbuser.setLname(userProfile.getLname());
-                        dbuser.setDob(userProfile.getDob());
-                        dbuser.setPhone(userProfile.getPhone());
-
-                        Log.d("DBUSER",""+dbuser.getFname()+" "+dbuser.getDob());
-                        Log.d("DBUSER",""+dbuser.getLname()+" "+dbuser.getPhone());
-                        // ...
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.d("getProfielDataFunction", "getUser:onCancelled", databaseError.toException());
-                    }
-                });
-
-        return dbuser;
-    }
 
 
     //<---------------------------------------------------UPDATE/APPEND FUNCTIONS--------------------------------------------------->

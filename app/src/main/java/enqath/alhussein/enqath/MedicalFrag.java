@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,7 +30,7 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
     static Button submit;
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
-    public EditText blood;
+    public Spinner blood;
     public EditText allergies;
     public EditText currentCondition;
     public EditText extraInfo;
@@ -52,11 +54,28 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
         submit = (Button)myView.findViewById(R.id.btnsubmitmed);
         submit.setOnClickListener(this);
 
+        blood=(Spinner)myView.findViewById(R.id.spinner_blood);
+        allergies=(EditText)myView.findViewById(R.id.txt_allerg);
+        currentCondition=(EditText)myView.findViewById(R.id.txt_currcond);
+        extraInfo=(EditText)myView.findViewById(R.id.txt_extra);
+        medications=(EditText)myView.findViewById(R.id.txt_med);
+
+        String bloodTypes[] = {"A+","A-","AB+","AB-","O+","O-","B+","B-"};
+
+        // Application of the Array to the Spinner
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, bloodTypes);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+        blood.setAdapter(spinnerArrayAdapter);
+
+
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
-        myRef.child("profiles").child(firebaseUser.getUid()).addListenerForSingleValueEvent(
+
+        listener.showProgress();
+        myRef.child("medID").child(firebaseUser.getUid()).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -69,11 +88,13 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
                             e.printStackTrace();
                         }
                         // ...
+                        listener.hideProgress();
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         Log.d("getProfielDataFunction", "getUser:onCancelled", databaseError.toException());
+                        listener.hideProgress();
                     }
                 });
 
@@ -95,15 +116,29 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
     public void pushMedicalID()
     {
         // This is how you call method of Activity from Fragment.
-        listener.pushMedicalID();
+        listener.pushMedicalID(new MedID(blood.getSelectedItem().toString(),
+                allergies.getText().toString(),currentCondition.getText().toString(),
+                extraInfo.getText().toString(),medications.getText().toString()));
     }
     public void updateUI(String dbblood,String dballergies,String dbcurrentcondition,String dbextraInfo,String dbmedications)
     {
-        blood.setText(dbblood);
+        blood.setSelection(getIndex(blood, dbblood));
         allergies.setText(dballergies);
         currentCondition.setText(dbcurrentcondition);
         extraInfo.setText(dbextraInfo);
         medications.setText(dbmedications);
 
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 }

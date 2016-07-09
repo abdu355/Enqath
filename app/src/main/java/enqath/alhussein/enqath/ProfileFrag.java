@@ -51,6 +51,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         submit = (Button)myView.findViewById(R.id.btnSubmit);
         submit.setOnClickListener(this);
 
+
         //text fields
         fname = (EditText)myView.findViewById(R.id.txt_fname);
         lname = (EditText)myView.findViewById(R.id.txt_lname);
@@ -63,6 +64,8 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
+
+        listener.showProgress();
         myRef.child("profiles").child(firebaseUser.getUid()).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -76,11 +79,13 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
                             e.printStackTrace();
                         }
                         // ...
+                        listener.hideProgress();
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         Log.d("getProfielDataFunction", "getUser:onCancelled", databaseError.toException());
+                        listener.hideProgress();
                     }
                 });
 
@@ -102,14 +107,12 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
     public void pushUserProfile()
     {
         // This is how you call method of Activity from Fragment.
-        listener.pushUserProfile();
+        listener.pushUserProfile(new UserProfile(fname.getText().toString(),
+                lname.getText().toString(),phone.getText().toString(),nID.getText().toString(),
+                dob.getText().toString(),nat.getText().toString()));
     }
 
     //------------------------------------------------------------------------------------
-    public void fetchUserProfile()
-    {
-        listener.fetchUserProfile();
-    }
 
     public void updateUI(String dbfname,String dblname,String dbphone,String dbdob,String dbnat,String dbnID)
     {

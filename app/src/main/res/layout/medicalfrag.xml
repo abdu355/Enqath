@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
+            android:hint="First emergency contact"
             android:id="@+id/pContact"
             android:layout_weight="1" />
     </TableRow>
@@ -38,7 +39,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText6" />
+            android:id="@+id/txt_currcond" />
     </TableRow>
 
     <TableRow
@@ -46,24 +47,33 @@
         android:layout_height="63dp"
         android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Blood Type"
-            android:id="@+id/textView25" />
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Blood Type"
+                android:id="@+id/textView25"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
         <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/spinner_blood"
             android:layout_weight="1" />
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,13 +81,15 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Current Medications"
             android:id="@+id/textView26"
-            android:textSize="15dp" />
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center_horizontal" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText7"
-            android:layout_weight="1" />
+            android:id="@+id/txt_med"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center_horizontal" />
     </TableRow>
 
     <TableRow
@@ -89,15 +101,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="extra information"
+            android:text="Extra information"
             android:id="@+id/textView27" />
+
+    </TableRow>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/txt_extra"
+        android:singleLine="false"
+        android:lines="3" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_gravity="center_horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Allergies"
+            android:id="@+id/textView3"
+            android:layout_weight="1" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/editText8" />
+            android:id="@+id/txt_allerg"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1" />
+
     </TableRow>
 
     <Button

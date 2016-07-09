@@ -19,11 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="206dp"
             android:layout_below="@+id/btnEnqath"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginBottom="-30dp"
+            android:layout_marginTop="-30dp">
 
             <Button
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:background="@drawable/circle"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/Enqath"
@@ -48,45 +50,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="50dp"
-            android:layout_marginTop="-50dp">
+            android:layout_marginTop="-50dp"
+            android:layout_marginRight="10dp">
 
-            <Button
+            <ImageButton
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnFire"
+                android:layout_height="140dp"
+                android:id="@+id/imageButton_fire"
+                android:src="@drawable/fireicon"
+                android:scaleType="fitXY"
+                android:layout_weight="1" />
 
-                android:layout_weight="1"
-                android:height="100dp"
-                android:background="@mipmap/fire1" />
-
-            <Button
+            <ImageButton
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnDrawn"
-                android:layout_weight="1"
-                android:height="100dp"
-                android:background="@mipmap/drown" />
+                android:layout_height="140dp"
+                android:id="@+id/imageButton_drown"
+                android:src="@drawable/drown"
+                android:scaleType="fitXY"
+                android:layout_weight="1" />
+
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp">
 
-            <Button
+            <ImageButton
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnCar"
-                android:layout_weight="1"
-                android:height="100dp"
-                android:background="@mipmap/car1" />
+                android:layout_height="140dp"
+                android:id="@+id/imageButton_theft"
+                android:src="@drawable/theft"
+                android:scaleType="fitXY"
+                android:layout_weight="1" />
 
-            <Button
+            <ImageButton
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnTheft"
-                android:layout_weight="1"
-                android:height="100dp"
-                android:background="@mipmap/theft" />
+                android:layout_height="140dp"
+                android:id="@+id/imageButton_crash"
+                android:src="@drawable/crashs"
+                android:scaleType="fitXY"
+                android:layout_weight="1" />
         </TableRow>
     </LinearLayout>
 

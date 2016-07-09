@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,10 +30,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,9 +60,9 @@ public class Main extends AppCompatActivity
     FirebaseUser firebaseUser;
     FirebaseFunctions firebaseFunctions;
     CollapsingToolbarLayout collapsingToolbarLayout;
+    ProgressBar progressBar;
 
 
-    private Button btnEnqath, btnTheft,btnCar,btnDrawn,btnFire;
     FrameLayout layout;
     final private int REQUEST_CODE_CALL = 124;
     DrawerLayout drawer;
@@ -83,6 +87,10 @@ public class Main extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        progressBar = (ProgressBar) findViewById(R.id.progress_spinner);
+
+
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
         collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
         appBarLayout =(AppBarLayout)findViewById(R.id.app_bar);
@@ -98,10 +106,6 @@ public class Main extends AppCompatActivity
             }
         });
 
-        btnCar=(Button)findViewById(R.id.btnCar);
-        btnTheft=(Button)findViewById(R.id.btnTheft);
-        btnDrawn=(Button)findViewById(R.id.btnDrawn);
-        btnFire=(Button)findViewById(R.id.btnFire);
 
 
         /*TODO :: moved to HomeFrag.java*/
@@ -145,7 +149,8 @@ public class Main extends AppCompatActivity
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             // User is signed in
-            Toast.makeText(Main.this,"WELCOME " + firebaseUser.getDisplayName(),Toast.LENGTH_LONG).show();
+            Snackbar snackbar = Snackbar.make(drawer, "WELCOME " + firebaseUser.getDisplayName(), Snackbar.LENGTH_SHORT);
+            snackbar.show();
             //get firebaseUser profile and display in nav drawer
             useremail_nav.setText(firebaseUser.getEmail());
             username_nav.setText(firebaseUser.getDisplayName());
@@ -449,12 +454,12 @@ public class Main extends AppCompatActivity
 
     /*<---------------------------------------------/*TODO :: Implement fragment functions here *///--------------------------------------------->
     @Override
-    public void pushUserProfile() //profile fragment
+    public void pushUserProfile(UserProfile userProfile) //profile fragment
     {
         Log.d("Main Activity Event","updateUser called");
         //push to Firebase
         try {
-            firebaseFunctions.pushProfileData( new UserProfile("Abdulwahab","Sahyoun","0500000000","02/02/1992","UAEID8976235612","Canada"),firebaseUser.getUid());
+            firebaseFunctions.pushProfileData(userProfile,firebaseUser.getUid());
             //REFERENCE ONLY: String fname, String lname, String phone, String dob, String nID, String nat
         } catch (NullPointerException e) {
             showAlert();
@@ -465,14 +470,13 @@ public class Main extends AppCompatActivity
 
     }
     @Override
-    public void pushMedicalID()//medical ID fragment
+    public void pushMedicalID(MedID medID)//medical ID fragment
     {
         Log.d("Main Activity Event","pushMedicalID called");
        //push to Firebase
-        MedID usermedID = new MedID("O+","diarrhea","lazyAF","extrabullshit","drugs");
         //REFERENCE ONLY: String blood, String allergies, String currentCondition, String extraInfo, String medications
         try {
-            firebaseFunctions.pushMedID(usermedID,firebaseUser.getUid());
+            firebaseFunctions.pushMedID(medID,firebaseUser.getUid());
         } catch (NullPointerException e) {
             showAlert();
         }
@@ -488,10 +492,18 @@ public class Main extends AppCompatActivity
     }
 
     @Override
-    public void fetchUserProfile() {
-        firebaseFunctions.fetchUserProfile(firebaseUser.getUid());
-
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+    }
 
+    @Override
+    public void quickEmergency(String message) {
+        Snackbar snackbar1 = Snackbar.make(drawer, message, Snackbar.LENGTH_SHORT);
+        snackbar1.show();
+    }
 }
