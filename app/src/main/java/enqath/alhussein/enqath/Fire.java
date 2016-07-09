@@ -25,7 +25,7 @@ public class Fire extends Activity implements View.OnClickListener{
         btnMed=(Button)findViewById(R.id.btnMedF);
         btnSerious=(Button)findViewById(R.id.btnSeriousF);
 
-        btnSerious.setOnClickListener(this);
+        btnMinor.setOnClickListener(this);
         btnMed.setOnClickListener(this);
         btnSerious.setOnClickListener(this);
 
@@ -39,7 +39,6 @@ public class Fire extends Activity implements View.OnClickListener{
         switch(view.getId()){
             case R.id.btnMinorF:
                   startActivity(callIntent);
-
                 break;
             case R.id.btnMedF:
                 break;

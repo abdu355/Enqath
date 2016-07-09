@@ -28,10 +28,9 @@ public class Car extends Activity implements View.OnClickListener {
         btnMed=(Button)findViewById(R.id.btnMed);
         btnSerious=(Button)findViewById(R.id.btnSerious);
 
-        btnSerious.setOnClickListener(this);
+        btnMinor.setOnClickListener(this);
         btnMed.setOnClickListener(this);
         btnSerious.setOnClickListener(this);
-
 
     }
 
@@ -44,17 +43,13 @@ public class Car extends Activity implements View.OnClickListener {
                 startActivity(callIntent);
             // insert talkback
                 break;
-
             case R.id.btnMed:
                 startActivity(callIntent);
                 // insert talkback
-
                 break;
-
             case R.id.btnSerious:
                 startActivity(callIntent);
                 // insert talkback
-
                 break;
 
 

@@ -2,6 +2,7 @@ package enqath.alhussein.enqath;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -63,16 +64,16 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
                 quickcall(); //saves profile to Firebase
                 break;
             case R.id.imageButton_fire:
-                quickEmergency("Report Fire");
+                quickEmergency("Report Fire",new Intent(getContext(),Fire.class));
                 break;
             case R.id.imageButton_theft:
-                quickEmergency("Report Theft");
+                quickEmergency("Report Theft",new Intent(getContext(),Theft.class));
                 break;
             case R.id.imageButton_crash:
-                quickEmergency("Report Car Crash");
+                quickEmergency("Report Car Crash",new Intent(getContext(),Car.class));
                 break;
             case R.id.imageButton_drown:
-                quickEmergency("Report Drowning");
+                quickEmergency("Report Drowning",new Intent(getContext(),Drowning.class));
                 break;
         }
     }
@@ -81,9 +82,9 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         // This is how you call method of Activity from Fragment.
         listener.quickCall();
     }
-    public void quickEmergency(String message)
+    public void quickEmergency(String message, Intent intent)
     {
-        listener.quickEmergency(message);
+        listener.quickEmergency(message,intent);
     }
 
 }

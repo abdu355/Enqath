@@ -502,8 +502,9 @@ public class Main extends AppCompatActivity
     }
 
     @Override
-    public void quickEmergency(String message) {
+    public void quickEmergency(String message, Intent intent) {
         Snackbar snackbar1 = Snackbar.make(drawer, message, Snackbar.LENGTH_SHORT);
         snackbar1.show();
+        startActivity(intent);
     }
 }

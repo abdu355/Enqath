@@ -11,7 +11,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/accidentMsg"
         android:id="@+id/textView9"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:layout_weight="0.18"
         android:textSize="25dp"
         android:textIsSelectable="false"

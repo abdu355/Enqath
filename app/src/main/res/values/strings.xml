@@ -78,7 +78,7 @@
     <string name="level1">Minor: No injuries</string>
     <string name="level2">Medium: Minor Injuries</string>
     <string name="level3">Serious: Severe Injuries</string>
-    <string name="accidentMsg">Choose The Level of the Accident</string>
+    <string name="accidentMsg">Choose Incident Severity</string>
     <string name="Skip">skip (dev only)</string>
     <string name="errorMsg">Field Required</string>
     <string name="title_activity_main_login">Enqath</string>
