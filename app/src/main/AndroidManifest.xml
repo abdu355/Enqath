@@ -25,41 +25,50 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Car"
-            android:theme="@style/CustomDialogTheme"/>
+            android:theme="@style/CustomDialogTheme"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Drowning"
-            android:theme="@style/CustomDialogTheme"/>
+            android:theme="@style/CustomDialogTheme"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Fire"
-            android:theme="@style/CustomDialogTheme" />
+            android:theme="@style/CustomDialogTheme"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Theft"
-            android:theme="@style/CustomDialogTheme"/>
+            android:theme="@style/CustomDialogTheme"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Main"
             android:label="@string/title_activity_drawer"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".MainLogin"
             android:label="@string/title_activity_main_login"
             android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".QuickRegistration"
             android:label="@string/title_activity_quick_registration"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainLogin" />
         </activity>
         <activity
             android:name=".SplashScreen"
-            android:label="@string/title_activity_main_login">
+            android:label="@string/title_activity_main_login"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -75,7 +84,8 @@
         <activity
             android:name=".About"
             android:label="@string/title_activity_about"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Main" />
@@ -84,7 +94,8 @@
             android:name=".Preferences"
             android:label="@string/title_activity_preferences"
             android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Main" />

@@ -84,7 +84,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Log.d("getProfielDataFunction", "getUser:onCancelled", databaseError.toException());
+                        Log.d("getProfileDataFunction", "getUser:onCancelled", databaseError.toException());
                         listener.hideProgress();
                     }
                 });
@@ -108,13 +108,13 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
     {
         // This is how you call method of Activity from Fragment.
         listener.pushUserProfile(new UserProfile(fname.getText().toString(),
-                lname.getText().toString(),phone.getText().toString(),nID.getText().toString(),
-                dob.getText().toString(),nat.getText().toString()));
+                lname.getText().toString(),phone.getText().toString(),
+                dob.getText().toString(),nID.getText().toString(),nat.getText().toString()));
     }
 
     //------------------------------------------------------------------------------------
 
-    public void updateUI(String dbfname,String dblname,String dbphone,String dbdob,String dbnat,String dbnID)
+    public void updateUI(String dbfname,String dblname,String dbphone,String dbdob,String dbnID,String dbnat)
     {
         fname.setText(dbfname);
         lname.setText(dblname);
