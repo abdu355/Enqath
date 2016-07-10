@@ -64,19 +64,19 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         dateView = (TextView) myView.findViewById(R.id.DOB);
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
-        datePicker=(DatePicker)myView.findViewById(R.id.datePiker);
+        datePicker=(DatePicker)myView.findViewById(R.id.datePicker);
 
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month+1, day);
 
-        setCurrentDateOnView(); //set current date
+        //setCurrentDateOnView(); //set current date
         //text fields
         fname = (EditText)myView.findViewById(R.id.txt_fname);
         lname = (EditText)myView.findViewById(R.id.txt_lname);
         phone = (EditText)myView.findViewById(R.id.txt_phone);
         nID = (EditText)myView.findViewById(R.id.txt_nID);
-        dob = (EditText)myView.findViewById(R.id.txt_dob);
+        //dob = (EditText)myView.findViewById(R.id.txt_dob);
         nat = (EditText)myView.findViewById(R.id.txt_nat);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -145,7 +145,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
 
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
-        showDialog(999);
+        //showDialog(999);
         Toast.makeText(context, "ca", Toast.LENGTH_SHORT)
                 .show();
     }

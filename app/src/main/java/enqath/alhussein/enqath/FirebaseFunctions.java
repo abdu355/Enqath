@@ -46,7 +46,7 @@ public class FirebaseFunctions {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
-        HashMap<String, Object> myMap = new HashMap<>();
+        HashMap<String, Object> myMap = new HashMap<String,Object>();
         myMap.put("medications",params[0]);
         myMap.put("extrainfo",params[1]);
         myMap.put("currentCondition",params[2]);
