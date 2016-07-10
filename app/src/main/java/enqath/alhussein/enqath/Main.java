@@ -404,7 +404,7 @@ public class Main extends AppCompatActivity
     {
         AlertDialog.Builder alert = new AlertDialog.Builder(this,R.style.CustomDialogTheme);
         final EditText edittext = new EditText(getApplicationContext());
-        edittext.setTextColor(Color.parseColor(String.valueOf(R.color.colorPrimaryDark)));
+        edittext.setTextColor(Color.parseColor("#f57f17"));
         alert.setMessage("Enter Alias or Name");
         alert.setTitle("Profile Setup");
 
