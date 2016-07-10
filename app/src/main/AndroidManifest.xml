@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="enqath.alhussein.enqath">
+    package="enqath.alhussein.enqath" >
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <service android:name=".MyFirebaseMessagingService">
+    <service android:name=".MyFirebaseMessagingService" >
         <intent-filter>
             <action android:name="com.google.firebase.MESSAGING_EVENT" />
         </intent-filter>
@@ -23,44 +23,46 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Car"
-            android:theme="@style/CustomDialogTheme"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Drowning"
-            android:theme="@style/CustomDialogTheme"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Fire"
-            android:theme="@style/CustomDialogTheme"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Theft"
-            android:theme="@style/CustomDialogTheme"
-            android:screenOrientation="portrait"/>
-
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".Car"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomDialogTheme" />
+        <activity
+            android:name=".Drowning"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomDialogTheme" />
+        <activity
+            android:name=".Fire"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomDialogTheme" />
+        <activity
+            android:name=".Theft"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomDialogTheme" />
         <activity
             android:name=".Main"
             android:label="@string/title_activity_drawer"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainLogin"
             android:label="@string/title_activity_main_login"
-            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".QuickRegistration"
             android:label="@string/title_activity_quick_registration"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainLogin" />
@@ -68,7 +70,7 @@
         <activity
             android:name=".SplashScreen"
             android:label="@string/title_activity_main_login"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -84,8 +86,8 @@
         <activity
             android:name=".About"
             android:label="@string/title_activity_about"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Main" />
@@ -93,14 +95,13 @@
         <activity
             android:name=".Preferences"
             android:label="@string/title_activity_preferences"
-            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Main" />
         </activity>
-
     </application>
 
 </manifest>

@@ -183,26 +183,25 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="46dp"
             android:paddingTop="5dp" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/DOB"
-                android:id="@+id/textView32"
-                android:paddingRight="15dp" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/DOB"
+                android:paddingRight="15dp"
                 android:inputType="date"
-                android:ems="10"
-                android:id="@+id/txt_dob"
-                android:layout_weight="1"
-                android:background="#FFFFFF"
-                android:textColor="@color/bright_foreground_material_light" />
+                android:layout_weight="1" />
+
+            <DatePicker
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/datePicker"
+                android:layout_weight="1" />
+
         </TableRow>
 
         <TableRow
