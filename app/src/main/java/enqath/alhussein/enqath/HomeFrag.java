@@ -3,6 +3,8 @@ package enqath.alhussein.enqath;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -20,8 +22,10 @@ import android.widget.ImageButton;
 /**
  * Created by Abdulwahab on 7/3/2016.
  */
-public class HomeFrag extends Fragment implements View.OnClickListener {
+public class HomeFrag extends Fragment implements View.OnClickListener, LocationListener{
     View myView;
+    int Lat,Lng,accurcy;
+
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
     private ImageButton btnTheft,btnCar,btnDrawn,btnFire;
@@ -67,6 +71,7 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         switch(view.getId())
         {
             case R.id.btnEnqath:
+
                 quickcall(); //saves profile to Firebase
                 break;
             case R.id.imageButton_fire:
@@ -97,4 +102,25 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         listener.quickEmergency(message,intent);
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        Lat=(int)location.getLatitude();
+        Lng=(int)location.getLongitude();
+        accurcy=(int)location.getAccuracy();
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
 }
