@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,7 +52,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import java.util.Locale;
 
 public class Main extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,myFragEventListerner {
+        implements NavigationView.OnNavigationItemSelectedListener,myFragEventListerner, LocationListener {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -61,6 +63,8 @@ public class Main extends AppCompatActivity
     FirebaseFunctions firebaseFunctions;
     CollapsingToolbarLayout collapsingToolbarLayout;
     ProgressBar progressBar;
+
+    int Lat,Lng,accurcy;
 
 
     FrameLayout layout;
@@ -506,5 +510,27 @@ public class Main extends AppCompatActivity
         Snackbar snackbar1 = Snackbar.make(drawer, message, Snackbar.LENGTH_SHORT);
         snackbar1.show();
         startActivity(intent);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Lat=(int)location.getLatitude();
+        Lng=(int)location.getLongitude();
+        accurcy=(int)location.getAccuracy();
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }
