@@ -79,6 +79,7 @@ public class Main extends AppCompatActivity
     String [] msg={"Car Accident Level Minor. No Human Injuries","Car Accident Level Medium. Simple Human Injuries","Car Accident Level Serious. Major Human Injuries"};
 
     final String number = "tel:000";
+    final String [] phoneNo={"0503987283"};
     //android.app.FragmentManager fragmentManager = getFragmentManager();
     FragmentTransaction transaction;
 
@@ -179,16 +180,12 @@ public class Main extends AppCompatActivity
     }
     public void DynamicPermission() {
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.CALL_PHONE) && ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.SEND_SMS)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
 
                 // Show an expanation to the User *asynchronously* -- don't block
                 // this thread waiting for the User's response! After the User
@@ -225,6 +222,7 @@ public class Main extends AppCompatActivity
             Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
             //noinspection MissingPermission
             startActivity(callIntent);
+            sendSMS();
         }
     }
     @Override
@@ -238,11 +236,16 @@ public class Main extends AppCompatActivity
 
                     // permission was granted, yay! Do the
                     // calling-related task you need to do.
+                    sendSMS();
                     Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
                     Uri callui = Uri.parse(number);
                     Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
                     //noinspection MissingPermission
                     startActivity(callIntent);
+
+
+
+
                 } else {
 
                     // permission denied, boo! Disable the
@@ -360,34 +363,8 @@ public class Main extends AppCompatActivity
     }
 
     /*TODO:: moved to HomeFrag.java*/
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.btnEnqath:
-//                DynamicPermission(); //fixed permission request logic
-//                break;
-//            case R.id.btnFire:
-//                //    startActivity(callIntent);
-//                // startActivity(new Intent(this,Fire.class));
-//
-//                break;
-//            case R.id.btnCar:
-//                //    startActivity(callIntent);
-//
-//                break;
-//            case R.id.btnTheft:
-//                //     startActivity(callIntent);
-//
-//                break;
-//            case R.id.btnDrawn:
-//                //     startActivity(callIntent);
-//
-//                break;
-//
-//
-//        }
-//    }
-    public void sendSMS(String [] phoneNo, String [] msg){
+
+    public void sendSMS(){
         try {
 
 
