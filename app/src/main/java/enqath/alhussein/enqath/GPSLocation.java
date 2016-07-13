@@ -1,4 +1,4 @@
-/*package enqath.alhussein.enqath;
+/*package enqath.alhussein.enqath;//
 
 import android.app.Activity;
 import android.content.Context;
