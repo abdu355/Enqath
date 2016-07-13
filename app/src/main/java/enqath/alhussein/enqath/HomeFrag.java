@@ -24,12 +24,13 @@ import android.widget.ImageButton;
  */
 public class HomeFrag extends Fragment implements View.OnClickListener, LocationListener{
     View myView;
-    int Lat,Lng,accurcy;
+    int Lat,Lng,accuracy;
 
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
     private ImageButton btnTheft,btnCar,btnDrawn,btnFire;
     private Button btnEnqath;
+
     Animation animScale;
 
     @SuppressWarnings("deprecation")
@@ -71,7 +72,6 @@ public class HomeFrag extends Fragment implements View.OnClickListener, Location
         switch(view.getId())
         {
             case R.id.btnEnqath:
-
                 quickcall(); //saves profile to Firebase
                 break;
             case R.id.imageButton_fire:
@@ -106,7 +106,7 @@ public class HomeFrag extends Fragment implements View.OnClickListener, Location
     public void onLocationChanged(Location location) {
         Lat=(int)location.getLatitude();
         Lng=(int)location.getLongitude();
-        accurcy=(int)location.getAccuracy();
+        accuracy=(int)location.getAccuracy();
     }
 
     @Override

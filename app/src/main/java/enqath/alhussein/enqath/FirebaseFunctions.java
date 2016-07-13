@@ -35,6 +35,14 @@ public class FirebaseFunctions {
 
         myRef.child("medID").child(userid).setValue(medID);
     }
+    public void pushGPS(GPSLoc gpsloc)
+    {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+
+        myRef.child("incidentLoc").setValue(gpsloc);
+    }
+
 
     //<---------------------------------------------------FETCH FUNCTIONS--------------------------------------------------->
 

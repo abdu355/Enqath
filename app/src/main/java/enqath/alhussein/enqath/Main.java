@@ -110,14 +110,6 @@ public class Main extends AppCompatActivity
         });
 
 
-
-        /*TODO :: moved to HomeFrag.java*/
-//        btnCar.setOnClickListener(this);
-//        btnTheft.setOnClickListener(this);
-//        btnDrawn.setOnClickListener(this);
-//        btnFire.setOnClickListener(this);
-
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -359,34 +351,6 @@ public class Main extends AppCompatActivity
         return true;
     }
 
-    /*TODO:: moved to HomeFrag.java*/
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.btnEnqath:
-//                DynamicPermission(); //fixed permission request logic
-//                break;
-//            case R.id.btnFire:
-//                //    startActivity(callIntent);
-//                // startActivity(new Intent(this,Fire.class));
-//
-//                break;
-//            case R.id.btnCar:
-//                //    startActivity(callIntent);
-//
-//                break;
-//            case R.id.btnTheft:
-//                //     startActivity(callIntent);
-//
-//                break;
-//            case R.id.btnDrawn:
-//                //     startActivity(callIntent);
-//
-//                break;
-//
-//
-//        }
-//    }
     public void sendSMS(String [] phoneNo, String [] msg){
         try {
 
@@ -486,6 +450,11 @@ public class Main extends AppCompatActivity
         //confirm
         Snackbar snackbar = Snackbar.make(drawer, "Your Medical ID has been updated", Snackbar.LENGTH_SHORT);
         snackbar.show();
+    }
+
+    @Override
+    public void pushGPS(GPSLoc gpsLoc) {
+        firebaseFunctions.pushGPS(gpsLoc);
     }
 
     @Override

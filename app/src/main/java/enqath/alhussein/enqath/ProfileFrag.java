@@ -79,34 +79,36 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         //dob = (EditText)myView.findViewById(R.id.txt_dob);
         nat = (EditText)myView.findViewById(R.id.txt_nat);
 
+        //---------------------------------------------------- Update from Firebase
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
 
-        listener.showProgress();
+        listener.showProgress();//change child name
         myRef.child("profiles").child(firebaseUser.getUid()).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get userProfile value
-                        UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-
+                        UserProfile userProfile = dataSnapshot.getValue(UserProfile.class); //change this
                         try {
-                            updateUI(userProfile.getFname(),userProfile.getLname(),userProfile.getPhone(),userProfile.getDob(),userProfile.getnID(),userProfile.getNat());
+                            //What to do with the new data
+                            updateUI(userProfile.getFname(),userProfile.getLname(),userProfile.getPhone(),userProfile.getDob(),userProfile.getnID(),userProfile.getNat());//change this
                         } catch (NullPointerException e) {
                             e.printStackTrace();
                         }
                         // ...
                         listener.hideProgress();
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         Log.d("getProfileDataFunction", "getUser:onCancelled", databaseError.toException());
+                        //What to do on error
                         listener.hideProgress();
                     }
                 });
+        //---------------------------------------------------- Update from Firebase
 
         return myView;
     }

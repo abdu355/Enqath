@@ -9,6 +9,7 @@ public interface myFragEventListerner {
     //push methods
     public void pushUserProfile(UserProfile userProfile);
     public void pushMedicalID(MedID medID);
+    public void pushGPS(GPSLoc gpsLoc);
     public void quickCall();
 
     //other
