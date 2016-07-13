@@ -1,6 +1,10 @@
 package enqath.alhussein.enqath;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
@@ -11,12 +15,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 public class Preferences extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener {
     TableRow R1,R2,R3,R4,R5;
     Spinner spinner;
+    int RQS_PICK_CONTACT=1;
+    EditText txtP1, txtP2, txtP3,txtP4,txtP5;
     Button save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,21 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
 
         save=(Button)findViewById(R.id.btnSave);
         save.setOnClickListener(this);
+
+        txtP1=(EditText)findViewById(R.id.txtPhone1) ;
+        txtP2=(EditText)findViewById(R.id.txtPhone2) ;
+        txtP3=(EditText)findViewById(R.id.txtPhone3) ;
+        txtP4=(EditText)findViewById(R.id.txtPhone4) ;
+        txtP5=(EditText)findViewById(R.id.txtPhone5) ;
+
+        txtP1.setOnClickListener(this);
+        txtP2.setOnClickListener(this);
+        txtP3.setOnClickListener(this);
+        txtP4.setOnClickListener(this);
+        txtP5.setOnClickListener(this);
+
+
+
 
 
         R1=(TableRow)findViewById(R.id.R1);
@@ -54,6 +77,9 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
 
 
     }
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -124,6 +150,37 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
+        startActivityForResult(intent, 1);
 
     }
+
+
+
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == RQS_PICK_CONTACT){
+            if(resultCode == RESULT_OK){
+                Uri contactData = data.getData();
+                Cursor cursor =  managedQuery(contactData, null, null, null, null);
+                cursor.moveToFirst();
+
+                String number =       cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+                //contactName.setText(name);
+                txtP1.setText(number);
+                //contactEmail.setText(email);
+            }
+        }
+    }
 }
+
+
+

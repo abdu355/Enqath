@@ -11,7 +11,7 @@ public interface myFragEventListerner {
     public void pushMedicalID(MedID medID);
     public void pushGPS(GPSLoc gpsLoc);
     public void quickCall();
-
+    public void getLocation();
     //other
     public void showProgress();
     public void hideProgress();

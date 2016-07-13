@@ -468,12 +468,18 @@ public class Main extends AppCompatActivity
     @Override
     public void pushGPS(GPSLoc gpsLoc) {
         firebaseFunctions.pushGPS(gpsLoc);
+
     }
 
     @Override
     public void quickCall() //home fragment
     {
         DynamicPermission(); //checks permission and initiates call
+
+    }
+
+    @Override
+    public void getLocation() {
 
     }
 

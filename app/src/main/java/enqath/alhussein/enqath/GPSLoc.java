@@ -1,5 +1,7 @@
 package enqath.alhussein.enqath;
 
+import android.location.Location;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Date;
@@ -11,7 +13,8 @@ import java.util.Date;
 public class GPSLoc {
 
     int accuracy;
-    LatLng latLng;
+   // Location latLng; // changed to location object .. i think it's better
+    double Lat, Lng;
     Date date;
     long time;
 
@@ -20,10 +23,27 @@ public class GPSLoc {
 
     }
 
-    public GPSLoc(int lat, int lng, int accuracy,Date date,long time) {
+    public double getLat(double latitude) {
+        return Lat;
+    }
+
+    public void setLat(double lat) {
+        Lat = lat;
+    }
+
+    public double getLng(double longitude) {
+        return Lng;
+    }
+
+    public void setLng(double lng) {
+        Lng = lng;
+    }
+
+    public GPSLoc(double lat, double lng, int accuracy, Date date, long time) {
         this.time=time;
         this.date=date;
-        latLng = new LatLng(lat,lng);
+        this.Lat=lat;
+        this.Lng=lng;
         this.accuracy = accuracy;
     }
 
@@ -43,13 +63,9 @@ public class GPSLoc {
         this.time = time;
     }
 
-    public LatLng getLatLng() {
-        return latLng;
-    }
 
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
-    }
+
+
 
     public int getAccuracy() {
         return accuracy;

@@ -3,6 +3,9 @@ package enqath.alhussein.enqath;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.icu.util.TimeZone;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
@@ -24,7 +27,7 @@ import android.widget.ImageButton;
  */
 public class HomeFrag extends Fragment implements View.OnClickListener, LocationListener{
     View myView;
-    int Lat,Lng,accuracy;
+    GPSLoc GPSLocation;
 
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
@@ -67,12 +70,16 @@ public class HomeFrag extends Fragment implements View.OnClickListener, Location
 
         return myView;
     }
+
+
+
     @Override
     public void onClick(View view) {
         switch(view.getId())
         {
             case R.id.btnEnqath:
                 quickcall(); //saves profile to Firebase
+
                 break;
             case R.id.imageButton_fire:
                 view.startAnimation(animScale);
@@ -104,10 +111,27 @@ public class HomeFrag extends Fragment implements View.OnClickListener, Location
 
     @Override
     public void onLocationChanged(Location location) {
-        Lat=(int)location.getLatitude();
-        Lng=(int)location.getLongitude();
-        accuracy=(int)location.getAccuracy();
+        GPSLocation.setLat(location.getLatitude());
+        GPSLocation.setLng(location.getLongitude());
+      //  GPSLocation.setDate(System.get);
+
     }
+/*****************************************************************
+    public  String getDateCurrentTimeZone(long timestamp) {
+        try{
+            Calendar calendar = Calendar.getInstance();
+            TimeZone tz = TimeZone.getDefault();
+            calendar.setTimeInMillis(timestamp * 1000);
+            calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date currenTimeZone = (Date) calendar.getTime();
+            return sdf.format(currenTimeZone);
+        }catch (Exception e) {
+        }
+        return "";
+    }
+*/////////////////////////////////////*/
+
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
