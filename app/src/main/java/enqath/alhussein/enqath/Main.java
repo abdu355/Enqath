@@ -474,6 +474,7 @@ public class Main extends AppCompatActivity
     public void quickCall() //home fragment
     {
         DynamicPermission(); //checks permission and initiates call
+
     }
 
     @Override
