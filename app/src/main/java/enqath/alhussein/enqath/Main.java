@@ -79,6 +79,7 @@ public class Main extends AppCompatActivity
     String [] msg={"Car Accident Level Minor. No Human Injuries","Car Accident Level Medium. Simple Human Injuries","Car Accident Level Serious. Major Human Injuries"};
 
     final String number = "tel:000";
+    final String [] phoneNo={"0503987283"};
     //android.app.FragmentManager fragmentManager = getFragmentManager();
     FragmentTransaction transaction;
 
@@ -108,6 +109,14 @@ public class Main extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+
+
+        /*TODO :: moved to HomeFrag.java*/
+//        btnCar.setOnClickListener(this);
+//        btnTheft.setOnClickListener(this);
+//        btnDrawn.setOnClickListener(this);
+//        btnFire.setOnClickListener(this);
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -171,16 +180,12 @@ public class Main extends AppCompatActivity
     }
     public void DynamicPermission() {
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.CALL_PHONE) && ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.SEND_SMS)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
 
                 // Show an expanation to the User *asynchronously* -- don't block
                 // this thread waiting for the User's response! After the User
@@ -217,6 +222,7 @@ public class Main extends AppCompatActivity
             Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
             //noinspection MissingPermission
             startActivity(callIntent);
+            sendSMS();
         }
     }
     @Override
@@ -230,11 +236,16 @@ public class Main extends AppCompatActivity
 
                     // permission was granted, yay! Do the
                     // calling-related task you need to do.
+                    sendSMS();
                     Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
                     Uri callui = Uri.parse(number);
                     Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
                     //noinspection MissingPermission
                     startActivity(callIntent);
+
+
+
+
                 } else {
 
                     // permission denied, boo! Disable the
@@ -351,7 +362,9 @@ public class Main extends AppCompatActivity
         return true;
     }
 
-    public void sendSMS(String [] phoneNo, String [] msg){
+    /*TODO:: moved to HomeFrag.java*/
+
+    public void sendSMS(){
         try {
 
 
@@ -450,11 +463,6 @@ public class Main extends AppCompatActivity
         //confirm
         Snackbar snackbar = Snackbar.make(drawer, "Your Medical ID has been updated", Snackbar.LENGTH_SHORT);
         snackbar.show();
-    }
-
-    @Override
-    public void pushGPS(GPSLoc gpsLoc) {
-        firebaseFunctions.pushGPS(gpsLoc);
     }
 
     @Override
