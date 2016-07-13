@@ -21,11 +21,14 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 public class Preferences extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener {
-    TableRow R1,R2,R3,R4,R5;
+    TableRow R1, R2, R3, R4, R5;
     Spinner spinner;
-    int RQS_PICK_CONTACT=1;
-    EditText txtP1, txtP2, txtP3,txtP4,txtP5;
+    int RQS_PICK_CONTACT = 1;
+    EditText txtP1, txtP2, txtP3, txtP4, txtP5;
     Button save;
+    int [] phoneNo=new int[5];
+    int contactPointer=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +38,14 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        save=(Button)findViewById(R.id.btnSave);
+        save = (Button) findViewById(R.id.btnSave);
         save.setOnClickListener(this);
 
-        txtP1=(EditText)findViewById(R.id.txtPhone1) ;
-        txtP2=(EditText)findViewById(R.id.txtPhone2) ;
-        txtP3=(EditText)findViewById(R.id.txtPhone3) ;
-        txtP4=(EditText)findViewById(R.id.txtPhone4) ;
-        txtP5=(EditText)findViewById(R.id.txtPhone5) ;
+        txtP1 = (EditText) findViewById(R.id.txtPhone1);
+        txtP2 = (EditText) findViewById(R.id.txtPhone2);
+        txtP3 = (EditText) findViewById(R.id.txtPhone3);
+        txtP4 = (EditText) findViewById(R.id.txtPhone4);
+        txtP5 = (EditText) findViewById(R.id.txtPhone5);
 
         txtP1.setOnClickListener(this);
         txtP2.setOnClickListener(this);
@@ -51,15 +54,12 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
         txtP5.setOnClickListener(this);
 
 
-
-
-
-        R1=(TableRow)findViewById(R.id.R1);
-        R2=(TableRow)findViewById(R.id.R2);
-        R3=(TableRow)findViewById(R.id.R3);
-        R4=(TableRow)findViewById(R.id.R4);
-        R5=(TableRow)findViewById(R.id.R5);
-        spinner=(Spinner)findViewById(R.id.spinner);
+        R1 = (TableRow) findViewById(R.id.R1);
+        R2 = (TableRow) findViewById(R.id.R2);
+        R3 = (TableRow) findViewById(R.id.R3);
+        R4 = (TableRow) findViewById(R.id.R4);
+        R5 = (TableRow) findViewById(R.id.R5);
+        spinner = (Spinner) findViewById(R.id.spinner);
         R1.setVisibility(View.VISIBLE);
         R2.setVisibility(View.GONE);
         R3.setVisibility(View.GONE);
@@ -79,7 +79,6 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -93,7 +92,7 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(spinner.getSelectedItemPosition()==0){
+        if (spinner.getSelectedItemPosition() == 0) {
             R1.setVisibility(View.VISIBLE);
             R2.setVisibility(View.GONE);
             R3.setVisibility(View.GONE);
@@ -101,7 +100,7 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
             R5.setVisibility(View.GONE);
 
         }
-        if(spinner.getSelectedItemPosition()==1){
+        if (spinner.getSelectedItemPosition() == 1) {
             R1.setVisibility(View.VISIBLE);
             R2.setVisibility(View.VISIBLE);
             R3.setVisibility(View.GONE);
@@ -109,7 +108,7 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
             R5.setVisibility(View.GONE);
 
         }
-        if(spinner.getSelectedItemPosition()==2){
+        if (spinner.getSelectedItemPosition() == 2) {
             R1.setVisibility(View.VISIBLE);
             R2.setVisibility(View.VISIBLE);
             R3.setVisibility(View.VISIBLE);
@@ -117,7 +116,7 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
             R5.setVisibility(View.GONE);
 
         }
-        if(spinner.getSelectedItemPosition()==3){
+        if (spinner.getSelectedItemPosition() == 3) {
             R1.setVisibility(View.VISIBLE);
             R2.setVisibility(View.VISIBLE);
             R3.setVisibility(View.VISIBLE);
@@ -125,7 +124,7 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
             R5.setVisibility(View.GONE);
 
         }
-        if(spinner.getSelectedItemPosition()==4){
+        if (spinner.getSelectedItemPosition() == 4) {
             R1.setVisibility(View.VISIBLE);
             R2.setVisibility(View.VISIBLE);
             R3.setVisibility(View.VISIBLE);
@@ -145,40 +144,80 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
         R5.setVisibility(View.GONE);
 
 
-
     }
 
-    @Override
-    public void onClick(View view) {
+    public void MyMagicContact() {
+
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
         startActivityForResult(intent, 1);
 
     }
 
-
-
-
-
-
     @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.txtPhone1:
+                contactPointer=0;
+                MyMagicContact();
+                break;
+
+            case R.id.txtPhone2:
+
+                contactPointer=1;
+
+                MyMagicContact();
+                break;
+
+            case R.id.txtPhone3:
+                contactPointer=2;
+
+                MyMagicContact();
+                break;
+
+            case R.id.txtPhone4:
+                contactPointer=3;
+
+                MyMagicContact();
+
+                break;
+
+            case R.id.txtPhone5:
+                contactPointer=4;
+
+                MyMagicContact();
+
+                break;
+        }
+    }
+
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RQS_PICK_CONTACT){
-            if(resultCode == RESULT_OK){
+        if (requestCode == RQS_PICK_CONTACT) {
+            if (resultCode == RESULT_OK) {
                 Uri contactData = data.getData();
-                Cursor cursor =  managedQuery(contactData, null, null, null, null);
+                Cursor cursor = managedQuery(contactData, null, null, null, null);
                 cursor.moveToFirst();
 
-                String number =       cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
+                String number = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 //contactName.setText(name);
-                txtP1.setText(number);
+                if (contactPointer==0)
+                    txtP1.setText(number);
+                if (contactPointer==1)
+                    txtP2.setText(number);
+                if (contactPointer==2)
+                    txtP3.setText(number);
+                if (contactPointer==3)
+                    txtP4.setText(number);
+                if (contactPointer==4)
+                    txtP5.setText(number);
                 //contactEmail.setText(email);
             }
         }
+
     }
 }
 
