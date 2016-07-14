@@ -31,9 +31,9 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
     int RQS_PICK_CONTACT = 1;
     EditText txtP1, txtP2, txtP3, txtP4, txtP5;
     Button save;
-    String[] phoneNo ={"0","0","0","0","0"};
+    //String[] phoneNo ={"0","0","0","0","0"};
     int contactPointer = 0;
-
+    EmergencyContacts emgPhone=new EmergencyContacts();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -175,38 +175,51 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
         switch (view.getId()) {
             case R.id.txtPhone1:
                 contactPointer = 0;
+
+                emgPhone.setNum1(txtP1.getText().toString());
                 MyMagicContact();
                 break;
 
             case R.id.txtPhone2:
                 contactPointer = 1;
+                emgPhone.setNum2(txtP1.getText().toString());
                 MyMagicContact();
+
+
                 break;
 
             case R.id.txtPhone3:
                 contactPointer = 2;
+                emgPhone.setNum3(txtP1.getText().toString());
                 MyMagicContact();
+
+
                 break;
 
             case R.id.txtPhone4:
                 contactPointer = 3;
+
+
+                emgPhone.setNum4(txtP1.getText().toString());
                 MyMagicContact();
 
                 break;
 
             case R.id.txtPhone5:
                 contactPointer = 4;
+                emgPhone.setNum5(txtP1.getText().toString());
                 MyMagicContact();
 
                 break;
             case R.id.btnSave:
-                pushContacts(phoneNo);
+                pushContacts(emgPhone);
+
                 break;
         }
     }
-public void pushContacts(String [] phones){
+public void pushContacts(EmergencyContacts emgPhone){
 
-    firebaseFunctions.pushContacts(phones);
+    firebaseFunctions.pushContacts(emgPhone);
 }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -222,21 +235,24 @@ public void pushContacts(String [] phones){
                 String number = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 //contactName.setText(name);
                 if (contactPointer == 0) {
-                    phoneNo[0] =number;
+                   emgPhone.setNum1(number);
                     txtP1.setText(number);
+
                 } else if (contactPointer == 1) {
-                    phoneNo[1] = number;
+                    emgPhone.setNum2(number);
                     txtP2.setText(number);
+
                 } else if (contactPointer == 2) {
-                    phoneNo[2] = number;
+                    emgPhone.setNum3(number);
                     txtP3.setText(number);
                 }
-                if (contactPointer == 3) {
-                    phoneNo[3] = number;
+
+               else if (contactPointer == 3) {
+                    emgPhone.setNum4(number);
                     txtP4.setText(number);
                 }
-                if (contactPointer == 4) {
-                    phoneNo[4] = number;
+               else if (contactPointer == 4) {
+                    emgPhone.setNum5(number);
                     txtP5.setText(number);
                     //contactEmail.setText(email);}
                 }

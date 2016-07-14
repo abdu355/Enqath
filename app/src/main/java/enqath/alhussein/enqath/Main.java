@@ -484,9 +484,11 @@ public class Main extends AppCompatActivity
     }
 
     @Override
-    public void pushContacts() {
+    public void pushContacts(String phoneNo1, String phoneNo2, String phoneNo3, String phoneNo4, String phoneNo5) {
 
     }
+
+
 
     @Override
     public void showProgress() {

@@ -29,6 +29,7 @@
                 android:ems="10"
                 android:id="@+id/txt_fname"
                 android:layout_weight="1"
+                android:hint=""
                 android:background="#FFFFFF"
                 android:textColor="@color/bright_foreground_material_light" />
         </TableRow>
@@ -156,6 +157,7 @@
                 android:id="@+id/txt_phone"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
+                android:hint="+9715xxxxxxxx"
                 android:textColor="@color/bright_foreground_material_light" />
         </TableRow>
 
