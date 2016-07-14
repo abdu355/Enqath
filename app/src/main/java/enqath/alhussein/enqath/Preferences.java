@@ -212,6 +212,11 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
 
                 break;
             case R.id.btnSave:
+                emgPhone.setNum1(txtP1.getText().toString());
+                emgPhone.setNum2(txtP2.getText().toString());
+                emgPhone.setNum3(txtP3.getText().toString());
+                emgPhone.setNum4(txtP4.getText().toString());
+                emgPhone.setNum5(txtP5.getText().toString());
                 pushContacts(emgPhone);
 
                 break;

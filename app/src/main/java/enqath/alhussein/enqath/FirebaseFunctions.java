@@ -46,7 +46,9 @@ public class FirebaseFunctions {
 public void pushContacts(EmergencyContacts phone){
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
+
     myRef.child("emergencyContacts").setValue(phone);
+    myRef.child("emergencyContacts").push();
 
 
 
