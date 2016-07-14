@@ -484,6 +484,11 @@ public class Main extends AppCompatActivity
     }
 
     @Override
+    public void pushContacts() {
+
+    }
+
+    @Override
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
     }

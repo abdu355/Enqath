@@ -43,7 +43,15 @@ public class FirebaseFunctions {
         myRef.child("incidentLoc").setValue(gpsloc);
     }
 
+public void pushContacts(String [] phones){
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
+    myRef.child("emergencyContacts").setValue(phones);
 
+
+
+
+}
 
     //<---------------------------------------------------FETCH FUNCTIONS--------------------------------------------------->
 

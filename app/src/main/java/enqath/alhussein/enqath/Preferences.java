@@ -16,9 +16,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.firebase.client.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Preferences extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener {
     TableRow R1, R2, R3, R4, R5;
@@ -26,8 +31,14 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
     int RQS_PICK_CONTACT = 1;
     EditText txtP1, txtP2, txtP3, txtP4, txtP5;
     Button save;
-    int [] phoneNo=new int[5];
-    int contactPointer=0;
+    String[] phoneNo ={"0","0","0","0","0"};
+    int contactPointer = 0;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
+    FirebaseUser firebaseUser;
+    FirebaseFunctions firebaseFunctions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +86,15 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+        firebaseFunctions = new FirebaseFunctions();
+        Firebase.setAndroidContext(this);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            // User is signed in
+
+        }
 
     }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -158,39 +174,40 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.txtPhone1:
-                contactPointer=0;
+                contactPointer = 0;
                 MyMagicContact();
                 break;
 
             case R.id.txtPhone2:
-
-                contactPointer=1;
-
+                contactPointer = 1;
                 MyMagicContact();
                 break;
 
             case R.id.txtPhone3:
-                contactPointer=2;
-
+                contactPointer = 2;
                 MyMagicContact();
                 break;
 
             case R.id.txtPhone4:
-                contactPointer=3;
-
+                contactPointer = 3;
                 MyMagicContact();
 
                 break;
 
             case R.id.txtPhone5:
-                contactPointer=4;
-
+                contactPointer = 4;
                 MyMagicContact();
 
                 break;
+            case R.id.btnSave:
+                pushContacts(phoneNo);
+                break;
         }
     }
+public void pushContacts(String [] phones){
 
+    firebaseFunctions.pushContacts(phones);
+}
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
@@ -204,22 +221,29 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
 
                 String number = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 //contactName.setText(name);
-                if (contactPointer==0)
+                if (contactPointer == 0) {
+                    phoneNo[0] =number;
                     txtP1.setText(number);
-                if (contactPointer==1)
+                } else if (contactPointer == 1) {
+                    phoneNo[1] = number;
                     txtP2.setText(number);
-                if (contactPointer==2)
+                } else if (contactPointer == 2) {
+                    phoneNo[2] = number;
                     txtP3.setText(number);
-                if (contactPointer==3)
+                }
+                if (contactPointer == 3) {
+                    phoneNo[3] = number;
                     txtP4.setText(number);
-                if (contactPointer==4)
+                }
+                if (contactPointer == 4) {
+                    phoneNo[4] = number;
                     txtP5.setText(number);
-                //contactEmail.setText(email);
+                    //contactEmail.setText(email);}
+                }
             }
-        }
 
+        }
     }
 }
-
 
 

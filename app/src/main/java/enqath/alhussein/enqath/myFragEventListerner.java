@@ -12,6 +12,7 @@ public interface myFragEventListerner {
     public void pushGPS(GPSLoc gpsLoc);
     public void quickCall();
     public void getLocation();
+    public void pushContacts();
     //other
     public void showProgress();
     public void hideProgress();
