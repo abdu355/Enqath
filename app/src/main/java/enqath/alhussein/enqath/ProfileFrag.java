@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -44,6 +45,8 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
     private TextView dateView;
     private int year, month, day;
 
+    DatabaseReference myRef;
+
     @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
@@ -79,36 +82,15 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         //dob = (EditText)myView.findViewById(R.id.txt_dob);
         nat = (EditText)myView.findViewById(R.id.txt_nat);
 
-        //---------------------------------------------------- Update from Firebase
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-
-
-        listener.showProgress();//change child name
-        myRef.child("profiles").child(firebaseUser.getUid()).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get userProfile value
-                        UserProfile userProfile = dataSnapshot.getValue(UserProfile.class); //change this
-                        try {
-                            //What to do with the new data
-                            updateUI(userProfile.getFname(),userProfile.getLname(),userProfile.getPhone(),userProfile.getDob(),userProfile.getnID(),userProfile.getNat());//change this
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
-                        }
-                        // ...
-                        listener.hideProgress();
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.d("getProfileDataFunction", "getUser:onCancelled", databaseError.toException());
-                        //What to do on error
-                        listener.hideProgress();
-                    }
-                });
-        //---------------------------------------------------- Update from Firebase
+        myRef = database.getReference();
+        try {
+            updateData();
+        } catch (NullPointerException e) {
+            Toast.makeText(getContext(),"User Error . Are you logged In ?",Toast.LENGTH_SHORT).show();
+            listener.hideProgress();
+        }
 
         return myView;
     }
@@ -175,6 +157,36 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
     private void showDate(int year, int month, int day) {
         dateView.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
+    }
+
+    private void updateData()
+    {
+        //---------------------------------------------------- Update from Firebase
+
+        listener.showProgress();//change child name
+        myRef.child("profiles").child(firebaseUser.getUid()).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get userProfile value
+                        UserProfile userProfile = dataSnapshot.getValue(UserProfile.class); //change this
+                        try {
+                            //What to do with the new data
+                            updateUI(userProfile.getFname(),userProfile.getLname(),userProfile.getPhone(),userProfile.getDob(),userProfile.getnID(),userProfile.getNat());//change this
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
+                        // ...
+                        listener.hideProgress();
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.d("getProfileDataFunction", "getUser:onCancelled", databaseError.toException());
+                        //What to do on error
+                        listener.hideProgress();
+                    }
+                });
+        //---------------------------------------------------- Update from Firebase
     }
 
 

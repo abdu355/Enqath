@@ -35,25 +35,25 @@ public class FirebaseFunctions {
 
         myRef.child("medID").child(userid).setValue(medID);
     }
-    public void pushGPS(GPSLoc gpsloc)
+    public void pushGPS(GPSLoc gpsloc, String userid)
     {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
-        myRef.child("incidentLoc").setValue(gpsloc);
+        myRef.child("incidentLoc").child(userid).setValue(gpsloc);
     }
 
-public void pushContacts(EmergencyContacts phone){
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
+    public void pushContacts(EmergencyContacts phone, String userid){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
 
-    myRef.child("emergencyContacts").setValue(phone);
-    myRef.child("emergencyContacts").push();
-
-
+        myRef.child("emergencyContacts").child(userid).setValue(phone);
+        //myRef.child("emergencyContacts").push();
 
 
-}
+
+
+    }
 
     //<---------------------------------------------------FETCH FUNCTIONS--------------------------------------------------->
 

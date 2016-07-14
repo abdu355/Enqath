@@ -10,6 +10,7 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -35,5 +36,8 @@ dependencies {
     compile 'com.google.firebase:firebase-analytics:9.2.0'
     compile 'com.google.android.gms:play-services-auth:9.2.0'
     compile 'com.google.android.gms:play-services:9.2.0'
+    compile 'com.android.support:multidex:1.0.1'
+
+    compile 'org.droidparts:droidparts:2.9.6'
 }
 apply plugin: 'com.google.gms.google-services'

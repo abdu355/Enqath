@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="enqath.alhussein.enqath.Preferences"
-    tools:showIn="@layout/activity_preferences">
+    tools:showIn="@layout/activity_preferences"
+    android:id="@+id/rootpref">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -62,7 +63,8 @@
                     android:text="@string/phone1"
                     android:id="@+id/textView14" />
 
-                <EditText
+                <org.droidparts.widget.ClearableEditText
+                    android:drawableRight="@android:drawable/ic_menu_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
@@ -85,7 +87,8 @@
                     android:text="@string/phone2"
                     android:id="@+id/textView15" />
 
-                <EditText
+                <org.droidparts.widget.ClearableEditText
+                    android:drawableRight="@android:drawable/ic_menu_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
@@ -109,7 +112,8 @@
                     android:text="@string/phone3"
                     android:id="@+id/textView16" />
 
-                <EditText
+                <org.droidparts.widget.ClearableEditText
+                    android:drawableRight="@android:drawable/ic_menu_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
@@ -133,7 +137,8 @@
                     android:text="@string/phone4"
                     android:id="@+id/textView17" />
 
-                <EditText
+                <org.droidparts.widget.ClearableEditText
+                    android:drawableRight="@android:drawable/ic_menu_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
@@ -157,7 +162,8 @@
                     android:text="@string/phone5"
                     android:id="@+id/textView18" />
 
-                <EditText
+                <org.droidparts.widget.ClearableEditText
+                    android:drawableRight="@android:drawable/ic_menu_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="phone"

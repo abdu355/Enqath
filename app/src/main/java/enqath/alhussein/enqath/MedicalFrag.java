@@ -3,6 +3,7 @@ package enqath.alhussein.enqath;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,6 +38,8 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
     public EditText extraInfo;
     public EditText medications;
     FirebaseUser firebaseUser;
+
+    DatabaseReference myRef;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -68,35 +72,16 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
         blood.setAdapter(spinnerArrayAdapter);
 
 
-
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
+        myRef = database.getReference();
 
-
-        listener.showProgress();
-        myRef.child("medID").child(firebaseUser.getUid()).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get userProfile value
-                        MedID usermedID = dataSnapshot.getValue(MedID.class);
-
-                        try {
-                            updateUI(usermedID.getBlood(),usermedID.getAllergies(),usermedID.getCurrentCondition(),usermedID.getExtraInfo(),usermedID.getMedications());
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
-                        }
-                        // ...
-                        listener.hideProgress();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.d("getProfielDataFunction", "getUser:onCancelled", databaseError.toException());
-                        listener.hideProgress();
-                    }
-                });
+        try {
+            updateData();
+        } catch (NullPointerException e) {
+            Toast.makeText(getContext(),"User Error . Are you logged In ?",Toast.LENGTH_SHORT).show();
+            listener.hideProgress();
+        }
 
         return myView;
     }
@@ -127,7 +112,6 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
         currentCondition.setText(dbcurrentcondition);
         extraInfo.setText(dbextraInfo);
         medications.setText(dbmedications);
-
     }
 
     private int getIndex(Spinner spinner, String myString) {
@@ -140,5 +124,32 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
             }
         }
         return index;
+    }
+
+    private void updateData()
+    {
+        listener.showProgress();
+        myRef.child("medID").child(firebaseUser.getUid()).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get userProfile value
+                        MedID usermedID = dataSnapshot.getValue(MedID.class);
+
+                        try {
+                            updateUI(usermedID.getBlood(),usermedID.getAllergies(),usermedID.getCurrentCondition(),usermedID.getExtraInfo(),usermedID.getMedications());
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
+                        // ...
+                        listener.hideProgress();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.d("getProfielDataFunction", "getUser:onCancelled", databaseError.toException());
+                        listener.hideProgress();
+                    }
+                });
     }
 }

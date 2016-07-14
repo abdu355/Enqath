@@ -5,6 +5,20 @@ package enqath.alhussein.enqath;
  */
 public class EmergencyContacts {
     String num1;
+    String num2;
+    String num3;
+    String num4;
+    String num5;
+
+    int numofcontacts;
+
+    public int getNumofcontacts() {
+        return numofcontacts;
+    }
+
+    public void setNumofcontacts(int numofcontacts) {
+        this.numofcontacts = numofcontacts;
+    }
 
     public String getNum1() {
         return num1;
@@ -46,8 +60,5 @@ public class EmergencyContacts {
         this.num5 = num5;
     }
 
-    String num2;
-    String num3;
-    String num4;
-    String num5;
+
 }
