@@ -210,6 +210,7 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
                 emgPhone.setNum5(txtP1.getText().toString());
                 MyMagicContact();
 
+
                 break;
             case R.id.btnSave:
                 emgPhone.setNum1(txtP1.getText().toString());
