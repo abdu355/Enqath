@@ -193,15 +193,15 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/DOB"
-                android:id="@+id/DOB"
+                android:id="@+id/DOBBBBBBBBB"
                 android:paddingRight="15dp"
                 android:inputType="date"
                 android:layout_weight="1" />
 
-            <DatePicker
+            <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/datePicker"
+                android:id="@+id/txtDob"
                 android:layout_weight="1" />
 
         </TableRow>
