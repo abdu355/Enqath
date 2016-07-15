@@ -14,15 +14,26 @@ public class IncidentDetails {
 
 
    // Location latLng; // changed to location object .. i think it's better
-   float accuracy;
-    double Lat, Lng;
+    private float accuracy;
+    private double Lat, Lng;
     //Date date;
     //long time;
-    String date;
-    String incidentType;
-    String severity;
+    private String date;
+    private String incidentType;
+    private String severity;
 
     public IncidentDetails() {}
+
+    public IncidentDetails(double lat, double lng, float accuracy, String date, String incidentType, String severity) {
+        this.date=date;
+        this.Lat=lat;
+        this.Lng=lng;
+        this.accuracy = accuracy;
+
+        this.severity=severity;
+        this.incidentType=incidentType;
+    }
+
     public double getLat() {
         return Lat;
     }
@@ -37,16 +48,6 @@ public class IncidentDetails {
 
     public void setLng(double lng) {
         Lng = lng;
-    }
-
-    public IncidentDetails(double lat, double lng, float accuracy, String date, String incidentType, String severity) {
-        this.date=date;
-        this.Lat=lat;
-        this.Lng=lng;
-        this.accuracy = accuracy;
-
-        this.severity=severity;
-        this.incidentType=incidentType;
     }
 
     public String getIncidentType() {

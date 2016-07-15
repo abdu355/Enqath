@@ -1,13 +1,17 @@
 package enqath.alhussein.enqath;
 
 import android.Manifest;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -561,6 +565,12 @@ public class Main extends AppCompatActivity
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
+        //--------------------
+        // Get Location Manager and check for GPS & Network location services
+        checkGPSON();
+        //------------
+
          mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
@@ -598,6 +608,7 @@ public class Main extends AppCompatActivity
 
     private void getIncidentDetails()
     {
+        checkGPSON();
         SingleShotProvider singleShotProvider = new SingleShotProvider(getApplicationContext());
         singleShotProvider.requestSingleUpdate(getApplicationContext(),
                 new SingleShotProvider.LocationCallback() {
@@ -609,6 +620,28 @@ public class Main extends AppCompatActivity
                         Log.d("GPSMAIN-getdetails",smsmessage);
                     }
                 });
+    }
+
+    public void checkGPSON()
+    {
+        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            // Build the alert dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Location Services Not Active");
+            builder.setMessage("Please enable Location Services and GPS");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // Show location settings when the user acknowledges the alert dialog
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            Dialog alertDialog = builder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.show();
+        }
     }
 //    @Override
 //    protected void onPause() {
