@@ -10,15 +10,23 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import java.util.Locale;
 import android.view.LayoutInflater;
 import android.view.Menu;
+
+import java.util.Collections;
 import android.view.View;
+import java.util.AbstractList;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import 	java.util.ArrayList;
+
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +36,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.droidparts.adapter.widget.ArrayAdapter;
 
 import java.util.Calendar;
 
@@ -43,10 +53,9 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
     private DatePicker datePicker;
     private Calendar calendar;
     private TextView dateView;
+
     private int year, month, day;
-
     DatabaseReference myRef;
-
     @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
@@ -73,6 +82,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month+1, day);
 
+
         //setCurrentDateOnView(); //set current date
         //text fields
         fname = (EditText)myView.findViewById(R.id.txt_fname);
@@ -80,7 +90,23 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         phone = (EditText)myView.findViewById(R.id.txt_phone);
         nID = (EditText)myView.findViewById(R.id.txt_nID);
         //dob = (EditText)myView.findViewById(R.id.txt_dob);
-        nat = (EditText)myView.findViewById(R.id.txt_nat);
+
+        //////////////////////////////////////////
+        Locale[] locale = Locale.getAvailableLocales();
+        ArrayList<String> countries = new ArrayList<String>();
+        String country;
+        for( Locale loc : locale ){
+            country = loc.getDisplayCountry();
+            if( country.length() > 0 && !countries.contains(country) ){
+                countries.add( country );
+            }
+        }
+        Collections.sort(countries, String.CASE_INSENSITIVE_ORDER);
+
+        Spinner citizenship = (Spinner)myView.findViewById(R.id.country);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, countries);
+        citizenship.setAdapter(adapter);
+        ///////////////
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -100,12 +126,13 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onClick(View view) {
-        switch(view.getId())
-        {
+        switch(view.getId()) {
             case R.id.btnSubmit:
                 pushUserProfile(); //saves profile to Firebase
                 break;
+
         }
+
     }
     public void pushUserProfile()
     {
@@ -154,6 +181,9 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         }
     };
 
+
+
+
     private void showDate(int year, int month, int day) {
         dateView.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
@@ -188,6 +218,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
                 });
         //---------------------------------------------------- Update from Firebase
     }
+
 
 
 }

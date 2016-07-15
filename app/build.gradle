@@ -24,7 +24,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_6
     }
 }
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.0.0'

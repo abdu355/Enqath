@@ -219,13 +219,12 @@
                 android:id="@+id/textView33"
                 android:paddingRight="15dp" />
 
-            <EditText
-                android:layout_width="254dp"
+            <Spinner
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txt_nat"
-                android:background="#FFFFFF"
-                android:paddingLeft="15dp"
-                android:textColor="@color/bright_foreground_material_light" />
+                android:id="@+id/country"
+                android:layout_weight="1" />
+
         </TableRow>
 
         <TableRow
