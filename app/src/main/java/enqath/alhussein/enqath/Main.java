@@ -1,21 +1,17 @@
 package enqath.alhussein.enqath;
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -33,11 +29,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -82,6 +75,7 @@ public class Main extends AppCompatActivity
 
     String[] phones;
     String[] msg = {"Car Accident Level Minor. No Human Injuries", "Car Accident Level Medium. Simple Human Injuries", "Car Accident Level Serious. Major Human Injuries"};
+    String smsmessage;
 
     final String number = "tel:000";
     final String[] phoneNo = {"0503987283"};
@@ -94,7 +88,10 @@ public class Main extends AppCompatActivity
     Location mCurrentLocation;
     String mLastUpdateTime;
     LocationRequest mLocationRequest;
-    SimpleDateFormat sdf;
+
+
+    String type="Car Accident";
+    String severity="Level Minor-No Human Injuries";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +102,7 @@ public class Main extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_spinner);
-        sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
@@ -202,10 +199,9 @@ public class Main extends AppCompatActivity
         }
         mGoogleApiClient.connect();
 
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(60000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
+//        mLocationRequest = new LocationRequest();
+//        mLocationRequest.setInterval(60000);//1 min interval
+//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
     }
 
@@ -231,7 +227,7 @@ public class Main extends AppCompatActivity
                                 Snackbar snackbar1 = Snackbar.make(drawer, "Requesting Access", Snackbar.LENGTH_SHORT);
                                 snackbar1.show();
                                 ActivityCompat.requestPermissions(Main.this,
-                                        new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
+                                        new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                                         REQUEST_CODE_CALL);
                             }
                         });
@@ -243,7 +239,7 @@ public class Main extends AppCompatActivity
                 // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
+                        new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                         REQUEST_CODE_CALL);
 
             }
@@ -396,11 +392,10 @@ public class Main extends AppCompatActivity
 
     public void sendSMS() {
         try {
-
-
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo[0], null, msg[0], null, null);
-            Toast.makeText(getApplicationContext(), "Message Sent",
+            getIncidentDetails();//---get Location once
+            smsManager.sendTextMessage(phoneNo[0], null, smsmessage, null, null);
+            Toast.makeText(getApplicationContext(), "SMS Message Sent",
                     Toast.LENGTH_LONG).show();
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), ex.getMessage(),
@@ -495,10 +490,8 @@ public class Main extends AppCompatActivity
         snackbar.show();
     }
 
-    @Override
-    public void pushGPS(GPSLoc gpsLoc) {
-        firebaseFunctions.pushGPS(gpsLoc, firebaseUser.getUid());
-
+    public void pushIncident(IncidentDetails gpsLoc) {
+        firebaseFunctions.pushIncident(gpsLoc, firebaseUser.getUid());
     }
 
     @Override
@@ -555,7 +548,7 @@ public class Main extends AppCompatActivity
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        Log.d("GPSMAIN","Connected");
+        Log.d("GPSMAIN", "Connected");
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -568,56 +561,54 @@ public class Main extends AppCompatActivity
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mCurrentLocation = mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
             //location is not null
-            Log.d("GPSMAIN",mLastLocation.getLatitude()+" "+mLastLocation.getLongitude()+" "+ mLastLocation.getTime());
+            Log.d("GPSMAIN-mLastLocation", mLastLocation.getLatitude() + " " + mLastLocation.getLongitude() + " " + mLastLocation.getTime());
         }
+        //startLocationUpdates();
 
-        startLocationUpdates();
-
+        //-------------------------------------------------- GET SINGLE LOCATION UPDATE
+        //getIncidentDetails();
     }
-
-    protected void startLocationUpdates() {
-        Log.d("GPSMAIN","startLocationUpdates");
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, mLocationRequest, this);
-    }
-
     public void onLocationChanged(Location location) {
-        Log.d("GPSMAIN","LocationChanged");
+        //Log.d("GPSMAIN", "LocationChanged");
         mCurrentLocation = location;
         mLastUpdateTime = DateFormat.getDateTimeInstance().format(new Date());
 
-        Log.d("GPSMAIN",mCurrentLocation.getLatitude()+" "+mCurrentLocation.getLongitude()+" "+ mLastUpdateTime);
+        Log.d("GPSMAIN-LocationChanged", mCurrentLocation.getLatitude() + " " + mCurrentLocation.getLongitude() + " " + mLastUpdateTime);
     }
-
     @Override
     public void onConnectionSuspended(int i) {
-        Log.d("GPSMAIN","ConnectionSuspended");
+        Log.d("GPSMAIN", "ConnectionSuspended");
     }
 
     protected void onStart() {
-        Log.d("GPSMAIN","onStart");
+        Log.d("GPSMAIN", "onStart");
         mGoogleApiClient.connect();
         super.onStart();
     }
 
     protected void onStop() {
-        Log.d("GPSMAIN","onStop");
+        Log.d("GPSMAIN", "onStop");
         mGoogleApiClient.disconnect();
         super.onStop();
+    }
+
+    private void getIncidentDetails()
+    {
+        SingleShotProvider singleShotProvider = new SingleShotProvider(getApplicationContext());
+        singleShotProvider.requestSingleUpdate(getApplicationContext(),
+                new SingleShotProvider.LocationCallback() {
+                    @Override public void onNewLocationAvailable(IncidentDetails location) {
+                        location.setIncidentType(type);
+                        location.setSeverity(severity);
+                        pushIncident(location);//push to FB
+                        smsmessage = location.toString();
+                        Log.d("GPSMAIN-getdetails",smsmessage);
+                    }
+                });
     }
 //    @Override
 //    protected void onPause() {
@@ -629,5 +620,25 @@ public class Main extends AppCompatActivity
 //        LocationServices.FusedLocationApi.removeLocationUpdates(
 //                mGoogleApiClient,this);
 //    }
+
+    //    protected void startLocationUpdates() {
+//        Log.d("GPSMAIN", "startLocationUpdates");
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            // TODO: Consider calling
+//            //    ActivityCompat#requestPermissions
+//            // here to request the missing permissions, and then overriding
+//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//            //                                          int[] grantResults)
+//            // to handle the case where the user grants the permission. See the documentation
+//            // for ActivityCompat#requestPermissions for more details.
+//            return;
+//        }
+//        LocationServices.FusedLocationApi.requestLocationUpdates(
+//                mGoogleApiClient, mLocationRequest, this);
+//
+//    }
+
+
+
      /*<---------------------------------------------/*TODO :: Implement GPS functions here *///--------------------------------------------->
 }

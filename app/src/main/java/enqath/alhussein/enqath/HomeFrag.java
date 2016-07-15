@@ -25,7 +25,7 @@ import java.util.TimeZone;
  */
 public class HomeFrag extends Fragment implements View.OnClickListener{
     View myView;
-    //GPSLoc GPSLocation;
+    //IncidentDetails GPSLocation;
 
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;

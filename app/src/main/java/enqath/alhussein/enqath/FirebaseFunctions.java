@@ -1,12 +1,7 @@
 package enqath.alhussein.enqath;
 
-import android.util.Log;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -35,12 +30,12 @@ public class FirebaseFunctions {
 
         myRef.child("medID").child(userid).setValue(medID);
     }
-    public void pushGPS(GPSLoc gpsloc, String userid)
+    public void pushIncident(IncidentDetails incidentDetails, String userid)
     {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
 
-        myRef.child("incidentLoc").child(userid).setValue(gpsloc);
+        myRef.child("incidentDetails").child(userid).setValue(incidentDetails);
     }
 
     public void pushContacts(EmergencyContacts phone, String userid){
