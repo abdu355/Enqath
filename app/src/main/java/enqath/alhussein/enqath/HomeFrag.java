@@ -1,16 +1,10 @@
 package enqath.alhussein.enqath;
 
-
 import android.app.Activity;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
-import android.icu.util.TimeZone;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,13 +15,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Abdulwahab on 7/3/2016.
  */
-public class HomeFrag extends Fragment implements View.OnClickListener, LocationListener{
+public class HomeFrag extends Fragment implements View.OnClickListener{
     View myView;
-    GPSLoc GPSLocation;
+    //GPSLoc GPSLocation;
 
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
@@ -71,8 +69,6 @@ public class HomeFrag extends Fragment implements View.OnClickListener, Location
         return myView;
     }
 
-
-
     @Override
     public void onClick(View view) {
         switch(view.getId())
@@ -109,42 +105,42 @@ public class HomeFrag extends Fragment implements View.OnClickListener, Location
         listener.quickEmergency(message,intent);
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        GPSLocation.setLat(location.getLatitude());
-        GPSLocation.setLng(location.getLongitude());
-      //  GPSLocation.setDate(System.get);
+////    @Override
+////    public void onLocationChanged(Location location) {
+////        GPSLocation.setLat(location.getLatitude());
+////        GPSLocation.setLng(location.getLongitude());
+////      //  GPSLocation.setDate(System.get);
+////
+////    }
+//
+//    public  String getDateCurrentTimeZone(long timestamp) {
+//        try{
+//            Calendar calendar = Calendar.getInstance();
+//            TimeZone tz = TimeZone.getDefault();
+//            calendar.setTimeInMillis(timestamp * 1000);
+//            calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            Date currenTimeZone = (Date) calendar.getTime();
+//            return sdf.format(currenTimeZone);
+//        }catch (Exception e) {
+//        }
+//        return "";
+//    }
 
-    }
-/*****************************************************************
-    public  String getDateCurrentTimeZone(long timestamp) {
-        try{
-            Calendar calendar = Calendar.getInstance();
-            TimeZone tz = TimeZone.getDefault();
-            calendar.setTimeInMillis(timestamp * 1000);
-            calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date currenTimeZone = (Date) calendar.getTime();
-            return sdf.format(currenTimeZone);
-        }catch (Exception e) {
-        }
-        return "";
-    }
-*/////////////////////////////////////*/
 
 
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-
-    }
+//    @Override
+//    public void onStatusChanged(String s, int i, Bundle bundle) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderEnabled(String s) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderDisabled(String s) {
+//
+//    }
 }

@@ -12,6 +12,7 @@ import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -43,28 +44,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class Main extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,myFragEventListerner {
+        implements NavigationView.OnNavigationItemSelectedListener, myFragEventListerner, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationListener {
+    private GoogleApiClient mGoogleApiClient;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private TextView useremail_nav,username_nav;
+    private TextView useremail_nav, username_nav;
     private ImageView userdp_nav;
     String userdisplayname;
     FirebaseUser firebaseUser;
     FirebaseFunctions firebaseFunctions;
     CollapsingToolbarLayout collapsingToolbarLayout;
     ProgressBar progressBar;
-
-
 
     FrameLayout layout;
     final private int REQUEST_CODE_CALL = 124;
@@ -73,15 +80,21 @@ public class Main extends AppCompatActivity
     android.support.v4.app.Fragment fragment_obj;
     AppBarLayout appBarLayout;
 
-
-
-    String [] phones;
-    String [] msg={"Car Accident Level Minor. No Human Injuries","Car Accident Level Medium. Simple Human Injuries","Car Accident Level Serious. Major Human Injuries"};
+    String[] phones;
+    String[] msg = {"Car Accident Level Minor. No Human Injuries", "Car Accident Level Medium. Simple Human Injuries", "Car Accident Level Serious. Major Human Injuries"};
 
     final String number = "tel:000";
-    final String [] phoneNo={"0503987283"};
+    final String[] phoneNo = {"0503987283"};
     //android.app.FragmentManager fragmentManager = getFragmentManager();
     FragmentTransaction transaction;
+
+    //GPS
+
+    Location mLastLocation;
+    Location mCurrentLocation;
+    String mLastUpdateTime;
+    LocationRequest mLocationRequest;
+    SimpleDateFormat sdf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,12 +105,11 @@ public class Main extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_spinner);
-
-
+        sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
-        appBarLayout =(AppBarLayout)findViewById(R.id.app_bar);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         fab.setImageResource(R.drawable.ic_phone_white_48dp); //call FAB
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,10 +139,9 @@ public class Main extends AppCompatActivity
         toggle.syncState();
 
         //change orientation when changing language
-        if(Locale.getDefault().getLanguage().equals("en")) {
+        if (Locale.getDefault().getLanguage().equals("en")) {
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-        }
-        else {
+        } else {
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }
 
@@ -140,12 +151,12 @@ public class Main extends AppCompatActivity
 
         View navHeaderView = navigationView.getHeaderView(0);
         useremail_nav = (TextView) navHeaderView.findViewById(R.id.useremail_nav);
-        username_nav=(TextView)navHeaderView.findViewById(R.id.username_nav);
+        username_nav = (TextView) navHeaderView.findViewById(R.id.username_nav);
         //--------------------------
 
         //btnEnqath = (Button) findViewById(R.id.btnEnqath);
-        layout = (FrameLayout)findViewById(R.id.container);
-        userdp_nav=(ImageView)findViewById(R.id.userdp_nav);
+        layout = (FrameLayout) findViewById(R.id.container);
+        userdp_nav = (ImageView) findViewById(R.id.userdp_nav);
 
 
         firebaseFunctions = new FirebaseFunctions();
@@ -160,16 +171,16 @@ public class Main extends AppCompatActivity
             username_nav.setText(firebaseUser.getDisplayName());
             //set DP image here
 
-            if(username_nav.getText().length()<=0) //if no username or alias yet
+            if (username_nav.getText().length() <= 0) //if no username or alias yet
             {
                 showdialog();
             }
         } else {
             // No firebaseUser is signed in
-            Toast.makeText(Main.this,"GUEST MODE",Toast.LENGTH_LONG).show();
+            Toast.makeText(Main.this, "GUEST MODE", Toast.LENGTH_LONG).show();
         }
 
-        Toast.makeText(Main.this,Locale.getDefault().getLanguage(),Toast.LENGTH_LONG).show();
+        Toast.makeText(Main.this, Locale.getDefault().getLanguage(), Toast.LENGTH_LONG).show();
 
         //start app with home fragment
         transaction = getSupportFragmentManager().beginTransaction();
@@ -177,11 +188,33 @@ public class Main extends AppCompatActivity
         transaction.addToBackStack(null);
         transaction.commit();
 
+
+        DynamicPermission(); //get all permission on launch
+
+
+        // Create an instance of GoogleAPIClient.
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+        mGoogleApiClient.connect();
+
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(60000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+
     }
+
     public void DynamicPermission() {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE) &&
@@ -191,14 +224,14 @@ public class Main extends AppCompatActivity
                 // this thread waiting for the User's response! After the User
                 // sees the explanation, try again to request the permission.
                 Snackbar snackbar = Snackbar
-                        .make(drawer, "Requires phone permission to make Emergency Calls", Snackbar.LENGTH_LONG)
+                        .make(drawer, "Requires multiple permissions to make Incident Reports", Snackbar.LENGTH_LONG)
                         .setAction("Allow", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Snackbar snackbar1 = Snackbar.make(drawer, "Requesting Access", Snackbar.LENGTH_SHORT);
                                 snackbar1.show();
                                 ActivityCompat.requestPermissions(Main.this,
-                                        new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS},
+                                        new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
                                         REQUEST_CODE_CALL);
                             }
                         });
@@ -210,21 +243,20 @@ public class Main extends AppCompatActivity
                 // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CALL_PHONE,Manifest.permission.SEND_SMS},
+                        new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
                         REQUEST_CODE_CALL);
 
             }
-        }
-        else
-        {
-            Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
-            Uri callui = Uri.parse(number);
-            Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
-            //noinspection MissingPermission
-            startActivity(callIntent);
-            sendSMS();
+        } else {
+//            Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
+//            Uri callui = Uri.parse(number);
+//            Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
+//            //noinspection MissingPermission
+//            startActivity(callIntent);
+//            sendSMS();
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -236,15 +268,12 @@ public class Main extends AppCompatActivity
 
                     // permission was granted, yay! Do the
                     // calling-related task you need to do.
-                    sendSMS();
-                    Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
-                    Uri callui = Uri.parse(number);
-                    Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
-                    //noinspection MissingPermission
-                    startActivity(callIntent);
-
-
-
+//                    sendSMS();
+//                    Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
+//                    Uri callui = Uri.parse(number);
+//                    Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
+//                    //noinspection MissingPermission
+//                    startActivity(callIntent);
 
                 } else {
 
@@ -272,6 +301,7 @@ public class Main extends AppCompatActivity
         }
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -290,7 +320,7 @@ public class Main extends AppCompatActivity
                 return true;
             case R.id.menu_logout:
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(),MainLogin.class));
+                startActivity(new Intent(getApplicationContext(), MainLogin.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -336,7 +366,7 @@ public class Main extends AppCompatActivity
                     Snackbar.make(view, "Edit profile", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     ProfileFrag.showEditButtons();//show edit buttons
-                    appBarLayout.setExpanded(false,true); //hide appbar
+                    appBarLayout.setExpanded(false, true); //hide appbar
                 }
             });
         } else if (id == R.id.nav_medicalpage) {
@@ -352,7 +382,7 @@ public class Main extends AppCompatActivity
                     Snackbar.make(view, "Edit Medical ID", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     MedicalFrag.showEditButtons(); //show edit buttons
-                    appBarLayout.setExpanded(false,true); //hide appbar
+                    appBarLayout.setExpanded(false, true); //hide appbar
                 }
             });
         }
@@ -364,7 +394,7 @@ public class Main extends AppCompatActivity
 
     /*TODO:: moved to HomeFrag.java*/
 
-    public void sendSMS(){
+    public void sendSMS() {
         try {
 
 
@@ -373,16 +403,15 @@ public class Main extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "Message Sent",
                     Toast.LENGTH_LONG).show();
         } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(),ex.getMessage(),
+            Toast.makeText(getApplicationContext(), ex.getMessage(),
                     Toast.LENGTH_LONG).show();
             ex.printStackTrace();
         }
     }
 
 
-    private void showdialog()
-    {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this,R.style.CustomDialogTheme);
+    private void showdialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this, R.style.CustomDialogTheme);
         final EditText edittext = new EditText(getApplicationContext());
         edittext.setTextColor(Color.parseColor("#f57f17"));
         alert.setMessage("Enter Alias or Name");
@@ -418,8 +447,8 @@ public class Main extends AppCompatActivity
 
         alert.show();
     }
-    private void showAlert()
-    {
+
+    private void showAlert() {
         new AlertDialog.Builder(this)
                 .setTitle("User Error")
                 .setMessage("Error Occurred , are you logged in ?")
@@ -436,10 +465,10 @@ public class Main extends AppCompatActivity
     @Override
     public void pushUserProfile(UserProfile userProfile) //profile fragment
     {
-        Log.d("Main Activity Event","updateUser called");
+        Log.d("Main Activity Event", "updateUser called");
         //push to Firebase
         try {
-            firebaseFunctions.pushProfileData(userProfile,firebaseUser.getUid());
+            firebaseFunctions.pushProfileData(userProfile, firebaseUser.getUid());
             //REFERENCE ONLY: String fname, String lname, String phone, String dob, String nID, String nat
         } catch (NullPointerException e) {
             showAlert();
@@ -449,14 +478,15 @@ public class Main extends AppCompatActivity
         snackbar.show();
 
     }
+
     @Override
     public void pushMedicalID(MedID medID)//medical ID fragment
     {
-        Log.d("Main Activity Event","pushMedicalID called");
-       //push to Firebase
+        Log.d("Main Activity Event", "pushMedicalID called");
+        //push to Firebase
         //REFERENCE ONLY: String blood, String allergies, String currentCondition, String extraInfo, String medications
         try {
-            firebaseFunctions.pushMedID(medID,firebaseUser.getUid());
+            firebaseFunctions.pushMedID(medID, firebaseUser.getUid());
         } catch (NullPointerException e) {
             showAlert();
         }
@@ -467,14 +497,21 @@ public class Main extends AppCompatActivity
 
     @Override
     public void pushGPS(GPSLoc gpsLoc) {
-        firebaseFunctions.pushGPS(gpsLoc,firebaseUser.getUid());
+        firebaseFunctions.pushGPS(gpsLoc, firebaseUser.getUid());
 
     }
 
     @Override
     public void quickCall() //home fragment
     {
-        DynamicPermission(); //checks permission and initiates call
+        //DynamicPermission(); //checks permission and initiates call
+
+        sendSMS();
+        Toast.makeText(this, "Calling...", Toast.LENGTH_SHORT).show();
+        Uri callui = Uri.parse(number);
+        Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
+        //noinspection MissingPermission
+        startActivity(callIntent);
 
     }
 
@@ -487,8 +524,6 @@ public class Main extends AppCompatActivity
     public void pushContacts(String phoneNo1, String phoneNo2, String phoneNo3, String phoneNo4, String phoneNo5) {
 
     }
-
-
 
     @Override
     public void showProgress() {
@@ -506,8 +541,93 @@ public class Main extends AppCompatActivity
         snackbar1.show();
         startActivity(intent);
     }
+     /*<---------------------------------------------/*TODO :: Implement fragment functions here *///--------------------------------------------->
 
 
 
 
+     /*<---------------------------------------------/*TODO :: Implement GPS functions here *///--------------------------------------------->
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Log.d("GPSMAIN","Connected");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mCurrentLocation = mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            //location is not null
+            Log.d("GPSMAIN",mLastLocation.getLatitude()+" "+mLastLocation.getLongitude()+" "+ mLastLocation.getTime());
+        }
+
+        startLocationUpdates();
+
+    }
+
+    protected void startLocationUpdates() {
+        Log.d("GPSMAIN","startLocationUpdates");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+                mGoogleApiClient, mLocationRequest, this);
+    }
+
+    public void onLocationChanged(Location location) {
+        Log.d("GPSMAIN","LocationChanged");
+        mCurrentLocation = location;
+        mLastUpdateTime = DateFormat.getDateTimeInstance().format(new Date());
+
+        Log.d("GPSMAIN",mCurrentLocation.getLatitude()+" "+mCurrentLocation.getLongitude()+" "+ mLastUpdateTime);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.d("GPSMAIN","ConnectionSuspended");
+    }
+
+    protected void onStart() {
+        Log.d("GPSMAIN","onStart");
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    protected void onStop() {
+        Log.d("GPSMAIN","onStop");
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        stopLocationUpdates();
+//    }
+//
+//    protected void stopLocationUpdates() {
+//        LocationServices.FusedLocationApi.removeLocationUpdates(
+//                mGoogleApiClient,this);
+//    }
+     /*<---------------------------------------------/*TODO :: Implement GPS functions here *///--------------------------------------------->
 }
