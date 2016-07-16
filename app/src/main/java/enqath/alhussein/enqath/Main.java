@@ -504,7 +504,7 @@ public class Main extends AppCompatActivity
         //DynamicPermission(); //checks permission and initiates call
 
         sendSMS();
-        Toast.makeText(this, "Calling...", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "Calling...", Toast.LENGTH_SHORT).show();
         Uri callui = Uri.parse(number);
         Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
         //noinspection MissingPermission

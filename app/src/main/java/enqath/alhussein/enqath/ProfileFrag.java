@@ -20,6 +20,7 @@ import java.util.Collections;
 import android.view.View;
 import java.util.AbstractList;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -43,26 +44,27 @@ import org.droidparts.adapter.widget.ArrayAdapter;
 
 import java.util.Calendar;
 
-public class ProfileFrag extends Fragment implements View.OnClickListener {
+public class ProfileFrag extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener {
     View myView;
-    Context context;
+    final String default_country="Saudi Arabia";
+
+    ArrayList<String> countries = new ArrayList<String>();
+
     private EditText txtDob;
     static Button submit;
     SimpleDateFormat dateFormat;
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
     private EditText fname, lname, phone, nID, dob, nat;
-    private Spinner blood;
+    private Spinner spinner;
     FirebaseUser firebaseUser;
     private Calendar calendar;
     Calendar c = Calendar.getInstance();
-    int mYear = c.get(Calendar.YEAR);
-    int mMonth = c.get(Calendar.MONTH);
-    int mDay = c.get(Calendar.DAY_OF_MONTH);
 
+    int spinnerPosition=0;
     private DatePickerDialog datePickerDialog;
-    private int year, month, day;
     DatabaseReference myRef;
+
 
     @SuppressWarnings("deprecation")
     @Override
@@ -85,34 +87,40 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         myView = inflater.inflate(R.layout.profilefrag, container, false);
         submit = (Button) myView.findViewById(R.id.btnSubmit);
         submit.setOnClickListener(this);
+/////////
+   /*     spinner = (Spinner) myView.findViewById(R.id.country);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, countries);
+        spinner.setAdapter(adapter);
+        Collections.sort(countries, String.CASE_INSENSITIVE_ORDER);
+*/
 
-     //   datePicker = (DatePicker) myView.findViewById(R.id.datePicker);
 
         dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-        //setCurrentDateOnView(); //set current date
-        //text fields
+
+
         fname = (EditText) myView.findViewById(R.id.txt_fname);
         lname = (EditText) myView.findViewById(R.id.txt_lname);
         phone = (EditText) myView.findViewById(R.id.txt_phone);
         nID = (EditText) myView.findViewById(R.id.txt_nID);
-        //dob = (EditText)myView.findViewById(R.id.txt_dob);
         txtDob=(EditText)myView.findViewById(R.id.txtDob);
+        nat=(EditText)myView.findViewById(R.id.txtNat);
         txtDob.setOnClickListener(this);
         //////////////////////////////////////////
-        Locale[] locale = Locale.getAvailableLocales();
+    /*    Locale[] locale = Locale.getAvailableLocales();
         ArrayList<String> countries = new ArrayList<String>();
         String country;
-        for (Locale loc : locale) {
+        for( Locale loc : locale ){
             country = loc.getDisplayCountry();
-            if (country.length() > 0 && !countries.contains(country)) {
-                countries.add(country);
+            if( country.length() > 0 && !countries.contains(country) ){
+                countries.add( country );
             }
         }
-        Collections.sort(countries, String.CASE_INSENSITIVE_ORDER);
+        //spinner.setOnItemClickListener(myView);*/
 
-        Spinner citizenship = (Spinner) myView.findViewById(R.id.country);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, countries);
-        citizenship.setAdapter(adapter);
+
+        ///////
+
+
         ///////////////
         setDateTimeField();
 
@@ -134,8 +142,6 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
         submit.setVisibility(View.VISIBLE);
     }
     private void setDateTimeField() {
-
-
 
         Calendar newCalendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
@@ -171,7 +177,9 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
                         phone.getText().toString(),
                         txtDob.getText().toString(),
                         nID.getText().toString(),
-                        nat.getText().toString()));
+             //           spinner.getSelectedItem().toString()));
+
+                       nat.getText().toString()));
             }
 
             //------------------------------------------------------------------------------------
@@ -182,37 +190,23 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
                 phone.setText(dbphone);
                 nID.setText(dbnID);
                 txtDob.setText(dbdob);
+
+             //   //spinner
+         //       int item_postion= numofcont-1;// item which you want to click
+         //       spinner.setSelection(item_postion, true);
+         //       View item_view = (View)spinner.getChildAt(item_postion);
+         //       long item_id = spinner.getAdapter().getItemId(item_postion);
+         //       spinner.performItemClick(item_view, item_postion, item_id);
+
+
                 nat.setText(dbnat);
             }
 
-            @SuppressWarnings("deprecation") /*          public void setDate(View view) {
-                //showDialog(999);
-                Toast.makeText(context, "ca", Toast.LENGTH_SHORT)
-                        .show();
-            }
 
 
-            protected Dialog onCreateDialog(int id) {
-                // TODO Auto-generated method stub
-                if (id == 999) {
-                    return new DatePickerDialog(context, myDateListener, year, month, day);
-                }
-                return null;
-            }*/
-
-        /*    private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-                    // TODO Auto-generated method stub
-                    // arg1 = year
-                    // arg2 = month
-                    // arg3 = day
-                    showDate(arg1, arg2 + 1, arg3);
-                }
-            };
 
 
-*/
+
             private void updateData() {
                 //---------------------------------------------------- Update from Firebase
 
@@ -244,5 +238,16 @@ public class ProfileFrag extends Fragment implements View.OnClickListener {
             }
 
 
-        }
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    //    spinner.setSelection(i);
+      //  spinnerPosition=i;
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+}
 
