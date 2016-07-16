@@ -1,11 +1,13 @@
 package enqath.alhussein.enqath;
 
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
@@ -48,7 +50,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
     View myView;
     final String default_country="Saudi Arabia";
 
-    ArrayList<String> countries = new ArrayList<String>();
+    ArrayList<String> countries;
 
     private EditText txtDob;
     static Button submit;
@@ -82,32 +84,27 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
 
 
 
+    @TargetApi(Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.profilefrag, container, false);
         submit = (Button) myView.findViewById(R.id.btnSubmit);
         submit.setOnClickListener(this);
-/////////
-   /*     spinner = (Spinner) myView.findViewById(R.id.country);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, countries);
-        spinner.setAdapter(adapter);
-        Collections.sort(countries, String.CASE_INSENSITIVE_ORDER);
-*/
 
-
-        dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-
-
+        spinner = (Spinner) myView.findViewById(R.id.country);
         fname = (EditText) myView.findViewById(R.id.txt_fname);
         lname = (EditText) myView.findViewById(R.id.txt_lname);
         phone = (EditText) myView.findViewById(R.id.txt_phone);
         nID = (EditText) myView.findViewById(R.id.txt_nID);
         txtDob=(EditText)myView.findViewById(R.id.txtDob);
-        nat=(EditText)myView.findViewById(R.id.txtNat);
+        //nat=(EditText)myView.findViewById(R.id.txtNat);
         txtDob.setOnClickListener(this);
-        //////////////////////////////////////////
-    /*    Locale[] locale = Locale.getAvailableLocales();
-        ArrayList<String> countries = new ArrayList<String>();
+
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
+
+        Locale[] locale = Locale.getAvailableLocales();
+        countries = new ArrayList<String>();
         String country;
         for( Locale loc : locale ){
             country = loc.getDisplayCountry();
@@ -115,13 +112,11 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
                 countries.add( country );
             }
         }
-        //spinner.setOnItemClickListener(myView);*/
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, countries);
+        spinner.setAdapter(adapter);
+        Collections.sort(countries, String.CASE_INSENSITIVE_ORDER);
 
 
-        ///////
-
-
-        ///////////////
         setDateTimeField();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -141,11 +136,13 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
     public static void showEditButtons() {
         submit.setVisibility(View.VISIBLE);
     }
+
     private void setDateTimeField() {
 
         Calendar newCalendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
+            @TargetApi(Build.VERSION_CODES.N)
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
@@ -163,7 +160,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
                         pushUserProfile(); //saves profile to Firebase
                         break;
                     case R.id.txtDob:
-                     datePickerDialog.show();
+                        datePickerDialog.show();
                         break;
                 }
 
@@ -177,9 +174,9 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
                         phone.getText().toString(),
                         txtDob.getText().toString(),
                         nID.getText().toString(),
-             //           spinner.getSelectedItem().toString()));
+                        spinner.getSelectedItem().toString()));
 
-                       nat.getText().toString()));
+                       //nat.getText().toString()));
             }
 
             //------------------------------------------------------------------------------------
@@ -191,20 +188,14 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
                 nID.setText(dbnID);
                 txtDob.setText(dbdob);
 
-             //   //spinner
-         //       int item_postion= numofcont-1;// item which you want to click
-         //       spinner.setSelection(item_postion, true);
-         //       View item_view = (View)spinner.getChildAt(item_postion);
-         //       long item_id = spinner.getAdapter().getItemId(item_postion);
-         //       spinner.performItemClick(item_view, item_postion, item_id);
+                //spinner
+                int item_postion = getIndex(spinner,dbnat);// item which you want to click
+                spinner.setSelection(item_postion, true);
+                View item_view = (View)spinner.getChildAt(item_postion);
+                long item_id = spinner.getAdapter().getItemId(item_postion);
+                spinner.performItemClick(item_view, item_postion, item_id);
 
-
-                nat.setText(dbnat);
             }
-
-
-
-
 
 
             private void updateData() {
@@ -248,6 +239,18 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    private int getIndex(Spinner s1, String prefNameCurGOV) {
+
+        int index = 0;
+
+        for (int i = 0; i < s1.getCount(); i++) {
+            if (s1.getItemAtPosition(i).equals(prefNameCurGOV)) {
+                index = i;
+            }
+        }
+        return index;
     }
 }
 

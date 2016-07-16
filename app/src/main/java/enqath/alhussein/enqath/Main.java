@@ -628,7 +628,7 @@ public class Main extends AppCompatActivity
         if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             // Build the alert dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomDialogTheme);
             builder.setTitle("Location Services Not Active");
             builder.setMessage("Please enable Location Services and GPS");
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

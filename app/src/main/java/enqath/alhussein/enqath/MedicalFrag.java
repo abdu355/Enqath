@@ -2,6 +2,7 @@ package enqath.alhussein.enqath;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -41,12 +42,15 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
 
     DatabaseReference myRef;
 
+    Context context;
+
     @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         if(activity instanceof myFragEventListerner) {
             listener = (myFragEventListerner) activity;
+            context = getActivity();
         } else {
             // Throw an error!
             Log.d("FragmentEvent","Activity not attached to fragment");
