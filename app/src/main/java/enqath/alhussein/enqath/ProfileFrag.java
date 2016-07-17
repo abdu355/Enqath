@@ -176,7 +176,6 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
                         nID.getText().toString(),
                         spinner.getSelectedItem().toString()));
 
-                       //nat.getText().toString()));
             }
 
             //------------------------------------------------------------------------------------

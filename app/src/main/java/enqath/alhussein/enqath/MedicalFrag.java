@@ -25,9 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-/**
- * Created by Abdulwahab on 7/3/2016.
- */
+
 public class MedicalFrag extends Fragment implements View.OnClickListener {
     View myView;
     static Button submit;

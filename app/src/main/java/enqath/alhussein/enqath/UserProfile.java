@@ -1,8 +1,5 @@
 package enqath.alhussein.enqath;
 
-/**
- * Created by Abdulwahab on 7/3/2016.
- */
 
 
 public class UserProfile {

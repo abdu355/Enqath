@@ -5,11 +5,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-/**
- * Created by Abdulwahab on 7/7/2016.
- *
- * This class will be used to store all firebase methods to be accessed from all Activities in the app
- */
 public class FirebaseFunctions {
     UserProfile dbuser;
 
@@ -43,7 +38,6 @@ public class FirebaseFunctions {
         DatabaseReference myRef = database.getReference();
 
         myRef.child("emergencyContacts").child(userid).setValue(phone);
-        //myRef.child("emergencyContacts").push();
 
 
 
@@ -66,9 +60,7 @@ public class FirebaseFunctions {
         myMap.put("currentCondition",params[2]);
         myMap.put("allergies",params[3]);
         myMap.put("bloodType",params[4]);
-        //put all fields required
-        // ...
-        // ...
+
         myRef.child("medID").child(userid).updateChildren(myMap);
     }
 

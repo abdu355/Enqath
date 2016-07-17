@@ -11,9 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-/**
- * Created by Abdulwahab on 7/6/2016.
- */
+
 public class SplashScreen extends Activity {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();

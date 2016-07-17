@@ -8,9 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * Created by Mohammad on 2016-06-21.
- */
 public class Car extends Activity implements View.OnClickListener {
     Button btnMinor, btnSerious,btnMed;
     final String number = "tel:000";

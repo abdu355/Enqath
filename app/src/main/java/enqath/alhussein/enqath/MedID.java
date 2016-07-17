@@ -1,8 +1,6 @@
 package enqath.alhussein.enqath;
 
-/**
- * Created by Abdulwahab on 7/8/2016.
- */
+
 public class MedID {
     public String blood;
     public String allergies;

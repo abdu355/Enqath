@@ -83,7 +83,6 @@ public class Main extends AppCompatActivity
 
     final String number = "tel:000";
     final String[] phoneNo = {"0503987283"};
-    //android.app.FragmentManager fragmentManager = getFragmentManager();
     FragmentTransaction transaction;
 
     //GPS
@@ -155,7 +154,6 @@ public class Main extends AppCompatActivity
         username_nav = (TextView) navHeaderView.findViewById(R.id.username_nav);
         //--------------------------
 
-        //btnEnqath = (Button) findViewById(R.id.btnEnqath);
         layout = (FrameLayout) findViewById(R.id.container);
         userdp_nav = (ImageView) findViewById(R.id.userdp_nav);
 
@@ -203,9 +201,6 @@ public class Main extends AppCompatActivity
         }
         mGoogleApiClient.connect();
 
-//        mLocationRequest = new LocationRequest();
-//        mLocationRequest.setInterval(60000);//1 min interval
-//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
     }
 
@@ -216,13 +211,9 @@ public class Main extends AppCompatActivity
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE) &&
                     ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
 
-                // Show an expanation to the User *asynchronously* -- don't block
-                // this thread waiting for the User's response! After the User
-                // sees the explanation, try again to request the permission.
                 Snackbar snackbar = Snackbar
                         .make(drawer, "Requires multiple permissions to make Incident Reports", Snackbar.LENGTH_LONG)
                         .setAction("Allow", new View.OnClickListener() {
@@ -240,7 +231,6 @@ public class Main extends AppCompatActivity
 
             } else {
 
-                // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
@@ -248,12 +238,7 @@ public class Main extends AppCompatActivity
 
             }
         } else {
-//            Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
-//            Uri callui = Uri.parse(number);
-//            Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
-//            //noinspection MissingPermission
-//            startActivity(callIntent);
-//            sendSMS();
+//
         }
     }
 
@@ -266,27 +251,18 @@ public class Main extends AppCompatActivity
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted, yay! Do the
-                    // calling-related task you need to do.
-//                    sendSMS();
-//                    Toast.makeText(this,"Calling...",Toast.LENGTH_SHORT).show();
-//                    Uri callui = Uri.parse(number);
-//                    Intent callIntent = new Intent(Intent.ACTION_CALL, callui);
-//                    //noinspection MissingPermission
-//                    startActivity(callIntent);
+
 
                 } else {
 
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+
                     Snackbar snackbar1 = Snackbar.make(drawer, "Permission Denied", Snackbar.LENGTH_SHORT);
                     snackbar1.show();
                 }
                 return;
             }
 
-            // other 'case' lines to check for other
-            // permissions this app might request
+
         }
     }
 
@@ -577,10 +553,8 @@ public class Main extends AppCompatActivity
             //location is not null
             Log.d("GPSMAIN-mLastLocation", mLastLocation.getLatitude() + " " + mLastLocation.getLongitude() + " " + mLastLocation.getTime());
         }
-        //startLocationUpdates();
 
         //-------------------------------------------------- GET SINGLE LOCATION UPDATE
-        //getIncidentDetails();
     }
     public void onLocationChanged(Location location) {
         //Log.d("GPSMAIN", "LocationChanged");
@@ -643,33 +617,6 @@ public class Main extends AppCompatActivity
             alertDialog.show();
         }
     }
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        stopLocationUpdates();
-//    }
-//
-//    protected void stopLocationUpdates() {
-//        LocationServices.FusedLocationApi.removeLocationUpdates(
-//                mGoogleApiClient,this);
-//    }
-
-    //    protected void startLocationUpdates() {
-//        Log.d("GPSMAIN", "startLocationUpdates");
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//        }
-//        LocationServices.FusedLocationApi.requestLocationUpdates(
-//                mGoogleApiClient, mLocationRequest, this);
-//
-//    }
 
 
 
