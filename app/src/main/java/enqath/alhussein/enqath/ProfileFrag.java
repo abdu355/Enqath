@@ -52,12 +52,17 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
 
     ArrayList<String> countries;
 
-    private EditText txtDob;
+    private static EditText txtDob;
     static Button submit;
     SimpleDateFormat dateFormat;
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
-    private EditText fname, lname, phone, nID, dob, nat;
+    private static EditText fname;
+    private static EditText lname;
+    private static EditText phone;
+    private static EditText nID;
+    private EditText dob;
+    private EditText nat;
     private Spinner spinner;
     FirebaseUser firebaseUser;
     private Calendar calendar;
@@ -87,7 +92,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.profilefrag, container, false);
+        myView = inflater.inflate(R.layout.profilefragv2, container, false);
         submit = (Button) myView.findViewById(R.id.btnSubmit);
         submit.setOnClickListener(this);
 
@@ -97,6 +102,11 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
         phone = (EditText) myView.findViewById(R.id.txt_phone);
         nID = (EditText) myView.findViewById(R.id.txt_nID);
         txtDob=(EditText)myView.findViewById(R.id.txtDob);
+//        fname.setFocusable(false);
+//        lname.setFocusable(false);
+//        phone.setFocusable(false);
+//        nID.setFocusable(false);
+//        txtDob.setFocusable(false);
         //nat=(EditText)myView.findViewById(R.id.txtNat);
         txtDob.setOnClickListener(this);
 
@@ -135,6 +145,11 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
 
     public static void showEditButtons() {
         submit.setVisibility(View.VISIBLE);
+        fname.setFocusable(true);
+        lname.setFocusable(true);
+        phone.setFocusable(true);
+        nID.setFocusable(true);
+        txtDob.setFocusable(true);
     }
 
     private void setDateTimeField() {
@@ -242,7 +257,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
     }
 
     private int getIndex(Spinner s1, String prefNameCurGOV) {
-
+        //http://stackoverflow.com/questions/8855205/how-set-selection-in-spinner-of-some-string-if-spinner-contains-the-same
         int index = 0;
 
         for (int i = 0; i < s1.getCount(); i++) {

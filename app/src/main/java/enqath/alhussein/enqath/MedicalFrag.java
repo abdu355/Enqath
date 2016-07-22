@@ -34,10 +34,13 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
     public Spinner blood;
-    public EditText allergies;
-    public EditText currentCondition;
-    public EditText extraInfo;
-    public EditText medications;
+    private EditText allergies;
+    private EditText currentCondition;
+    private EditText extraInfo;
+    private EditText medications;
+    private EditText primcontact;
+
+
     FirebaseUser firebaseUser;
 
     DatabaseReference myRef;
@@ -58,7 +61,7 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.medicalfrag,container,false);
+        myView = inflater.inflate(R.layout.medicalfragv2,container,false);
         submit = (Button)myView.findViewById(R.id.btnsubmitmed);
         submit.setOnClickListener(this);
 
@@ -67,6 +70,7 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
         currentCondition=(EditText)myView.findViewById(R.id.txt_currcond);
         extraInfo=(EditText)myView.findViewById(R.id.txt_extra);
         medications=(EditText)myView.findViewById(R.id.txt_med);
+        primcontact=(EditText)myView.findViewById(R.id.primcontact);
 
         String bloodTypes[] = {"A+","A-","AB+","AB-","O+","O-","B+","B-"};
 
@@ -92,6 +96,7 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
     public static void showEditButtons()
     {
         submit.setVisibility(View.VISIBLE);
+
     }
     @Override
     public void onClick(View view) {

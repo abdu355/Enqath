@@ -20,7 +20,9 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/fName"
                 android:id="@+id/textView2"
-                android:paddingRight="15dp" />
+                android:paddingRight="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -45,7 +47,9 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/lName"
                 android:id="@+id/textView12"
-                android:paddingRight="15dp" />
+                android:paddingRight="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -147,7 +151,9 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/phoneNumber"
                 android:id="@+id/textView30"
-                android:paddingRight="15dp" />
+                android:paddingRight="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -172,7 +178,9 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/nationalID"
                 android:id="@+id/textView31"
-                android:paddingRight="15dp" />
+                android:paddingRight="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
             <EditText
                 android:layout_width="254dp"
@@ -189,19 +197,21 @@
             android:paddingTop="5dp" >
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/DOB"
                 android:id="@+id/DOBBBBBBBBB"
                 android:paddingRight="15dp"
                 android:inputType="date"
-                android:layout_weight="1" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
             <EditText
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtDob"
+                android:background="#FFFFFF"
                 android:layout_weight="1" />
 
         </TableRow>
@@ -217,12 +227,16 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/nationality"
                 android:id="@+id/textView33"
-                android:paddingRight="15dp" />
+                android:paddingRight="15dp"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/country" />
+                android:id="@+id/country"
+                android:layout_weight="1" />
 
         </TableRow>
 

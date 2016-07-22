@@ -13,7 +13,9 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Primary Contact"
-            android:id="@+id/textView" />
+            android:id="@+id/textView"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -34,7 +36,9 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Current Condition"
-            android:id="@+id/textView24" />
+            android:id="@+id/textView24"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark" />
 
         <EditText
             android:layout_width="match_parent"
@@ -59,7 +63,9 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Blood Type"
                 android:id="@+id/textView25"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark" />
 
         </LinearLayout>
 
@@ -82,7 +88,9 @@
             android:text="Current Medications"
             android:id="@+id/textView26"
             android:layout_marginTop="60dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark" />
 
         <EditText
             android:layout_width="match_parent"
@@ -102,7 +110,9 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Extra information"
-            android:id="@+id/textView27" />
+            android:id="@+id/textView27"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark" />
 
     </TableRow>
 
@@ -126,7 +136,9 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Allergies"
             android:id="@+id/textView3"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark" />
 
         <EditText
             android:layout_width="match_parent"
