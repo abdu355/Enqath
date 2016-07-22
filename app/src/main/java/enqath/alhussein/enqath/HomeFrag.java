@@ -20,9 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * Created by Abdulwahab on 7/3/2016.
- */
+
 public class HomeFrag extends Fragment implements View.OnClickListener{
     View myView;
     //IncidentDetails GPSLocation;
@@ -41,7 +39,6 @@ public class HomeFrag extends Fragment implements View.OnClickListener{
         if(activity instanceof myFragEventListerner) {
             listener = (myFragEventListerner) activity;
         } else {
-            // Throw an error!
             Log.d("FragmentEvent","Activity not attached to fragment");
         }
     }
@@ -105,42 +102,4 @@ public class HomeFrag extends Fragment implements View.OnClickListener{
         listener.quickEmergency(message,intent);
     }
 
-////    @Override
-////    public void onLocationChanged(Location location) {
-////        GPSLocation.setLat(location.getLatitude());
-////        GPSLocation.setLng(location.getLongitude());
-////      //  GPSLocation.setDate(System.get);
-////
-////    }
-//
-//    public  String getDateCurrentTimeZone(long timestamp) {
-//        try{
-//            Calendar calendar = Calendar.getInstance();
-//            TimeZone tz = TimeZone.getDefault();
-//            calendar.setTimeInMillis(timestamp * 1000);
-//            calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            Date currenTimeZone = (Date) calendar.getTime();
-//            return sdf.format(currenTimeZone);
-//        }catch (Exception e) {
-//        }
-//        return "";
-//    }
-
-
-
-//    @Override
-//    public void onStatusChanged(String s, int i, Bundle bundle) {
-//
-//    }
-//
-//    @Override
-//    public void onProviderEnabled(String s) {
-//
-//    }
-//
-//    @Override
-//    public void onProviderDisabled(String s) {
-//
-//    }
 }

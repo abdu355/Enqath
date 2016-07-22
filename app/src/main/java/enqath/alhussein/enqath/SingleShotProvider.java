@@ -18,9 +18,7 @@ import android.support.v7.app.AlertDialog;
 import java.text.DateFormat;
 import java.util.Date;
 
-/**
- * Created by Abdulwahab on 7/15/2016.
- */
+
 public class SingleShotProvider {
     Context context;
     public SingleShotProvider(Context context) {
@@ -31,9 +29,7 @@ public class SingleShotProvider {
         public void onNewLocationAvailable(IncidentDetails location);
     }
 
-    // calls back to calling thread, note this is for low grain: if you want higher precision, swap the
-    // contents of the else and if. Also be sure to check gps permission/settings are allowed.
-    // call usually takes <10ms
+
     public static void requestSingleUpdate(final Context context, final LocationCallback callback) {
         final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -41,13 +37,7 @@ public class SingleShotProvider {
             Criteria criteria = new Criteria();
             criteria.setAccuracy(Criteria.ACCURACY_FINE);
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+
                 return;
             }
             locationManager.requestSingleUpdate(criteria, new LocationListener() {

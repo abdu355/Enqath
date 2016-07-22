@@ -6,18 +6,12 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Date;
 
-/**
- * Created by Abdulwahab on 7/13/2016.
- */
 
 public class IncidentDetails {
 
 
-   // Location latLng; // changed to location object .. i think it's better
     private float accuracy;
     private double Lat, Lng;
-    //Date date;
-    //long time;
     private String date;
     private String incidentType;
     private String severity;

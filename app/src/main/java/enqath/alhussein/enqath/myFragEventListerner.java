@@ -2,9 +2,7 @@ package enqath.alhussein.enqath;
 
 import android.content.Intent;
 
-/**
- * Created by Abdulwahab on 7/6/2016.
- */
+
 public interface myFragEventListerner {
     //push methods
     public void pushUserProfile(UserProfile userProfile);

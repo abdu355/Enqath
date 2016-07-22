@@ -1,8 +1,6 @@
 package enqath.alhussein.enqath;
 
-/**
- * Created by Mohammad on 7/14/2016.
- */
+
 public class EmergencyContacts {
     String num1;
     String num2;
