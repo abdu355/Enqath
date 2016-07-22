@@ -37,6 +37,8 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.2.0'
     compile 'com.android.support:multidex:1.0.1'
 
+    //external libs
     compile 'org.droidparts:droidparts:2.9.6'
+    compile 'cn.pedant.sweetalert:library:1.3'
 }
 apply plugin: 'com.google.gms.google-services'

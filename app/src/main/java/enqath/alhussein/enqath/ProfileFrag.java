@@ -46,6 +46,8 @@ import org.droidparts.adapter.widget.ArrayAdapter;
 
 import java.util.Calendar;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class ProfileFrag extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener {
     View myView;
     final String default_country="Saudi Arabia";
@@ -168,85 +170,105 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
 
     }
 
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.btnSubmit:
-                        pushUserProfile(); //saves profile to Firebase
-                        break;
-                    case R.id.txtDob:
-                        datePickerDialog.show();
-                        break;
-                }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnSubmit:
+                pushUserProfile(); //saves profile to Firebase
+                break;
+            case R.id.txtDob:
+                datePickerDialog.show();
+                break;
+        }
 
-            }
+    }
 
-            public void pushUserProfile() {
-                // This is how you call method of Activity from Fragment.
-                listener.pushUserProfile(new UserProfile(
-                        fname.getText().toString(),
-                        lname.getText().toString(),
-                        phone.getText().toString(),
-                        txtDob.getText().toString(),
-                        nID.getText().toString(),
-                        spinner.getSelectedItem().toString()));
+    public void pushUserProfile() {
+        new SweetAlertDialog(myView.getContext(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you sure?")
+                .setContentText("Update Profile")
+                .setConfirmText("Yes !")
+                .setCancelText("Cancel")
+                .showCancelButton(true)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog
+                                .setTitleText("Done!")
+                                .setContentText("Your Profile Has Been Updated!")
+                                .setConfirmText("OK")
+                                .setConfirmClickListener(null)
+                                .showCancelButton(false)
+                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                        // This is how you call method of Activity from Fragment.
+                        listener.pushUserProfile(new UserProfile(
+                                fname.getText().toString(),
+                                lname.getText().toString(),
+                                phone.getText().toString(),
+                                txtDob.getText().toString(),
+                                nID.getText().toString(),
+                                spinner.getSelectedItem().toString()));
+                        submit.setVisibility(View.GONE);
+                    }
+                })
+                .show();
 
-            }
+    }
 
-            //------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------
 
-            public void updateUI(String dbfname, String dblname, String dbphone, String dbdob, String dbnID, String dbnat) {
-                fname.setText(dbfname);
-                lname.setText(dblname);
-                phone.setText(dbphone);
-                nID.setText(dbnID);
-                txtDob.setText(dbdob);
+    public void updateUI(String dbfname, String dblname, String dbphone, String dbdob, String dbnID, String dbnat) {
+        fname.setText(dbfname);
+        lname.setText(dblname);
+        phone.setText(dbphone);
+        nID.setText(dbnID);
+        txtDob.setText(dbdob);
 
-                //spinner
-                int item_postion = getIndex(spinner,dbnat);// item which you want to click
-                spinner.setSelection(item_postion, true);
-                View item_view = (View)spinner.getChildAt(item_postion);
-                long item_id = spinner.getAdapter().getItemId(item_postion);
-                spinner.performItemClick(item_view, item_postion, item_id);
+        //spinner
+        int item_postion = getIndex(spinner,dbnat);// item which you want to click
+        spinner.setSelection(item_postion, true);
+        View item_view = (View)spinner.getChildAt(item_postion);
+        long item_id = spinner.getAdapter().getItemId(item_postion);
+        spinner.performItemClick(item_view, item_postion, item_id);
 
-            }
+    }
 
 
-            private void updateData() {
-                //---------------------------------------------------- Update from Firebase
+    private void updateData() {
+        //---------------------------------------------------- Update from Firebase
 
-                listener.showProgress();//change child name
-                myRef.child("profiles").child(firebaseUser.getUid()).addListenerForSingleValueEvent(
-                        new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                // Get userProfile value
-                                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class); //change this
-                                try {
-                                    //What to do with the new data
-                                    updateUI(userProfile.getFname(), userProfile.getLname(), userProfile.getPhone(), userProfile.getDob(), userProfile.getnID(), userProfile.getNat());//change this
-                                } catch (NullPointerException e) {
-                                    e.printStackTrace();
-                                }
-                                // ...
-                                listener.hideProgress();
-                            }
+        listener.showProgress();//change child name
+        myRef.child("profiles").child(firebaseUser.getUid()).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get userProfile value
+                        UserProfile userProfile = dataSnapshot.getValue(UserProfile.class); //change this
+                        try {
+                            //What to do with the new data
+                            updateUI(userProfile.getFname(), userProfile.getLname(), userProfile.getPhone(), userProfile.getDob(), userProfile.getnID(), userProfile.getNat());//change this
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
+                        // ...
+                        listener.hideProgress();
+                    }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Log.d("getProfileDataFunction", "getUser:onCancelled", databaseError.toException());
-                                //What to do on error
-                                listener.hideProgress();
-                            }
-                        });
-                //---------------------------------------------------- Update from Firebase
-            }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.d("getProfileDataFunction", "getUser:onCancelled", databaseError.toException());
+                        //What to do on error
+                        listener.hideProgress();
+                    }
+                });
+        //---------------------------------------------------- Update from Firebase
+    }
 
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-    //    spinner.setSelection(i);
-      //  spinnerPosition=i;
+        //    spinner.setSelection(i);
+        //  spinnerPosition=i;
 
     }
 

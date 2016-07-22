@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 public class MedicalFrag extends Fragment implements View.OnClickListener {
     View myView;
@@ -107,10 +109,30 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
     }
     public void pushMedicalID()
     {
-        // This is how you call method of Activity from Fragment.
-        listener.pushMedicalID(new MedID(blood.getSelectedItem().toString(),
-                allergies.getText().toString(),currentCondition.getText().toString(),
-                extraInfo.getText().toString(),medications.getText().toString()));
+        new SweetAlertDialog(myView.getContext(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you sure?")
+                .setContentText("Update Medical ID")
+                .setConfirmText("Yes !")
+                .setCancelText("Cancel")
+                .showCancelButton(true)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog
+                                .setTitleText("Done!")
+                                .setContentText("Your Medical ID Has Been Updated!")
+                                .setConfirmText("OK")
+                                .setConfirmClickListener(null)
+                                .showCancelButton(false)
+                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                        // This is how you call method of Activity from Fragment.
+                        listener.pushMedicalID(new MedID(blood.getSelectedItem().toString(),
+                                allergies.getText().toString(),currentCondition.getText().toString(),
+                                extraInfo.getText().toString(),medications.getText().toString()));
+                        submit.setVisibility(View.GONE);
+                    }
+                })
+                .show();
     }
     public void updateUI(String dbblood,String dballergies,String dbcurrentcondition,String dbextraInfo,String dbmedications)
     {

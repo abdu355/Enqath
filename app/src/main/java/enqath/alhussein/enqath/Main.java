@@ -56,6 +56,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, myFragEventListerner, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationListener {
     private GoogleApiClient mGoogleApiClient;
@@ -436,10 +438,15 @@ public class Main extends AppCompatActivity
                 .show();
     }
 
+    private void showConfirm()
+    {
+    }
+
     /*<---------------------------------------------/*TODO :: Implement fragment functions here *///--------------------------------------------->
     @Override
     public void pushUserProfile(UserProfile userProfile) //profile fragment
     {
+
         Log.d("Main Activity Event", "updateUser called");
         //push to Firebase
         try {
@@ -466,8 +473,8 @@ public class Main extends AppCompatActivity
             showAlert();
         }
         //confirm
-        Snackbar snackbar = Snackbar.make(drawer, "Your Medical ID has been updated", Snackbar.LENGTH_SHORT);
-        snackbar.show();
+        //Snackbar snackbar = Snackbar.make(drawer, "Your Medical ID has been updated", Snackbar.LENGTH_SHORT);
+        //snackbar.show();
     }
 
     public void pushIncident(IncidentDetails gpsLoc) {

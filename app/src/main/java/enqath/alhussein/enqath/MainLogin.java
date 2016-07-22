@@ -3,6 +3,7 @@ package enqath.alhussein.enqath;
 import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,9 +25,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class MainLogin extends AppCompatActivity {
 
-    private Button skipbtn,email_sign_in_button,email_sign_up_button;
+    private Button skipbtn,email_sign_up_button,email_sign_in_button;
+
     private SignInButton gsign_in_button;
     private EditText useremail,pass;
     private FirebaseAuth mAuth;
@@ -33,6 +38,7 @@ public class MainLogin extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     String TAG = "Firebase Authentication";
     ProgressDialog progress;
+    SweetAlertDialog pDialog;
 
 
 
@@ -102,9 +108,13 @@ public class MainLogin extends AppCompatActivity {
         gsign_in_button=(SignInButton)findViewById(R.id.gsign_in_button);
 
 
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+
+
         email_sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(useremail.getText().length()<=0)
                 {
                     useremail.setError(errorMsg);
@@ -149,8 +159,12 @@ public class MainLogin extends AppCompatActivity {
     }
     private void userSingin(String email, String password)
     {
-        progress = ProgressDialog.show(MainLogin.this, "Logging In",
-            "Almost Done...", true);
+//        progress = ProgressDialog.show(MainLogin.this, "Logging In",
+//            "Almost Done...", true);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#f57f17"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -165,12 +179,14 @@ public class MainLogin extends AppCompatActivity {
                             Toast.makeText(MainLogin.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        progress.dismiss();
+                        //progress.dismiss();
+                        pDialog.dismiss();
                         // ...
                     }
                 });
-        if (errorMsg==null)
-            errorMsg="Field Required";
+        if (errorMsg==null) {
+            errorMsg = "Field Required";
+        }
     }
 
     @Override
