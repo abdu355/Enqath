@@ -150,7 +150,7 @@
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/colorPrimaryDark" />
 
-            <Spinner
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/country"

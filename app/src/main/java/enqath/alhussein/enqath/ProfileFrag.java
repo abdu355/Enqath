@@ -19,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 
 import java.util.Collections;
+
+import android.view.MotionEvent;
 import android.view.View;
 import java.util.AbstractList;
 import android.view.ViewGroup;
@@ -27,7 +29,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import 	java.util.ArrayList;
@@ -41,6 +42,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.toptoche.searchablespinnerlibrary.SearchableListDialog;
 
 import org.droidparts.adapter.widget.ArrayAdapter;
 
@@ -48,7 +50,9 @@ import java.util.Calendar;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class ProfileFrag extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener {
+public class ProfileFrag extends Fragment implements View.OnClickListener,
+        AdapterView.OnItemSelectedListener, View.OnTouchListener,
+        SearchableListDialog.SearchableItem  {
     View myView;
     final String default_country="Saudi Arabia";
 
@@ -65,7 +69,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
     private static EditText nID;
     private EditText dob;
     private EditText nat;
-    private Spinner spinner;
+    private com.toptoche.searchablespinnerlibrary.SearchableSpinner spinner;
     FirebaseUser firebaseUser;
     private Calendar calendar;
     Calendar c = Calendar.getInstance();
@@ -98,7 +102,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
         submit = (Button) myView.findViewById(R.id.btnSubmit);
         submit.setOnClickListener(this);
 
-        spinner = (Spinner) myView.findViewById(R.id.country);
+        spinner = (com.toptoche.searchablespinnerlibrary.SearchableSpinner) myView.findViewById(R.id.country);
         fname = (EditText) myView.findViewById(R.id.txt_fname);
         lname = (EditText) myView.findViewById(R.id.txt_lname);
         phone = (EditText) myView.findViewById(R.id.txt_phone);
@@ -124,7 +128,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
                 countries.add( country );
             }
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, countries);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, countries);
         spinner.setAdapter(adapter);
         Collections.sort(countries, String.CASE_INSENSITIVE_ORDER);
 
@@ -277,7 +281,8 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
 
     }
 
-    private int getIndex(Spinner s1, String prefNameCurGOV) {
+    private int getIndex(com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            s1, String prefNameCurGOV) {
         //http://stackoverflow.com/questions/8855205/how-set-selection-in-spinner-of-some-string-if-spinner-contains-the-same
         int index = 0;
 
@@ -287,6 +292,16 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,Adapte
             }
         }
         return index;
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public void onSearchableItemClicked(Object item, int position) {
+
     }
 }
 
