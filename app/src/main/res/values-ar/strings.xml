@@ -64,4 +64,19 @@
     <string name="abc">مرحبا</string>
     <string name="title_activity_preferences">التفضيلات</string>
     <string name="updateProfile">تحديث الملف الشخصي</string>
+
+
+    <string name="fname">الاسم الاول</string>
+    <string name="lname">اسم العائلة</string>
+    <string name="phone">رقم الهاتف</string>
+    <string name="NationalID">رقم الهوية</string>
+    <string name="Nationality">الجنسية</string>
+    <string name="dob">تاريخ الميلاد</string>
+
+    <string name="currentCondition">الحالة الصحية</string>
+    <string name="meds">الأدوية</string>
+    <string name="allergies">الحساسيات</string>
+    <string name="eInfo">معلومات إضافية</string>
+
+
 </resources>

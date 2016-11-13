@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Enqath</string>
 
-    <string name="hello_world">Hello world!</string>
+
     <string name="action_settings">Settings</string>
     <string name="ar">arabic</string>
 
@@ -113,7 +113,7 @@
     <string name="home">Home</string>
     <string name="save">Save</string>
     <string name="updateProfile">Update</string>
-    <string name="large_text">
+    <string name="aboutt">
       \n\n
         © Enqath 2016 \n\n
 
@@ -166,6 +166,26 @@
         ---------------------------------------------------------\n\n
 
     </string>
+
+
+
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="phone">Phone Number</string>
+    <string name="NationalID">National ID</string>
+    <string name="Nationality">Nationality</string>
+    <string name="dob">Date of Birth</string>
+
+
+    <string name="primaryContact">Primary Contact</string>
+
+    <string name="currentCondition">Current Condition</string>
+    <string name="meds">Medications</string>
+    <string name="allergies">Allergies</string>
+    <string name="eInfo">Extra Information</string>
+
+
+
     <string name="title_activity_preferences">Preferences</string>
     <string name="title_activity_test">test</string>
 </resources>
