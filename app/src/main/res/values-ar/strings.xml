@@ -77,6 +77,8 @@
     <string name="meds">الأدوية</string>
     <string name="allergies">الحساسيات</string>
     <string name="eInfo">معلومات إضافية</string>
+    <string name="aboutt" translatable="false"></string>
+    <string name="primaryContact">الرقم الاساسي</string>
 
 
 </resources>

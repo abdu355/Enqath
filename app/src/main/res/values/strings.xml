@@ -113,7 +113,7 @@
     <string name="home">Home</string>
     <string name="save">Save</string>
     <string name="updateProfile">Update</string>
-    <string name="aboutt">
+    <string name="aboutt" translatable="false">
       \n\n
         © Enqath 2016 \n\n
 
@@ -187,5 +187,6 @@
 
 
     <string name="title_activity_preferences">Preferences</string>
-    <string name="title_activity_test">test</string>
+    <string name="title_activity_test" translatable="false">test</string>
+    <string name="abc">abc</string>
 </resources>
