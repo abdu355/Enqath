@@ -13,7 +13,6 @@
     <string name="error_incorrect_password">كلمة المرور غير صحيحة</string>
     <string name="error_invalid_email">صيغة البريد الاكتروني غير صحيحة</string>
     <string name="error_invalid_password">كلمة مرور قصيرة</string>
-    <string name="hello_world" translatable="false">مرحبا للعالم!</string>
     <string name="navigation_drawer_close">أغلق درج الملاحة</string>
     <string name="navigation_drawer_open">افتح درج الملاحة</string>
     <string name="prompt_email">البريد الالكتروني</string>
@@ -63,4 +62,6 @@
     <string name="preferences">الإعدادات</string>
     <string name="save">حفظ</string>
     <string name="abc">مرحبا</string>
+    <string name="title_activity_preferences">التفضيلات</string>
+    <string name="updateProfile">تحديث الملف الشخصي</string>
 </resources>

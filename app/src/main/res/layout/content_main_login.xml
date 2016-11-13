@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,90 +12,107 @@
     tools:context="enqath.alhussein.enqath.MainLogin"
     tools:showIn="@layout/activity_main_login">
 
-    <LinearLayout
-        android:id="@+id/email_login_form"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <AutoCompleteTextView
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true" />
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_password"
-                android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
 
         </android.support.design.widget.TextInputLayout>
 
-        <Button
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="264dp"
+        android:layout_height="37dp"
+        android:hint="@string/prompt_password"
+        android:imeActionId="@+id/login"
+        android:imeActionLabel="@string/action_sign_in_short"
+        android:imeOptions="actionUnspecified"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:singleLine="true"
+        tools:layout_editor_absoluteY="202dp"
+        tools:layout_editor_absoluteX="46dp" />
+
+    <Button
             android:id="@+id/email_sign_in_button"
-            android:layout_width="200dp"
+            android:layout_width="117dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/action_sign_in"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            tools:layout_editor_absoluteY="350dp"
+            tools:layout_editor_absoluteX="45dp" />
+
         <Button
             android:id="@+id/email_sign_up_button"
-            android:layout_width="200dp"
+            android:layout_width="234dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/action_sign_up"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal" />
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/gsign_in_button"
-            android:layout_width="200dp"
-            android:layout_marginTop="16dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"/>
-        <ImageView
-            android:layout_width="100dp"
+            android:layout_gravity="center_horizontal"
+            tools:layout_editor_absoluteY="406dp"
+            tools:layout_editor_absoluteX="45dp" />
+
+    <ImageView
+            android:layout_width="352dp"
             android:layout_height="100dp"
             android:id="@+id/imageView3"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/fire" />
+            android:src="@mipmap/fire"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="0dp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="336dp"
+            android:layout_height="28dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Enqath"
             android:id="@+id/textView22"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            tools:layout_editor_absoluteY="116dp"
+            tools:layout_editor_absoluteX="8dp"
+            android:textAlignment="center"
+            android:textStyle="normal|bold"
+            android:fontFamily="sans-serif" />
 
         <Button
-            android:layout_width="fill_parent"
+            android:layout_width="88dp"
             android:layout_height="wrap_content"
             android:text="@string/Skip"
             android:id="@+id/skiplogin"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            tools:layout_editor_absoluteY="271dp"
+            tools:layout_editor_absoluteX="252dp" />
 
-    </LinearLayout>
+
+    <AutoCompleteTextView
+        android:id="@+id/email"
+        android:layout_width="264dp"
+        android:layout_height="36dp"
+        android:hint="@string/prompt_email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:singleLine="true"
+        tools:layout_editor_absoluteY="158dp"
+        tools:layout_editor_absoluteX="46dp" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/gsign_in_button"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        tools:layout_editor_absoluteY="350dp"
+        tools:layout_editor_absoluteX="162dp" />
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
