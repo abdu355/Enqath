@@ -25,7 +25,7 @@ public class FirebaseFunctions {
 
         myRef.child("medID").child(userid).setValue(medID);
     }
-    public void pushIncident(IncidentDetails incidentDetails, String userid)
+    public void pushIncident(incidentDetails incidentDetails, String userid)
     {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();

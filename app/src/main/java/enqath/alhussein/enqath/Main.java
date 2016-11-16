@@ -2,7 +2,6 @@ package enqath.alhussein.enqath;
 
 import android.Manifest;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -52,11 +51,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, myFragEventListerner, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationListener {
@@ -477,7 +473,7 @@ public class Main extends AppCompatActivity
         //snackbar.show();
     }
 
-    public void pushIncident(IncidentDetails gpsLoc) {
+    public void pushIncident(incidentDetails gpsLoc) {
         firebaseFunctions.pushIncident(gpsLoc, firebaseUser.getUid());
     }
 
@@ -593,7 +589,7 @@ public class Main extends AppCompatActivity
         SingleShotProvider singleShotProvider = new SingleShotProvider(getApplicationContext());
         singleShotProvider.requestSingleUpdate(getApplicationContext(),
                 new SingleShotProvider.LocationCallback() {
-                    @Override public void onNewLocationAvailable(IncidentDetails location) {
+                    @Override public void onNewLocationAvailable(incidentDetails location) {
                         location.setIncidentType(type);
                         location.setSeverity(severity);
                         pushIncident(location);//push to FB
