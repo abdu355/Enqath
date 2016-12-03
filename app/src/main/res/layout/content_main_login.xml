@@ -93,7 +93,8 @@
             android:layout_height="wrap_content"
             android:text="@string/Skip"
             android:id="@+id/skiplogin"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
 
     </LinearLayout>
 

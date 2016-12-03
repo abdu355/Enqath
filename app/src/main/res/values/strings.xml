@@ -120,9 +120,9 @@
         An application that was made with the intention of making the UAE a better place. \n
         The application aims to ease the incident reporting methods and makes it as accurate as possible.\n\n
 
-        Found a bug?\n Please [help us fix it](opens bug report form).\n\n
+        Found a bug?\n Please help us fix it by sending us feedback (use the mail button on top).\n\n
 
-        By using this application, you agree to our\n [terms and services](opens dialog).\n\n
+        By using this application, you agree to our terms and services.
 
         This app uses the following open-source libraries:\n\n
 
@@ -168,4 +168,9 @@
     </string>
     <string name="title_activity_preferences">Preferences</string>
     <string name="title_activity_test">test</string>
+    <string name="title_activity_user_login">UserLogin</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

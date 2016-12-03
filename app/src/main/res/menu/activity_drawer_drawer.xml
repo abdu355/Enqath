@@ -4,29 +4,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_home_white_24dp"
             android:title="@string/home" />
         <item
             android:id="@+id/nav_profilepage"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_account_circle_white_24dp"
             android:title="@string/secondPage" />
         <item
             android:id="@+id/nav_medicalpage"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_favorite_border_white_24dp"
             android:title="@string/thirdPage" />
     </group>
-
-    <item android:title="@string/communications">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/send" />
-        </menu>
-    </item>
 
 </menu>

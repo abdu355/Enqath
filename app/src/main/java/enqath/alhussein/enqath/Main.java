@@ -438,7 +438,7 @@ public class Main extends AppCompatActivity
     {
     }
 
-    /*<---------------------------------------------/*TODO :: Implement fragment functions here *///--------------------------------------------->
+    /*<---------------------------------------------/*TODO :: Implement fragment functions here (START) *///--------------------------------------------->
     @Override
     public void pushUserProfile(UserProfile userProfile) //profile fragment
     {
@@ -517,12 +517,12 @@ public class Main extends AppCompatActivity
         snackbar1.show();
         startActivity(intent);
     }
-     /*<---------------------------------------------/*TODO :: Implement fragment functions here *///--------------------------------------------->
+     /*<---------------------------------------------/*TODO :: Implement fragment functions here (END) *///--------------------------------------------->
 
 
 
 
-     /*<---------------------------------------------/*TODO :: Implement GPS functions here *///--------------------------------------------->
+     /*<---------------------------------------------/*TODO :: Implement GPS functions here (START) *///--------------------------------------------->
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -623,5 +623,5 @@ public class Main extends AppCompatActivity
 
 
 
-     /*<---------------------------------------------/*TODO :: Implement GPS functions here *///--------------------------------------------->
+     /*<---------------------------------------------/*TODO :: Implement GPS functions here (END) *///--------------------------------------------->
 }
