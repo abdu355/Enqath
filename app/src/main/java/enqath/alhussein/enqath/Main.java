@@ -2,7 +2,6 @@ package enqath.alhussein.enqath;
 
 import android.Manifest;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -52,11 +51,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, myFragEventListerner, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, com.google.android.gms.location.LocationListener {
@@ -163,7 +159,7 @@ public class Main extends AppCompatActivity
         firebaseFunctions = new FirebaseFunctions();
         Firebase.setAndroidContext(this);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
+        if (firebaseUser != null && firebaseUser.getDisplayName()!=null ) {
             // User is signed in
             Snackbar snackbar = Snackbar.make(drawer, "WELCOME " + firebaseUser.getDisplayName(), Snackbar.LENGTH_SHORT);
             snackbar.show();
@@ -174,11 +170,11 @@ public class Main extends AppCompatActivity
 
             if (username_nav.getText().length() <= 0) //if no username or alias yet
             {
-                showdialog();
+                //showdialog();
             }
         } else {
             // No firebaseUser is signed in
-            Toast.makeText(Main.this, "GUEST MODE", Toast.LENGTH_LONG).show();
+            //Toast.makeText(Main.this, "GUEST MODE", Toast.LENGTH_LONG).show();
         }
 
         Toast.makeText(Main.this, Locale.getDefault().getLanguage(), Toast.LENGTH_LONG).show();
@@ -442,7 +438,7 @@ public class Main extends AppCompatActivity
     {
     }
 
-    /*<---------------------------------------------/*TODO :: Implement fragment functions here *///--------------------------------------------->
+    /*<---------------------------------------------/*TODO :: Implement fragment functions here (START) *///--------------------------------------------->
     @Override
     public void pushUserProfile(UserProfile userProfile) //profile fragment
     {
@@ -477,7 +473,7 @@ public class Main extends AppCompatActivity
         //snackbar.show();
     }
 
-    public void pushIncident(IncidentDetails gpsLoc) {
+    public void pushIncident(incidentDetails gpsLoc) {
         firebaseFunctions.pushIncident(gpsLoc, firebaseUser.getUid());
     }
 
@@ -521,12 +517,12 @@ public class Main extends AppCompatActivity
         snackbar1.show();
         startActivity(intent);
     }
-     /*<---------------------------------------------/*TODO :: Implement fragment functions here *///--------------------------------------------->
+     /*<---------------------------------------------/*TODO :: Implement fragment functions here (END) *///--------------------------------------------->
 
 
 
 
-     /*<---------------------------------------------/*TODO :: Implement GPS functions here *///--------------------------------------------->
+     /*<---------------------------------------------/*TODO :: Implement GPS functions here (START) *///--------------------------------------------->
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -593,7 +589,7 @@ public class Main extends AppCompatActivity
         SingleShotProvider singleShotProvider = new SingleShotProvider(getApplicationContext());
         singleShotProvider.requestSingleUpdate(getApplicationContext(),
                 new SingleShotProvider.LocationCallback() {
-                    @Override public void onNewLocationAvailable(IncidentDetails location) {
+                    @Override public void onNewLocationAvailable(incidentDetails location) {
                         location.setIncidentType(type);
                         location.setSeverity(severity);
                         pushIncident(location);//push to FB
@@ -627,5 +623,5 @@ public class Main extends AppCompatActivity
 
 
 
-     /*<---------------------------------------------/*TODO :: Implement GPS functions here *///--------------------------------------------->
+     /*<---------------------------------------------/*TODO :: Implement GPS functions here (END) *///--------------------------------------------->
 }

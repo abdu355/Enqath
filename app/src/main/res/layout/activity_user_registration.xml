@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="enqath.alhussein.enqath.QuickRegistration">
+    tools:context="enqath.alhussein.enqath.UserRegistration">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_quick_registration" />
+    <include layout="@layout/content_user_registration" />
 
 
 </android.support.design.widget.CoordinatorLayout>

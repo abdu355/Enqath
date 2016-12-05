@@ -13,6 +13,7 @@
     <string name="error_incorrect_password">كلمة المرور غير صحيحة</string>
     <string name="error_invalid_email">صيغة البريد الاكتروني غير صحيحة</string>
     <string name="error_invalid_password">كلمة مرور قصيرة</string>
+    <string name="hello_world">مرحبا للعالم!</string>
     <string name="navigation_drawer_close">أغلق درج الملاحة</string>
     <string name="navigation_drawer_open">افتح درج الملاحة</string>
     <string name="prompt_email">البريد الالكتروني</string>
@@ -61,24 +62,4 @@
     <string name="phone5">الهاتف 5:</string>
     <string name="preferences">الإعدادات</string>
     <string name="save">حفظ</string>
-    <string name="abc">مرحبا</string>
-    <string name="title_activity_preferences">التفضيلات</string>
-    <string name="updateProfile">تحديث الملف الشخصي</string>
-
-
-    <string name="fname">الاسم الاول</string>
-    <string name="lname">اسم العائلة</string>
-    <string name="phone">رقم الهاتف</string>
-    <string name="NationalID">رقم الهوية</string>
-    <string name="Nationality">الجنسية</string>
-    <string name="dob">تاريخ الميلاد</string>
-
-    <string name="currentCondition">الحالة الصحية</string>
-    <string name="meds">الأدوية</string>
-    <string name="allergies">الحساسيات</string>
-    <string name="eInfo">معلومات إضافية</string>
-    <string name="aboutt" translatable="false"></string>
-    <string name="primaryContact">الرقم الاساسي</string>
-
-
 </resources>

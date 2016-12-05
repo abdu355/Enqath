@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Date;
 
 
-public class IncidentDetails {
+public class incidentDetails {
 
 
     private float accuracy;
@@ -16,9 +16,9 @@ public class IncidentDetails {
     private String incidentType;
     private String severity;
 
-    public IncidentDetails() {}
+    public incidentDetails() {}
 
-    public IncidentDetails(double lat, double lng, float accuracy, String date, String incidentType, String severity) {
+    public incidentDetails(double lat, double lng, float accuracy, String date, String incidentType, String severity) {
         this.date=date;
         this.Lat=lat;
         this.Lng=lng;

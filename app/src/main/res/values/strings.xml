@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Enqath</string>
 
-
+    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="ar">arabic</string>
 
@@ -113,16 +113,16 @@
     <string name="home">Home</string>
     <string name="save">Save</string>
     <string name="updateProfile">Update</string>
-    <string name="aboutt" translatable="false">
+    <string name="large_text">
       \n\n
         © Enqath 2016 \n\n
 
         An application that was made with the intention of making the UAE a better place. \n
         The application aims to ease the incident reporting methods and makes it as accurate as possible.\n\n
 
-        Found a bug?\n Please [help us fix it](opens bug report form).\n\n
+        Found a bug?\n Please help us fix it by sending us feedback (use the mail button on top).\n\n
 
-        By using this application, you agree to our\n [terms and services](opens dialog).\n\n
+        By using this application, you agree to our terms and services.
 
         This app uses the following open-source libraries:\n\n
 
@@ -165,28 +165,28 @@
         SOFTWARE.\n
         ---------------------------------------------------------\n\n
 
+         <b>SearchableSpinner</b> \n https://github.com/miteshpithadiya/SearchableSpinner \n\n
+        Copyright 2015-2016 Mitesh Pithadiya
+
+         Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.\n
+         ---------------------------------------------------------\n\n
+
     </string>
-
-
-
-    <string name="fname">First Name</string>
-    <string name="lname">Last Name</string>
-    <string name="phone">Phone Number</string>
-    <string name="NationalID">National ID</string>
-    <string name="Nationality">Nationality</string>
-    <string name="dob">Date of Birth</string>
-
-
-    <string name="primaryContact">Primary Contact</string>
-
-    <string name="currentCondition">Current Condition</string>
-    <string name="meds">Medications</string>
-    <string name="allergies">Allergies</string>
-    <string name="eInfo">Extra Information</string>
-
-
-
     <string name="title_activity_preferences">Preferences</string>
-    <string name="title_activity_test" translatable="false">test</string>
-    <string name="abc">abc</string>
+    <string name="title_activity_test">test</string>
+    <string name="title_activity_user_login">UserLogin</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

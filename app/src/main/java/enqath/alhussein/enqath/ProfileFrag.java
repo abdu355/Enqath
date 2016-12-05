@@ -6,9 +6,11 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -69,7 +71,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,
     private static EditText nID;
     private EditText dob;
     private EditText nat;
-    private com.toptoche.searchablespinnerlibrary.SearchableSpinner spinner;
+    private static com.toptoche.searchablespinnerlibrary.SearchableSpinner spinner;
     FirebaseUser firebaseUser;
     private Calendar calendar;
     Calendar c = Calendar.getInstance();
@@ -101,6 +103,11 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,
         myView = inflater.inflate(R.layout.profilefragv2, container, false);
         submit = (Button) myView.findViewById(R.id.btnSubmit);
         submit.setOnClickListener(this);
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("first_time", false);
+        editor.commit();
 
         spinner = (com.toptoche.searchablespinnerlibrary.SearchableSpinner) myView.findViewById(R.id.country);
         fname = (EditText) myView.findViewById(R.id.txt_fname);
@@ -144,7 +151,7 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,
             Toast.makeText(getContext(), "User Error . Are you logged In ?", Toast.LENGTH_SHORT).show();
             listener.hideProgress();
         }
-
+        spinner.setEnabled(false);
         return myView;
     }
 
@@ -154,8 +161,13 @@ public class ProfileFrag extends Fragment implements View.OnClickListener,
         fname.setFocusable(true);
         lname.setFocusable(true);
         phone.setFocusable(true);
-        nID.setFocusable(true);
-        txtDob.setFocusable(true);
+        fname.setEnabled(true);
+        lname.setEnabled(true);
+        phone.setEnabled(true);
+        spinner.setEnabled(true);
+
+        //nID.setFocusable(true);
+        //txtDob.setFocusable(true);
     }
 
     private void setDateTimeField() {
