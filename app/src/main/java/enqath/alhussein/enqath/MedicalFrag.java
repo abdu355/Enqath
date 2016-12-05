@@ -3,7 +3,9 @@ package enqath.alhussein.enqath;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -33,12 +35,12 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
     static Button submit;
     protected AppCompatActivity mActivity;
     private myFragEventListerner listener;
-    public Spinner blood;
-    private EditText allergies;
-    private EditText currentCondition;
-    private EditText extraInfo;
-    private EditText medications;
-    private EditText primcontact;
+    public static Spinner blood;
+    private static EditText allergies;
+    private static EditText currentCondition;
+    private static EditText extraInfo;
+    private static EditText medications;
+    private static EditText primcontact;
 
 
     FirebaseUser firebaseUser;
@@ -64,6 +66,11 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
         myView = inflater.inflate(R.layout.medicalfragv2,container,false);
         submit = (Button)myView.findViewById(R.id.btnsubmitmed);
         submit.setOnClickListener(this);
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("first_time", false);
+        editor.commit();
 
         blood=(Spinner)myView.findViewById(R.id.spinner_blood);
         allergies=(EditText)myView.findViewById(R.id.txt_allerg);
@@ -91,11 +98,22 @@ public class MedicalFrag extends Fragment implements View.OnClickListener {
             listener.hideProgress();
         }
 
+        blood.setEnabled(false);
         return myView;
     }
     public static void showEditButtons()
     {
+        blood.setEnabled(true);
+        allergies.setEnabled(true);
+        currentCondition.setEnabled(true);
+        extraInfo.setEnabled(true);
+        medications.setEnabled(true);
+        primcontact.setEnabled(true);
+
+
+
         submit.setVisibility(View.VISIBLE);
+
 
     }
     @Override

@@ -2,8 +2,10 @@ package enqath.alhussein.enqath;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -73,6 +75,12 @@ public class MainLogin extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+
+                    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putBoolean("first_time", false);
+                    editor.commit();
+
                     startActivity(new Intent(MainLogin.this, Main.class));
                 } else {
                     // User is signed out

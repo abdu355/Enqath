@@ -1,8 +1,10 @@
 package enqath.alhussein.enqath;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
@@ -32,6 +34,11 @@ public class About extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("first_time", false);
+        editor.commit();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

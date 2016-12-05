@@ -159,7 +159,7 @@ public class Main extends AppCompatActivity
         firebaseFunctions = new FirebaseFunctions();
         Firebase.setAndroidContext(this);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
+        if (firebaseUser != null && firebaseUser.getDisplayName()!=null ) {
             // User is signed in
             Snackbar snackbar = Snackbar.make(drawer, "WELCOME " + firebaseUser.getDisplayName(), Snackbar.LENGTH_SHORT);
             snackbar.show();
@@ -170,11 +170,11 @@ public class Main extends AppCompatActivity
 
             if (username_nav.getText().length() <= 0) //if no username or alias yet
             {
-                showdialog();
+                //showdialog();
             }
         } else {
             // No firebaseUser is signed in
-            Toast.makeText(Main.this, "GUEST MODE", Toast.LENGTH_LONG).show();
+            //Toast.makeText(Main.this, "GUEST MODE", Toast.LENGTH_LONG).show();
         }
 
         Toast.makeText(Main.this, Locale.getDefault().getLanguage(), Toast.LENGTH_LONG).show();

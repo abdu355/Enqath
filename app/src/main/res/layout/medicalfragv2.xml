@@ -36,7 +36,8 @@
                 android:hint="Emergency Contact"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:enabled="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_currcond"
                 android:layout_gravity="right"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:enabled="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +86,8 @@
                 android:layout_height="wrap_content"
                 android:hint="seperate with commas"
                 android:id="@+id/txt_med"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:enabled="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -109,7 +112,8 @@
                 android:id="@+id/txt_allerg"
                 android:layout_gravity="right"
                 android:hint="seperate with commas"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:enabled="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -133,7 +137,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_extra"
                 android:layout_gravity="right"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:enabled="false" />
         </LinearLayout>
 
         <LinearLayout

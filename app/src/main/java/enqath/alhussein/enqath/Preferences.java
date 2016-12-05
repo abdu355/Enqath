@@ -1,9 +1,11 @@
 package enqath.alhussein.enqath;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -59,6 +61,10 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("first_time", false);
+        editor.commit();
 
         progressBar = (ProgressBar) findViewById(R.id.progress_spinner);
 

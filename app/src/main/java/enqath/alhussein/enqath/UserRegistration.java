@@ -3,12 +3,17 @@ package enqath.alhussein.enqath;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,7 +47,9 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
     EditText emailreg, passreg;
     ProgressDialog progress;
 
+    FirebaseFunctions firebaseFunctions;
 
+    private EditText txtAlias;
 
     //profile
     ArrayList<String> countries;
@@ -56,8 +64,15 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
 
     //medical id
     public Spinner blood;
+    private EditText allergies;
+    private EditText currentCondition;
+    private EditText extraInfo;
+    private EditText medications;
+    private EditText primcontact;
 
 
+
+    @TargetApi(Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +91,11 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
         phone = (EditText) findViewById(R.id.txt_phone);
         nID = (EditText) findViewById(R.id.txt_nID);
         txtDob=(EditText)findViewById(R.id.txtDob);
+        txtAlias = (EditText)findViewById(R.id.txtAlias);
+
         txtDob.setOnClickListener(this);
         txtDob.setOnFocusChangeListener(this);
+
         dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
         spinner = (com.toptoche.searchablespinnerlibrary.SearchableSpinner)findViewById(R.id.country);
@@ -90,7 +108,7 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
                 countries.add( country );
             }
         }
-        org.droidparts.adapter.widget.ArrayAdapter<String> adapter = new org.droidparts.adapter.widget.ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, countries);
+        org.droidparts.adapter.widget.ArrayAdapter<String> adapter = new org.droidparts.adapter.widget.ArrayAdapter<String>(getApplicationContext(), R.xml.spinner_item, countries);
         spinner.setAdapter(adapter);
         Collections.sort(countries, String.CASE_INSENSITIVE_ORDER);
         setDateTimeField();
@@ -107,6 +125,11 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
         blood.setAdapter(spinnerArrayAdapter);
 
+        allergies=(EditText)findViewById(R.id.txt_allerg);
+        currentCondition=(EditText)findViewById(R.id.txt_currcond);
+        extraInfo=(EditText)findViewById(R.id.txt_extra);
+        medications=(EditText)findViewById(R.id.txt_med);
+        primcontact=(EditText)findViewById(R.id.primcontact);
         //---------------------------medID
 
         email_sign_up_button = (Button)findViewById(R.id.email_sign_up_button);
@@ -114,9 +137,24 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
             @Override
             public void onClick(View view) {
 
-                Usersignup(emailreg.getText().toString(),passreg.getText().toString());
+                if(validate(new EditText[]{fname, lname, nID,txtDob,txtAlias,phone})) {
+                    Usersignup(emailreg.getText().toString(), passreg.getText().toString());
+                }
+                else
+                {
+                    fname.setError("Fields Required");
+                    lname.setError("Fields Required");
+                    nID.setError("Fields Required");
+                    txtAlias.setError("Fields Required");
+                    txtDob.setError("Fields Required");
+                    phone.setError("Fields Required");
+
+                }
             }
         });
+
+        firebaseFunctions = new FirebaseFunctions();
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -125,15 +163,28 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    startActivity(new Intent(UserRegistration.this,Main.class));
                     //TODO hand rest of information here (medical and profile info)
                     //profile
+                    pushUserProfile(new UserProfile(
+                            fname.getText().toString(),
+                            lname.getText().toString(),
+                            phone.getText().toString(),
+                            txtDob.getText().toString(),
+                            nID.getText().toString(),
+                            spinner.getSelectedItem().toString()),user);
+                    //medID - push
+                    pushMedicalID(new MedID(blood.getSelectedItem().toString(),
+                            allergies.getText().toString(),currentCondition.getText().toString(),
+                            extraInfo.getText().toString(),medications.getText().toString()),user);
 
+                    setAlias(txtAlias.getText().toString(),user);
 
+                    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putBoolean("first_time", true);
+                    editor.commit();
 
-                    //medID
-
-
+                    startActivity(new Intent(UserRegistration.this,Main.class));
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -142,6 +193,15 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
             }
         };
         // ...
+    }
+    private boolean validate(EditText[] fields){
+        for(int i=0; i<fields.length; i++){
+            EditText currentField=fields[i];
+            if(currentField.getText().toString().length()<=0){
+                return false;
+            }
+        }
+        return true;
     }
     @Override
     public void onStart() {
@@ -200,6 +260,7 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
         datePickerDialog = new DatePickerDialog(UserRegistration.this, new DatePickerDialog.OnDateSetListener() {
 
 
+            @TargetApi(Build.VERSION_CODES.N)
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
@@ -228,5 +289,48 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
                     datePickerDialog.show();
                 break;
         }
+    }
+    public void pushMedicalID(MedID medID, FirebaseUser firebaseUser)//medical ID fragment
+    {
+        Log.d("UserReg Activity Event", "pushMedicalID called");
+        //push to Firebase
+        //REFERENCE ONLY: String blood, String allergies, String currentCondition, String extraInfo, String medications
+        try {
+            firebaseFunctions.pushMedID(medID, firebaseUser.getUid());
+        } catch (NullPointerException e) {
+            showAlert();
+        }
+          }
+    public void pushUserProfile(UserProfile userProfile, FirebaseUser firebaseUser) //profile fragment
+    {
+
+        Log.d("UserReg Activity Event", "updateUser called");
+        //push to Firebase
+        try {
+            firebaseFunctions.pushProfileData(userProfile, firebaseUser.getUid());
+            //REFERENCE ONLY: String fname, String lname, String phone, String dob, String nID, String nat
+        } catch (NullPointerException e) {
+            showAlert();
+        }
+    }
+    private void showAlert() {
+
+    }
+
+    private void setAlias(String userdisplayname, FirebaseUser firebaseUser )
+    {
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(userdisplayname)
+                .build();
+
+        firebaseUser.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("Firebase Profile", "User profile updated.");
+                        }
+                    }
+                });
     }
 }

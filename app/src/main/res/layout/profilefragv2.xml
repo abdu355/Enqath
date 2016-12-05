@@ -34,7 +34,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_fname"
                 android:layout_gravity="right"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:enabled="false" />
 
         </LinearLayout>
 
@@ -59,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_lname"
                 android:layout_gravity="right"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:enabled="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -83,7 +85,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_phone"
                 android:layout_marginRight="10dp"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:enabled="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -106,8 +109,10 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_nID"
+                android:maxLength="15"
                 android:layout_gravity="right"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:enabled="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -131,7 +136,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtDob"
                 android:layout_gravity="right"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:enabled="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -156,7 +162,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/country"
                 android:layout_gravity="center|right"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:focusable="false" />
 
         </LinearLayout>
 
