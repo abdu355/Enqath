@@ -105,7 +105,31 @@
     <string name="phone5">Phone 5:</string>
     <string name="emergencyContacts">Your emergency contacts will be notified by SMS in case of an emergency or incident report</string>
 
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="phone">Phone Number</string>
+    <string name="NationalID">National ID</string>
+    <string name="Nationality">Nationality</string>
+    <string name="dob">Date of Birth</string>
 
+
+    <string name="primaryContact">Primary Contact</string>
+
+    <string name="currentCondition">Current Condition</string>
+    <string name="meds">Medications</string>
+    <string name="allergies">Allergies</string>
+    <string name="eInfo">Extra Information</string>
+
+
+
+    <string name="tooltip_title1">Extra Information</string>
+    <string name="tooltip_title2">Extra Information</string>
+    <string name="tooltip_desc1">Extra Information</string>
+    <string name="tooltip_desc2">Extra Information</string>
+    <string name="userprofiletitle">User Profile</string>
+    <string name="apptitle">Enqath</string>
+    <string name="medidtitle">Medical ID</string>
+    <string name="alias">Alias/Display Name</string>
     <string name="send">Send</string>
     <string name="share">Share</string>
     <string name="thirdPage">Medical ID</string>
@@ -113,7 +137,14 @@
     <string name="home">Home</string>
     <string name="save">Save</string>
     <string name="updateProfile">Update</string>
+
+    <string name="title_activity_preferences">Emergency Contacts</string>
+    <string name="title_activity_test">test</string>
+    <string name="title_activity_user_login">UserLogin</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
     <string name="large_text">
+
       \n\n
         © Enqath 2016 \n\n
 
@@ -205,40 +236,13 @@ SOFTWARE.
             ---------------------------------------------------------\n\n
 
     </string>
-    <string name="title_activity_preferences">Emergency Contacts</string>
-    <string name="title_activity_test">test</string>
-    <string name="title_activity_user_login">UserLogin</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-    <string name="fname">First Name</string>
-    <string name="lname">Last Name</string>
-    <string name="phone">Phone Number</string>
-    <string name="NationalID">National ID</string>
-    <string name="Nationality">Nationality</string>
-    <string name="dob">Date of Birth</string>
 
-
-    <string name="primaryContact">Primary Contact</string>
-
-    <string name="currentCondition">Current Condition</string>
-    <string name="meds">Medications</string>
-    <string name="allergies">Allergies</string>
-    <string name="eInfo">Extra Information</string>
-
-    <string name="Alias">Alias/Display Name</string>
-
-    <string name="tooltip_title1">Extra Information</string>
-    <string name="tooltip_title2">Extra Information</string>
-    <string name="tooltip_desc1">Extra Information</string>
-    <string name="tooltip_desc2">Extra Information</string>
-    <string name="extrainfo">Extra Info.</string>
-    <string name="userprofiletitle">User Profile</string>
-    <string name="apptitle">Enqath</string>
-    <string name="medidtitle">Medical ID</string>
 
 
 </resources>

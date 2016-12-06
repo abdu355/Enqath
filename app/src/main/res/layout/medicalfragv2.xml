@@ -27,7 +27,8 @@
                 android:id="@+id/textView11"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:layout_width="200dp"
@@ -54,7 +55,8 @@
                 android:id="@+id/textView20"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:layout_width="200dp"
@@ -79,7 +81,8 @@
                 android:id="@+id/textView21"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:layout_width="200dp"
@@ -104,7 +107,8 @@
                 android:id="@+id/textView23"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:layout_width="200dp"
@@ -130,7 +134,8 @@
                 android:id="@+id/textView32"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:layout_width="200dp"
@@ -156,7 +161,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <Spinner
                 android:layout_width="200dp"

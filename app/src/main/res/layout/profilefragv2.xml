@@ -27,7 +27,8 @@
                 android:id="@+id/textView4"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:layout_width="200dp"
@@ -53,7 +54,8 @@
                 android:id="@+id/textView5"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:layout_width="200dp"
@@ -78,7 +80,8 @@
                 android:id="@+id/textView6"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:layout_width="200dp"
@@ -103,7 +106,8 @@
                 android:id="@+id/textView7"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:layout_width="200dp"
@@ -129,7 +133,8 @@
                 android:id="@+id/textView8"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:layout_width="200dp"
@@ -155,7 +160,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="10dp" />
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:layout_width="200dp"

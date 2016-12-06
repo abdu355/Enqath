@@ -90,7 +90,8 @@
                         android:id="@+id/textView4"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginRight="10dp" />
 
                     <EditText
                         android:layout_width="200dp"
@@ -112,11 +113,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/lname"
                         android:id="@+id/textView5"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="@string/lName"
+                        android:layout_marginRight="10dp" />
 
                     <EditText
                         android:layout_width="200dp"
@@ -137,11 +139,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/phone"
                         android:id="@+id/textView6"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="@string/phoneNumber"
+                        android:layout_marginRight="10dp" />
 
                     <EditText
                         android:layout_width="200dp"
@@ -166,7 +169,8 @@
                         android:id="@+id/textView7"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginRight="10dp" />
 
                     <EditText
                         android:layout_width="200dp"
@@ -189,11 +193,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/dob"
                         android:id="@+id/textView8"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="@string/DOB"
+                        android:layout_marginRight="10dp" />
 
                     <EditText
                         android:layout_width="200dp"
@@ -219,7 +224,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginRight="10dp" />
 
                     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:layout_width="200dp"
@@ -241,11 +247,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/Alias"
                         android:id="@+id/textView12"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="@string/alias"
+                        android:layout_marginRight="10dp" />
 
                     <EditText
                         android:layout_width="200dp"
@@ -283,7 +290,8 @@
                         android:id="@+id/textView11"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginRight="10dp" />
 
                     <EditText
                         android:layout_width="200dp"
@@ -310,7 +318,8 @@
                         android:id="@+id/textView20"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginRight="10dp" />
 
                     <EditText
                         android:layout_width="200dp"
@@ -335,7 +344,9 @@
                         android:id="@+id/textView21"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginRight="10dp"
+                        android:textSize="17sp" />
 
                     <EditText
                         android:layout_width="200dp"
@@ -361,7 +372,8 @@
                         android:id="@+id/textView23"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginRight="10dp" />
 
                     <EditText
                         android:layout_width="200dp"
@@ -372,15 +384,6 @@
                         android:layout_marginRight="10dp"
                         android:maxLines="1"
                         android:singleLine="true" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:layout_marginLeft="5dp">
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -399,7 +402,8 @@
                         android:layout_gravity="center"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginRight="10dp" />
 
                     <Spinner
                         android:layout_width="200dp"
@@ -420,17 +424,18 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical" >
+                        android:orientation="vertical"
+                        android:layout_marginRight="10dp">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/extrainfo"
+                            android:text="@string/eInfo"
                             android:id="@+id/textView32"
                             android:layout_weight="0.5"
-                            android:layout_marginLeft="10dp"
-                            android:textColor="@color/colorPrimaryDark" />
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_marginLeft="10dp" />
 
                         <EditText
                             android:layout_width="match_parent"

@@ -121,7 +121,7 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
 
         // Application of the Array to the Spinner
         blood=(Spinner)findViewById(R.id.spinner_blood);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_item, bloodTypes);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item, bloodTypes);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
         blood.setAdapter(spinnerArrayAdapter);
 
