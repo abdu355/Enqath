@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">انقاذ</string>
-    <string name="action_settings">الاعدادات</string>
+    <string name="action_settings">ارقام الطوارئ</string>
     <string name="ar">العربية</string>
     <string name="about">عن التطبيق</string>
     <string name="action_example">مثال حركة</string>
@@ -17,7 +17,7 @@
     <string name="navigation_drawer_close">أغلق درج الملاحة</string>
     <string name="navigation_drawer_open">افتح درج الملاحة</string>
     <string name="prompt_email">البريد الالكتروني</string>
-    <string name="prompt_password">كلمة المرور</string>
+    <string name="prompt_password">كلمة المرور(6 رموز على الاقل) </string>
     <string name="title_activity_about">عن التطبيق</string>
     <string name="title_activity_drawer">إنقاذ</string>
     <string name="title_activity_login">إنقاذ</string>
@@ -36,7 +36,7 @@
     <string name="Skip">تخطي (للمبرمجين فقط)ا</string>
     <string name="errorMsg">خانة مطلوبة</string>
     <string name="logout">تسجيل الخروج</string>
-    <string name="settings">الإعدادات</string>
+    <string name="settings">ارقام الطوارئ</string>
     <string name="DOB">تاريخ الميلاد</string>
     <string name="bloodType">فصيلة الدم</string>
     <string name="confirmPass">تأكيد كلمة المرور</string>
@@ -50,11 +50,11 @@
     <string name="signUp">التسجيل</string>
     <string name="home">الرئيسية</string>
     <string name="send">أرسل</string>
-    <string name="secondPage">الصفحة الثانية</string>
+    <string name="secondPage">الملف الشخصي</string>
     <string name="share">مشاركة</string>
-    <string name="thirdPage">الصفحة الثالثة</string>
+    <string name="thirdPage">الملف الطبي </string>
     <string name="communications">التواصل</string>
-    <string name="emergencyContacts">عدد هواتف الطوارئ</string>
+    <string name="emergencyContacts"> سيتم ابلاغ هواتف الطوارئ عن طريق الرسائل النصية في حال وقوع حادث</string>
     <string name="phone1">الهاتف 1:</string>
     <string name="phone2">الهاتف 2:</string>
     <string name="phone3">الهاتف 3:</string>
@@ -62,4 +62,125 @@
     <string name="phone5">الهاتف 5:</string>
     <string name="preferences">الإعدادات</string>
     <string name="save">حفظ</string>
+
+
+    <string name="title_activity_preferences">التفضيلات</string>
+    <string name="updateProfile">تحديث الملف الشخصي</string>
+
+
+    <string name="fname">الاسم الاول</string>
+    <string name="lname">اسم العائلة</string>
+    <string name="phone">رقم الهاتف</string>
+    <string name="NationalID">رقم الهوية</string>
+    <string name="Nationality">الجنسية</string>
+
+    <string name="Alias">الاسم المستعار</string>
+
+
+    <string name="dob">تاريخ الميلاد</string>
+
+    <string name="currentCondition">الحالة الصحية</string>
+    <string name="meds">الأدوية</string>
+    <string name="allergies">الحساسيات</string>
+    <string name="eInfo">معلومات إضافية</string>
+    <string name="primaryContact">الرقم الاساسي</string>
+
+    <string name="large_text">
+      \n\n
+        © Enqath 2016 \n\n
+
+        An application that was made with the intention of making the UAE a better place. \n
+        The application aims to ease the incident reporting methods and makes it as accurate as possible.\n\n
+
+        Found a bug?\n Please help us fix it by sending us feedback (use the mail button on top).\n\n
+
+        By using this application, you agree to our terms and services.
+
+        This app uses the following open-source libraries:\n\n
+
+       <b>DroidParts</b> \n (https://github.com/yanchenko/droidparts/tree/develop)\n\n
+        ---------------------------------------------------------\n
+        Copyright 2016 Alex Yanchenko\n
+        Licensed under the Apache License, Version 2.0 (the "License");\n
+        ou may not use this file except in compliance with the License.\n
+        You may obtain a copy of the License at\n
+        http://www.apache.org/licenses/LICENSE-2.0\n
+        Unless required by applicable law or agreed to in writing, software\n
+        distributed under the License is distributed on an "AS IS" BASIS,\n
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n
+        See the License for the specific language governing permissions and\n
+        limitations under the License.\n
+        ---------------------------------------------------------\n\n
+
+        <b>Sweet Alert Dialog</b> \n https://github.com/pedant/sweet-alert-dialog \n\n
+        ---------------------------------------------------------\n
+        The MIT License (MIT)\n\n
+
+        Copyright © 2014 Pedant(http://pedant.cn)\n\n
+
+        Permission is hereby granted, free of charge, to any person obtaining a copy\n
+        of this software and associated documentation files (the "Software"), to deal\n
+        in the Software without restriction, including without limitation the rights\n
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n
+        copies of the Software, and to permit persons to whom the Software is\n
+        furnished to do so, subject to the following conditions:\n
+
+        The above copyright notice and this permission notice shall be included in all\n
+        copies or substantial portions of the Software.\n\n
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n
+        SOFTWARE.\n
+        ---------------------------------------------------------\n\n
+
+         <b>SearchableSpinner</b> \n https://github.com/miteshpithadiya/SearchableSpinner \n\n
+        Copyright 2015-2016 Mitesh Pithadiya
+
+         Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.\n
+         ---------------------------------------------------------\n\n
+        <b>TourGuide</b> \n https://github.com/miteshpithadiya/SearchableSpinner \n\n
+        The MIT License (MIT)
+
+    Copyright © 2016 Tan Jun Rong
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+            ---------------------------------------------------------\n\n
+
+    </string>
+
+    <string name="extrainfo">Extra Info.</string>
+    <string name="userprofiletitle">الملف الشخصي</string>
+    <string name="apptitle">إنقاذ</string>
+    <string name="medidtitle">الملف الطبي</string>
+
 </resources>

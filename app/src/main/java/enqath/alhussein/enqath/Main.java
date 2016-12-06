@@ -315,7 +315,7 @@ public class Main extends AppCompatActivity
             transaction.addToBackStack(null);
             transaction.commit();
             //FAB
-            collapsingToolbarLayout.setTitle("Enqath");
+            collapsingToolbarLayout.setTitle(getApplicationContext().getString(R.string.apptitle));
             fab.setImageResource(R.drawable.ic_phone_white_48dp); //call FAB
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -332,7 +332,7 @@ public class Main extends AppCompatActivity
             transaction.addToBackStack(null);
             transaction.commit();
             //FAB
-            collapsingToolbarLayout.setTitle("User Profile");//change appbar title
+            collapsingToolbarLayout.setTitle(getApplicationContext().getString(R.string.userprofiletitle));//change appbar title
             fab.setImageResource(R.drawable.ic_mode_edit_white_48dp); //call FAB
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -348,7 +348,7 @@ public class Main extends AppCompatActivity
             transaction.addToBackStack(null);
             transaction.commit();
             //FAB
-            collapsingToolbarLayout.setTitle("Medical ID"); //change appbar title
+            collapsingToolbarLayout.setTitle(getApplicationContext().getString(R.string.medidtitle)); //change appbar title
             fab.setImageResource(R.drawable.ic_mode_edit_white_48dp); //call FAB
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override

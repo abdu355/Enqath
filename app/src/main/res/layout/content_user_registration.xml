@@ -79,13 +79,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:layout_marginTop="50dp">
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="First Name"
+                        android:text="@string/fName"
                         android:id="@+id/textView4"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
@@ -104,13 +105,14 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal" >
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Last Name"
+                        android:text="@string/lname"
                         android:id="@+id/textView5"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
@@ -128,13 +130,14 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal" >
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Phone/Mobile"
+                        android:text="@string/phone"
                         android:id="@+id/textView6"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
@@ -152,13 +155,14 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal" >
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="National ID"
+                        android:text="@string/nationalID"
                         android:id="@+id/textView7"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
@@ -178,13 +182,14 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal" >
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Date of Birth"
+                        android:text="@string/dob"
                         android:id="@+id/textView8"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
@@ -202,13 +207,14 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal">
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Nationality"
+                        android:text="@string/nationality"
                         android:id="@+id/textView10"
                         android:layout_gravity="center"
                         android:layout_weight="0.5"
@@ -228,14 +234,15 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal" >
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Alias/Display Name"
-                        android:id="@+id/textView8"
+                        android:text="@string/Alias"
+                        android:id="@+id/textView12"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
                         android:textColor="@color/colorPrimaryDark" />
@@ -265,13 +272,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:layout_marginTop="50dp" >
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Primary Contact"
+                        android:text="@string/primaryContact"
                         android:id="@+id/textView11"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
@@ -291,13 +299,14 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal" >
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Current Condition"
+                        android:text="@string/currentCondition"
                         android:id="@+id/textView20"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
@@ -315,13 +324,14 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal" >
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Medications"
+                        android:text="@string/meds"
                         android:id="@+id/textView21"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
@@ -340,13 +350,14 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal" >
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Allergies"
+                        android:text="@string/allergies"
                         android:id="@+id/textView23"
                         android:layout_weight="0.5"
                         android:layout_marginLeft="10dp"
@@ -367,21 +378,23 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal" >
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="5dp">
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     android:gravity="center_vertical|center_horizontal"
-                    android:layout_height="30dp">
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Blood Type"
+                        android:text="@string/bloodType"
                         android:id="@+id/textView35"
                         android:layout_gravity="center"
                         android:layout_weight="0.5"
@@ -401,7 +414,8 @@
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scrollIndicators="right">
+                    android:scrollIndicators="right"
+                    android:layout_marginLeft="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -412,7 +426,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Extra Info."
+                            android:text="@string/extrainfo"
                             android:id="@+id/textView32"
                             android:layout_weight="0.5"
                             android:layout_marginLeft="10dp"

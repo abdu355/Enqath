@@ -37,6 +37,16 @@
             android:typeface="serif"
             android:layout_gravity="center"
             android:layout_marginTop="50dp" />
+
+        <TextView
+            android:text="إنقاذ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:textAlignment="center"
+            android:textSize="50sp"
+            android:textColor="#ffffff"
+            android:layout_marginTop="450dp" />
     </FrameLayout>
 
 

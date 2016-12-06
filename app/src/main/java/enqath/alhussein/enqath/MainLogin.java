@@ -178,6 +178,7 @@ public class MainLogin extends AppCompatActivity {
                         // If sign in fails, display a message to the firebaseUser. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in firebaseUser can be handled in the listener.
+
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
                             Toast.makeText(MainLogin.this, "Authentication failed.",

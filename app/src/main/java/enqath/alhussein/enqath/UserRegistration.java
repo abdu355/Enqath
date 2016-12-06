@@ -121,7 +121,7 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
 
         // Application of the Array to the Spinner
         blood=(Spinner)findViewById(R.id.spinner_blood);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item, bloodTypes);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_item, bloodTypes);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
         blood.setAdapter(spinnerArrayAdapter);
 
@@ -137,7 +137,12 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
             @Override
             public void onClick(View view) {
 
-                if(validate(new EditText[]{fname, lname, nID,txtDob,txtAlias,phone})) {
+                if(passreg.getText().toString().length()<6)
+                {
+                    passreg.setError("Must be at least 6 characters");
+                }
+
+                if(validate(new EditText[]{emailreg,passreg,fname, lname, nID,txtDob,txtAlias,phone})) {
                     Usersignup(emailreg.getText().toString(), passreg.getText().toString());
                 }
                 else
@@ -231,6 +236,7 @@ public class UserRegistration extends AppCompatActivity implements  View.OnClick
                         // If sign in fails, display a message to the firebaseUser. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in firebaseUser can be handled in the listener.
+                        //Log.d("USERREG",task.getResult().toString());
                         if (!task.isSuccessful()) {
                             //Log.d(TAG, "createUserWithEmail:onComplete:" + task.toString());
                             Toast.makeText(UserRegistration.this, "Registration failed.",
